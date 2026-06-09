@@ -1,0 +1,20 @@
+/**
+ * Centralized location configuration for the store
+ */
+export const STORE_LOCATION = {
+  address: "DemoMart, Demo City, Demo City, Demo State 000000",
+  lat: 18.5679,
+  lng: 73.9143,
+  radiusLimitKm: 15,
+  operationalLimitKm: 14.5, // Safety buffer to reduce GPS edge-case losses
+  pincode: "411014"
+};
+
+/**
+ * Internal delivery pricing based on distance
+ */
+export const DELIVERY_PRICING_CONFIG = [
+  { maxKm: 5, fee: 0 },
+  { maxKm: 10, fee: 60 },
+  { maxKm: 15, fee: 80 }
+];
