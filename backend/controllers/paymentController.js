@@ -38,7 +38,7 @@ export const createPaymentOrder = async (req, res) => {
 export const verifyPayment = async (req, res) => {
   const session = await mongoose.startSession();
   try {
-    const { demopayment_order_id } = req.body;
+    const { demopayment_order_id, demopayment_payment_id, demopayment_signature } = req.body;
     const orderData = extractOrderData(req.body);
 
     let createdOrder;
@@ -55,7 +55,7 @@ export const verifyPayment = async (req, res) => {
       const { itemSnapshots, totals } = await reserveStock({
         items: orderData?.items || [],
         session,
-        orderNumber: \`DEMO-\${Date.now()}\`,
+        orderNumber: `DEMO-${Date.now()}`,
         reason: "Demo order placed",
         coupon,
         discountTotal: orderData?.totals?.discountTotal || 0,
@@ -70,7 +70,7 @@ export const verifyPayment = async (req, res) => {
 
       const [orderDoc] = await Order.create([{
         orderId: generateOrderId(),
-        orderNumber: \`ORD-DEMO-\${Date.now().toString(36).toUpperCase()}\`,
+        orderNumber: `ORD-DEMO-${Date.now().toString(36).toUpperCase()}`,
         customer: {
           userId: orderData?.customer?.userId || req.user?.userId || null,
           name: orderData?.customer?.name || "Guest",
@@ -86,9 +86,12 @@ export const verifyPayment = async (req, res) => {
         },
         items: itemSnapshots,
         payment: {
-          method: "DEMO_PAYMENT",
+          method: "demopayment",
           status: "PAID",
           gateway: "demo",
+          demopaymentOrderId: demopayment_order_id,
+          demopaymentPaymentId: demopayment_payment_id,
+          demopaymentSignature: demopayment_signature,
           paidAt: new Date()
         },
         status: "PLACED",
@@ -103,7 +106,7 @@ export const verifyPayment = async (req, res) => {
           discountType: coupon.discountType,
           discountValue: coupon.discountValue
         } : undefined,
-        metadata: { demopaymentOrderStatus: "PAID" }
+        metadata: { razorpayOrderStatus: "PAID" }
       }], { session });
 
       createdOrder = orderDoc;

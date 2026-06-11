@@ -1,25 +1,26 @@
-# DemoMart - MERN Ecommerce Demo Template
+# DemoMart - MERN Ecommerce Demo Platform
 
-A completely generic, fully functional ecommerce demo project built on the MERN stack. This repository serves as a showcase template for future clients.
+A completely generic, fully functional, and self-contained ecommerce demo project built on the MERN stack. This repository is designed to serve as a showcase template for prospective clients, featuring modern tech-forward styling, automated mock payment/delivery logic, and a manual order status lifecycle.
 
 ## Features
 
 - **Full-Stack MERN Architecture:** Built using MongoDB, Express.js, React.js, and Node.js.
-- **Admin Dashboard:** Complete management of products, categories, hero banners, and coupons.
-- **Order Management:** Track and update order statuses manually (Placed -> Preparing -> Ready -> Picked Up -> Delivered).
-- **Automated Mock Integrations:** Payments and delivery tracking have been mocked to simulate a complete e-commerce flow without the need for external API credentials.
+- **Zero-Config In-Memory DB Fallback:** If a local/remote MongoDB server is not available or connection fails, the system automatically spins up a programmatically-managed `mongodb-memory-server` and auto-seeds the required demo catalog data, making the platform 100% plug-and-play out of the box!
+- **Admin Dashboard:** Complete management of products, categories (Electronics, Fashion, Home, Accessories, Sports), hero banners, and coupons.
+- **Order Management & Lifecycle:** Track and update order statuses manually through the custom lifecycle buttons: `Placed` -> `Accepted` -> `Preparing` -> `Ready` -> `Picked Up` -> `Delivered`.
+- **Automated Mock Integrations:** Payments and delivery tracking are mocked to simulate a complete e-commerce checkout flow (`checkout.demopayment.com`) without the need for external API credentials.
 - **Real-Time Updates:** Socket.io integration for instant status updates across clients and admin.
-- **Responsive UI:** Built with Tailwind CSS and Vite.
+- **Responsive UI:** Built with custom Vanilla CSS styles (via a centralized design system in `GlobalStyle.jsx`) and Vite.
 
 ## Tech Stack
 
-- **Frontend:** React, Vite, Tailwind CSS, React Router, Socket.io-client.
-- **Backend:** Node.js, Express, MongoDB (Mongoose), Socket.io, JWT Authentication.
+- **Frontend:** React 18, Vite, Vanilla CSS, React Router, Socket.io-client.
+- **Backend:** Node.js, Express, MongoDB (Mongoose) / MongoDB Memory Server, Socket.io, JWT Authentication.
 
 ## Setup Instructions
 
 ### 1. Clone & Install
-\`\`\`bash
+```bash
 git clone <repository-url> demo_web
 cd demo_web
 
@@ -30,54 +31,47 @@ npm install
 # Install frontend dependencies
 cd ../frontend
 npm install
-\`\`\`
+```
 
 ### 2. Environment Variables
 Minimal `.env.example` files are provided in both `backend` and `frontend` directories.
 Copy them to `.env`:
 
 **Backend (`backend/.env`):**
-\`\`\`env
+```env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/demo_ecommerce
 JWT_SECRET=demo_jwt_secret_key_12345
 NODE_ENV=development
-\`\`\`
+```
 
 **Frontend (`frontend/.env`):**
-\`\`\`env
+```env
 VITE_API_URL=http://localhost:5000
 VITE_DEMOPAYMENT_KEY_ID=rzp_demo_key
-\`\`\`
+```
 
-### 3. Seed the Database
-Ensure your MongoDB instance is running, then run the seed script to populate categories, dummy products, coupons, and the admin user:
-\`\`\`bash
-cd backend
-npm run seed
-\`\`\`
-
-### 4. Run the Project
-Start both servers in parallel:
+### 3. Run the Project
+You can start both servers in parallel. Since the database connection has an automatic in-memory fallback, you do **not** need to have a running local MongoDB instance or manually seed it—the server handles everything on startup!
 
 **Backend:**
-\`\`\`bash
+```bash
 cd backend
 npm run dev
-\`\`\`
+```
 
 **Frontend:**
-\`\`\`bash
+```bash
 cd frontend
 npm run dev
-\`\`\`
+```
 
 ## Demo Credentials
 
-You can log in to the admin dashboard using the following generated credentials:
+Log in to the admin dashboard using the following generated credentials:
 
 - **Admin Login:** `admin@gmail.com`
-- **Password:** `Admin@AppData\Local\Microsoft\OneDrive\logs\Personal\SyncEngine-2026-06-09.0815.10112.123.odl`
+- **Password:** `Admin@123`
 
 ---
 *This repository has been fully sanitized to remove all production and client-specific data. It is ready to be presented to prospective clients.*

@@ -8,7 +8,7 @@ export const ORDER_TABS = [
   {
     id: "PREPARING",
     label: "Preparing",
-    statuses: ["PREPARING"],
+    statuses: ["ACCEPTED", "PREPARING"],
     tone: "bg-orange-100 text-orange-900"
   },
   {
@@ -33,6 +33,7 @@ export const ORDER_TABS = [
 
 export const STATUS_META = {
   PLACED: { label: "New Order", cls: "bg-amber-100 text-amber-900" },
+  ACCEPTED: { label: "Accepted", cls: "bg-blue-100 text-blue-900" },
   PREPARING: { label: "Preparing", cls: "bg-orange-100 text-orange-900" },
   READY: { label: "Ready for Pickup", cls: "bg-blue-100 text-blue-900" },
   PICKED_UP: { label: "Picked Up", cls: "bg-indigo-100 text-indigo-900" },

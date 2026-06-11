@@ -1,5 +1,7 @@
 import axios from "axios";
 import { getStoredToken, notifySessionExpired } from "./utils/authSession";
+import { DEMO_MODE } from "../demo/demo.config";
+import { demoAdapter } from "../mocks/demoAdapter";
 
 const getBackendUrl = () => {
   if (typeof window !== "undefined") {
@@ -20,6 +22,10 @@ const api = axios.create({
   timeout: DEFAULT_TIMEOUT,
   withCredentials: true
 });
+
+if (DEMO_MODE) {
+  api.defaults.adapter = demoAdapter;
+}
 
 const isAuthEndpoint = (url = "") => String(url).includes("/api/auth/");
 

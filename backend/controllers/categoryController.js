@@ -78,7 +78,7 @@ export const createCategory = async (req, res, next) => {
       is_active: parseBool(is_active),
       showInNavbar: parseBool(showInNavbar),
       showInHomepage: parseBool(showInHomepage),
-      type: ["sweets", "other"].includes(String(type || "").toLowerCase()) ? String(type).toLowerCase() : "other",
+      type: ["products", "other"].includes(String(type || "").toLowerCase()) ? String(type).toLowerCase() : "other",
       order: Number(order || 0)
     });
 
@@ -143,7 +143,7 @@ export const updateCategory = async (req, res, next) => {
       updates.showInHomepage = parseBool(showInHomepage);
     }
     if (type !== undefined) {
-      updates.type = ["sweets", "other"].includes(String(type || "").toLowerCase()) ? String(type).toLowerCase() : "other";
+      updates.type = ["products", "other"].includes(String(type || "").toLowerCase()) ? String(type).toLowerCase() : "other";
     }
     if (order !== undefined) {
       updates.order = Number(order || 0);

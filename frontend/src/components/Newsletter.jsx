@@ -40,7 +40,7 @@ const Newsletter = () => {
             <Gift size={14} /> Join the Festive Club
           </div>
           
-          <h2 className="serif text-4xl md:text-5xl mb-6">Experience the sweetness of every occasion</h2>
+          <h2 className=" text-4xl md:text-5xl mb-6">Experience the sweetness of every occasion</h2>
           <p className="text-white/60 text-sm md:text-base max-w-2xl mx-auto mb-12 leading-relaxed">
             Subscribe to our newsletter and be the first to know about seasonal launches, festive gift boxes, and exclusive member-only offers.
           </p>
@@ -79,3 +79,4 @@ const Newsletter = () => {
 };
 
 export default Newsletter;
+

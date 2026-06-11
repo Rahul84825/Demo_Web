@@ -42,6 +42,7 @@ import { ProductProvider } from "./context/ProductContext";
 import GlobalStyle from "./services/utils/GlobalStyle";
 import PromotionBar from "./components/common/PromotionBar";
 import AnnouncementPopup from "./components/common/AnnouncementPopup";
+import { DemoBanner, ResetButton } from "./components/common";
 
 // Store Pages (core pages, loaded early)
 import HomePage from "./pages/HomePage";
@@ -83,7 +84,7 @@ const AdminHeroBannerManager = lazyRetry(() => import("./admin/AdminHeroBannerMa
 const LazyFallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-[var(--cream)]">
     <div className="text-center">
-      <div className="mb-4 inline-flex h-12 w-12 animate-spin rounded-full border-4 border-[var(--surface)] border-t-[var(--saffron)]" />
+      <div className="mb-4 inline-flex h-12 w-12 animate-spin rounded-full border-4 border-[var(--surface)] border-t-[var(--accent)]" />
       <p className="text-sm text-gray-600">Loading...</p>
     </div>
   </div>
@@ -116,6 +117,7 @@ function App() {
           <GlobalStyle />
           <ScrollToTop />
           <ToastContainer position="bottom-right" autoClose={3000} />
+          <DemoBanner />
           <AnnouncementPopup />
 
           <Routes>
@@ -149,7 +151,7 @@ function App() {
             />
 
             <Route
-              path="/sweets"
+              path="/products"
               element={
                 <StoreLayout>
                   <ProductsPage />
@@ -157,7 +159,7 @@ function App() {
               }
             />
 
-            <Route path="/products" element={<Navigate to="/sweets" replace />} />
+            <Route path="/sweets" element={<Navigate to="/products" replace />} />
 
             <Route
               path="/product/:id"
@@ -311,6 +313,7 @@ function App() {
             {/* ═══════════════════════════════════════════ */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          <ResetButton />
         </ProductProvider>
       </CartProvider>
     </ErrorBoundary>

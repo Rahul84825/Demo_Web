@@ -11,7 +11,7 @@ function SimilarProducts({ titleCategory, products }) {
         <div className="inline-block px-3 py-1 mb-4 rounded-full bg-[var(--surface-strong)] text-[var(--gold)] text-[10px] font-medium tracking-widest uppercase">
           Recommendation
         </div>
-        <h2 className="serif">
+        <h2 className="">
           More from <span className="text-[var(--saffron)]">{titleCategory}</span>
         </h2>
         <p>You might also enjoy these handpicked favorites from the same collection.</p>
@@ -27,3 +27,4 @@ function SimilarProducts({ titleCategory, products }) {
 }
 
 export default SimilarProducts;
+

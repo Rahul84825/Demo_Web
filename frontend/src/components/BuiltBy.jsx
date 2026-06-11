@@ -9,11 +9,11 @@ const BuiltBy = () => {
   }, []);
 
   return (
-    <main className="min-h-[60vh] bg-[#fff8f0] pb-16 font-['Inter',system-ui,sans-serif]">
+    <main className="min-h-[60vh] bg-[var(--surface-border)] pb-16 font-['Inter',system-ui,sans-]">
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden text-white"
-               style={{ background: "linear-gradient(135deg, #1e0f0a 0%, #2d1a10 100%)" }}>
+               style={{ background: "linear-gradient(135deg, var(--charcoal) 0%, #2d1a10 100%)" }}>
         <div className="pointer-events-none absolute -right-24 -top-24 h-[400px] w-[400px]
                         rounded-full bg-[rgba(232,136,58,0.08)] blur-[90px]" />
         <div className="relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
@@ -27,7 +27,7 @@ const BuiltBy = () => {
           <h1 className="mb-4 text-4xl font-medium tracking-tight sm:text-5xl">
             Hi, I'm Rahul Choudhary
           </h1>
-          <p className="mb-6 text-[13px] font-medium uppercase tracking-[0.24em] text-[#e8883a]">
+          <p className="mb-6 text-[13px] font-medium uppercase tracking-[0.24em] text-[var(--surface-border)]">
             Full Stack Developer
           </p>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
@@ -41,16 +41,16 @@ const BuiltBy = () => {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
 
           {/* About */}
-          <div className="rounded-3xl border border-[rgba(83,44,22,0.10)] bg-[#fffaf3]
+          <div className="rounded-3xl border border-[rgba(99, 102, 241,0.10)] bg-slate-50
                           p-8 shadow-sm transition-shadow hover:shadow-md md:col-span-2">
             <div className="mb-4 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl
-                              bg-[rgba(212,160,23,0.12)]">
-                <Code className="h-5 w-5 text-[#b76a1f]" />
+                              bg-[rgba(99, 102, 241,0.12)]">
+                <Code className="h-5 w-5 text-[#6366F1]" />
               </div>
-              <h2 className="text-[15px] font-medium text-[#24140f]">About Me</h2>
+              <h2 className="text-[15px] font-medium text-[#0F172A]">About Me</h2>
             </div>
-            <p className="text-[14px] leading-relaxed text-[#6e5443]">
+            <p className="text-[14px] leading-relaxed text-[#475569]">
               I specialize in building full-stack applications using React, Node.js, and MongoDB.
               My focus is on creating clean, responsive, and highly functional digital experiences
               that help businesses grow online and scale their sales reliably.
@@ -58,22 +58,22 @@ const BuiltBy = () => {
           </div>
 
           {/* Links */}
-          <div className="rounded-3xl border border-[rgba(83,44,22,0.10)] bg-[#fffaf3]
+          <div className="rounded-3xl border border-[rgba(99, 102, 241,0.10)] bg-slate-50
                           p-8 shadow-sm transition-shadow hover:shadow-md">
             <h2 className="mb-5 text-[11px] font-medium uppercase tracking-[0.18em]
-                           text-[rgba(83,44,22,0.40)]">
+                           text-[rgba(99, 102, 241,0.40)]">
               Connect
             </h2>
             <div className="flex flex-col gap-4">
               <a href="https://github.com/Rahul84825" target="_blank" rel="noopener noreferrer"
-                 className="group flex items-center gap-3 text-sm font-medium text-[#3b2417]
-                            transition-colors hover:text-[#24140f]">
+                 className="group flex items-center gap-3 text-sm font-medium text-[#0F172A]
+                            transition-colors hover:text-[#0F172A]">
                 <Github className="h-5 w-5 transition-transform group-hover:scale-110" />
                 GitHub Profile
               </a>
               <a href="https://www.linkedin.com/in/rahul-choudhary-b597b2395/" target="_blank" rel="noopener noreferrer"
-                 className="group flex items-center gap-3 text-sm font-medium text-[#3b2417]
-                            transition-colors hover:text-[#7a2828]">
+                 className="group flex items-center gap-3 text-sm font-medium text-[#0F172A]
+                            transition-colors hover:text-[#6366F1]">
                 <Linkedin className="h-5 w-5 transition-transform group-hover:scale-110" />
                 LinkedIn Profile
               </a>
@@ -84,7 +84,7 @@ const BuiltBy = () => {
           <div className="group relative flex flex-col items-center justify-between gap-8
                           overflow-hidden rounded-3xl p-8 text-white shadow-xl
                           transition-shadow hover:shadow-2xl sm:flex-row md:col-span-3"
-               style={{ background: "linear-gradient(135deg, #1e0f0a 0%, #3a1f10 100%)" }}>
+               style={{ background: "linear-gradient(135deg, var(--charcoal) 0%, #3a1f10 100%)" }}>
             <div className="pointer-events-none absolute right-0 top-0 h-64 w-64
                             rounded-full bg-[rgba(232,136,58,0.08)] blur-3xl
                             transition-colors duration-500 group-hover:bg-[rgba(232,136,58,0.14)]" />
@@ -113,14 +113,14 @@ const BuiltBy = () => {
           </div>
 
           {/* CTA / hire me */}
-          <div className="rounded-3xl border border-[rgba(83,44,22,0.10)] bg-[#fffaf3]
+          <div className="rounded-3xl border border-[rgba(99, 102, 241,0.10)] bg-slate-50
                           p-8 shadow-sm md:col-span-3">
             <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
               <div>
-                <h2 className="mb-2 text-xl font-medium tracking-tight text-[#24140f] sm:text-2xl">
+                <h2 className="mb-2 text-xl font-medium tracking-tight text-[#0F172A] sm:text-2xl">
                   Need a website like this?
                 </h2>
-                <p className="text-[13px] text-[#6e5443]">
+                <p className="text-[13px] text-[#475569]">
                   Let's build it 🚀 Reach out to discuss your project.
                 </p>
               </div>
@@ -133,16 +133,16 @@ const BuiltBy = () => {
                   <MessageCircle className="h-4 w-4" /> WhatsApp
                 </a>
                 <a href="tel:9999999999"
-                   className="flex items-center justify-center gap-2 rounded-xl bg-[#1e0f0a]
+                   className="flex items-center justify-center gap-2 rounded-xl bg-[var(--charcoal)]
                               px-5 py-3 text-sm font-medium text-white shadow-sm transition-all
                               hover:-translate-y-0.5 hover:bg-[#2d1a10] hover:shadow-md">
                   <Phone className="h-4 w-4" /> Call
                 </a>
                 <a href="mailto:dev@demomart.com"
                    className="flex items-center justify-center gap-2 rounded-xl border
-                              border-[rgba(83,44,22,0.15)] bg-white px-5 py-3 text-sm font-medium
-                              text-[#3b2417] shadow-sm transition-all hover:-translate-y-0.5
-                              hover:bg-[#fffaf3]">
+                              border-[rgba(99, 102, 241,0.15)] bg-white px-5 py-3 text-sm font-medium
+                              text-[#0F172A] shadow-sm transition-all hover:-translate-y-0.5
+                              hover:bg-slate-50">
                   <Mail className="h-4 w-4" /> Email
                 </a>
               </div>
@@ -156,3 +156,4 @@ const BuiltBy = () => {
 };
 
 export default BuiltBy;
+

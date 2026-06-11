@@ -15,7 +15,7 @@ const ReturnsExchange = () => {
     <div className="min-h-[60vh] bg-[var(--cream)]">
       <SEO 
         title="Returns & Exchange Policy"
-        description="Learn about DemoMart's returns and exchange policy. We guarantee freshness and quality for all our Indian sweets."
+        description="Learn about DemoMart's returns and exchange policy. We guarantee freshness and quality for all our Indian products."
         canonical="/returns-exchanges"
       />
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
@@ -26,7 +26,7 @@ const ReturnsExchange = () => {
             <h2 className="mb-3 text-2xl font-medium text-[var(--charcoal)]">Return Window</h2>
             <p>
               Products can be returned within 7 days of delivery if they are in original condition
-              and packaging. Since our sweets are perishable, return eligibility depends on product quality.
+              and packaging. Since our products are perishable, return eligibility depends on product quality.
             </p>
           </section>
 
@@ -66,3 +66,4 @@ const ReturnsExchange = () => {
 };
 
 export default ReturnsExchange;
+

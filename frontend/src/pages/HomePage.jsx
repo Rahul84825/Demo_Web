@@ -12,7 +12,7 @@ import { SEO } from "../components/common";
 function HomePage({ showHero = true, initialCategory = "all", catalogTitle = "New Arrivals" }) {
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "Bakery",
+    "@type": "store",
     "name": "DemoMart",
     "image": "https://demomart.com/favicon.png",
     "@id": "https://demomart.com",
@@ -20,9 +20,9 @@ function HomePage({ showHero = true, initialCategory = "all", catalogTitle = "Ne
     "telephone": "+91 99999 99999",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Demo Address Line 1, Konark Nagar, Demo City",
+      "streetAddress": "Demo Business Address",
       "addressLocality": "Demo City",
-      "postalCode": "411014",
+      "postalCode": "000000",
       "addressCountry": "IN"
     },
     "openingHoursSpecification": {
@@ -44,8 +44,8 @@ function HomePage({ showHero = true, initialCategory = "all", catalogTitle = "Ne
   return (
     <div className="page-enter bg-[var(--cream)]">
       <SEO 
-        title="Best Authentic Indian Sweets in Demo City, Demo City"
-        description="Discover the finest collection of authentic Indian sweets, dry fruit product, and traditional treats at DemoMart, Demo City. Freshly prepared daily."
+        title="Best Authentic Indian products in Demo City, Demo City"
+        description="Discover the finest collection of authentic Indian products, dry fruit product, and traditional items at DemoMart, Demo City. Freshly prepared daily."
         canonical="/"
         schemaData={schemaData}
       />
@@ -63,3 +63,4 @@ function HomePage({ showHero = true, initialCategory = "all", catalogTitle = "Ne
 }
 
 export default HomePage;
+

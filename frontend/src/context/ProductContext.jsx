@@ -82,7 +82,7 @@ const normalizeCategory = (category) => ({
   is_active: category?.is_active ?? category?.isActive ?? category?.active ?? true,
   showInNavbar: category?.showInNavbar ?? category?.isFeatured ?? false,
   showInHomepage: category?.showInHomepage ?? false,
-  type: String(category?.type || "other").trim().toLowerCase() === "sweets" ? "sweets" : "other",
+  type: String(category?.type || "other").trim().toLowerCase() === "products" ? "products" : "other",
   order: Number(category?.order || 0)
 });
 
@@ -515,6 +515,11 @@ export function ProductProvider({ children }) {
     return updateOrderState(data?.order || data);
   }, [updateOrderState]);
 
+  const markOrderPreparing = useCallback(async (orderId) => {
+    const { data } = await api.patch(`/api/orders/${orderId}/preparing`);
+    return updateOrderState(data?.order || data);
+  }, [updateOrderState]);
+
   const markOrderDelivered = useCallback(async (orderId) => {
     const { data } = await api.patch(`/api/orders/${orderId}/delivered`);
     return updateOrderState(data?.order || data);
@@ -581,6 +586,7 @@ export function ProductProvider({ children }) {
     rejectOrder,
     markOrderPickedUp,
     markOrderReady,
+    markOrderPreparing,
     markOrderDelivered,
     updateOrderState,
     addOffer,

@@ -13,8 +13,8 @@ import { SEO } from "./common";
 // ── Field wrapper ──────────────────────────────────────────────────────────────
 const Field = ({ icon: Icon, label, required, error, children }) => (
   <div className="flex flex-col">
-    <label className="mb-2 flex items-center gap-1.5 text-[13px] font-medium text-[#3b2417]">
-      <Icon className="h-3.5 w-3.5 text-[#b76a1f]" />
+    <label className="mb-2 flex items-center gap-1.5 text-[13px] font-medium text-[#0F172A]">
+      <Icon className="h-3.5 w-3.5 text-[#6366F1]" />
       {label}
       {required && <span className="ml-0.5 text-red-500">*</span>}
     </label>
@@ -33,7 +33,7 @@ const inputCls = (err) =>
    transition-all duration-200
    ${err
      ? "border-red-300 bg-red-50 text-red-900 placeholder:text-red-300 focus:ring-4 focus:ring-red-100"
-     : "border-[rgba(83,44,22,0.15)] bg-[rgba(212,160,23,0.04)] text-[#1d120d] placeholder:text-[rgba(83,44,22,0.35)] hover:border-[rgba(83,44,22,0.28)] focus:border-[#d4a017] focus:bg-white focus:ring-4 focus:ring-[rgba(212,160,23,0.12)]"
+     : "border-[rgba(99, 102, 241,0.15)] bg-[rgba(99, 102, 241,0.04)] text-[#0F172A] placeholder:text-[rgba(99, 102, 241,0.35)] hover:border-[rgba(99, 102, 241,0.28)] focus:border-[#6366F1] focus:bg-white focus:ring-4 focus:ring-[rgba(99, 102, 241,0.12)]"
    }`;
 
 // ── Contact Page ──────────────────────────────────────────────────────────────
@@ -102,25 +102,25 @@ const Contact = () => {
   };
 
   return (
-    <main className="min-h-[60vh] bg-[#fff8f0] font-['Inter',system-ui,sans-serif]">
+    <main className="min-h-[60vh] bg-[var(--surface-border)] font-['Inter',system-ui,sans-]">
       <SEO 
         title="Contact Us | Support & Enquiries"
-        description="Have questions about our sweets or your order? Contact DemoMart Demo City. We're here to help with bulk orders, delivery, and more."
+        description="Have questions about our products or your order? Contact DemoMart Demo City. We're here to help with bulk orders, delivery, and more."
         canonical="/contact"
       />
 
       {/* ── Page header ── */}
-      <div className="relative overflow-hidden border-b border-[rgba(83,44,22,0.10)] bg-[#fffaf3]">
+      <div className="relative overflow-hidden border-b border-[rgba(99, 102, 241,0.10)] bg-slate-50">
         <div className="pointer-events-none absolute -right-16 -top-16 h-[360px] w-[360px]
                         rounded-full bg-[rgba(232,136,58,0.07)] blur-[70px]" />
         <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
           <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.28em] text-[#9c6a18]">
             Get in Touch
           </p>
-          <h1 className="mb-3 text-3xl font-medium tracking-tight text-[#24140f] sm:text-4xl">
+          <h1 className="mb-3 text-3xl font-medium tracking-tight text-[#0F172A] sm:text-4xl">
             Contact Us
           </h1>
-          <p className="max-w-xl text-[13px] font-medium leading-relaxed text-[#6e5443] sm:text-sm">
+          <p className="max-w-xl text-[13px] font-medium leading-relaxed text-[#475569] sm:text-sm">
             We're here to help with your orders and queries
           </p>
         </div>
@@ -133,12 +133,12 @@ const Contact = () => {
           <div className="flex flex-col gap-6">
 
             {/* Notice */}
-            <div className="flex items-start gap-3 rounded-2xl border border-[rgba(212,160,23,0.25)]
-                            bg-[rgba(212,160,23,0.07)] p-5">
-              <Info className="mt-0.5 h-5 w-5 shrink-0 text-[#b76a1f]" />
+            <div className="flex items-start gap-3 rounded-2xl border border-[rgba(99, 102, 241,0.25)]
+                            bg-[rgba(99, 102, 241,0.07)] p-5">
+              <Info className="mt-0.5 h-5 w-5 shrink-0 text-[#6366F1]" />
               <div>
-                <h3 className="mb-1 text-sm font-medium text-[#24140f]">Direct Assistance</h3>
-                <p className="text-[13px] leading-relaxed text-[#6e5443]">
+                <h3 className="mb-1 text-sm font-medium text-[#0F172A]">Direct Assistance</h3>
+                <p className="text-[13px] leading-relaxed text-[#475569]">
                   Need immediate help with a bulk order or delivery? Reach out to us directly through the channels below.
                 </p>
               </div>
@@ -149,12 +149,12 @@ const Contact = () => {
           </div>
 
           {/* ── Right: form ── */}
-          <div className="rounded-[2rem] border border-[rgba(83,44,22,0.10)]
-                          bg-[#fffaf3] p-6 shadow-sm sm:p-8 lg:p-10">
-            <h2 className="mb-2 text-xl font-medium tracking-tight text-[#24140f] sm:text-2xl">
+          <div className="rounded-[2rem] border border-[rgba(99, 102, 241,0.10)]
+                          bg-slate-50 p-6 shadow-sm sm:p-8 lg:p-10">
+            <h2 className="mb-2 text-xl font-medium tracking-tight text-[#0F172A] sm:text-2xl">
               Send a Message
             </h2>
-            <p className="mb-8 text-[13px] text-[#6e5443]">
+            <p className="mb-8 text-[13px] text-[#475569]">
               Prefer writing? Drop your details below and we'll call you back.
             </p>
 
@@ -167,9 +167,9 @@ const Contact = () => {
 
             {success && (
               <div className="mb-6 flex items-center gap-3 rounded-xl border
-                              border-[rgba(212,160,23,0.25)] bg-[rgba(212,160,23,0.08)]
-                              px-4 py-4 text-sm font-medium text-[#7a4a00]">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-[#b76a1f]" />
+                              border-[rgba(99, 102, 241,0.25)] bg-[rgba(99, 102, 241,0.08)]
+                              px-4 py-4 text-sm font-medium text-[#312E81]">
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-[#6366F1]" />
                 Your message has been sent successfully. Our team will contact you shortly!
               </div>
             )}
@@ -189,7 +189,7 @@ const Contact = () => {
                 <Field icon={Phone} label="Phone Number" required error={errors.phone}>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 select-none
-                                     text-sm font-medium text-[rgba(83,44,22,0.55)]">
+                                     text-sm font-medium text-[rgba(99, 102, 241,0.55)]">
                       +91
                     </span>
                     <input type="tel" name="phone" value={form.phone} onChange={handleChange}
@@ -209,10 +209,10 @@ const Contact = () => {
                 type="submit"
                 disabled={loading}
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl
-                           bg-[#7a2828] py-3.5 text-sm font-medium text-white shadow-md
-                           shadow-[rgba(122,40,40,0.20)] transition-all hover:-translate-y-0.5
-                           hover:bg-[#6b2020] disabled:translate-y-0 disabled:cursor-not-allowed
-                           disabled:bg-[rgba(83,44,22,0.25)]"
+                           bg-[#6366F1] py-3.5 text-sm font-medium text-white shadow-md
+                           shadow-[rgba(99, 102, 241,0.20)] transition-all hover:-translate-y-0.5
+                           hover:bg-[#4F46E5] disabled:translate-y-0 disabled:cursor-not-allowed
+                           disabled:bg-[rgba(99, 102, 241,0.25)]"
               >
                 {loading
                   ? <><Loader2 className="h-5 w-5 animate-spin" /> Sending Message…</>
@@ -226,7 +226,7 @@ const Contact = () => {
 
         {/* Map Section */}
         <div className="mt-16">
-          <h2 className="mb-6 text-xl font-medium tracking-tight text-[#24140f]">
+          <h2 className="mb-6 text-xl font-medium tracking-tight text-[#0F172A]">
             Find Us on the Map
           </h2>
           <StoreMap size="large" showTitle={false} />
@@ -238,3 +238,5 @@ const Contact = () => {
 };
 
 export default Contact;
+
+

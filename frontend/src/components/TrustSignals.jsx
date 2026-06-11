@@ -4,23 +4,23 @@ import SectionContainer from "./home/SectionContainer";
 const FEATURES = [
   {
     icon: Sparkles,
-    title: "Always Fresh",
-    description: "Prepared daily in small batches to ensure maximum flavor and shelf life."
+    title: "Premium Quality",
+    description: "Curated selection of top-tier products sourced from verified manufacturers."
   },
   {
     icon: Award,
-    title: "Authentic Taste",
-    description: "Generational recipes using 100% pure desi ghee and premium ingredients."
+    title: "Authentic Guarantee",
+    description: "100% genuine products backed by official manufacturer warranties."
   },
   {
     icon: Truck,
     title: "Swift Delivery",
-    description: "Secure packaging and lightning fast delivery across your city."
+    description: "Express local shipping and real-time tracking for every order."
   },
   {
     icon: ShieldCheck,
-    title: "Quality Tested",
-    description: "Strict hygiene standards and quality checks at every step of preparation."
+    title: "Secure Checkout",
+    description: "Industry-standard encryption and fully mocked demo payment flows."
   }
 ];
 
@@ -34,7 +34,7 @@ const TrustSignals = () => {
               <div className="h-16 w-16 rounded-3xl bg-[var(--cream)] flex items-center justify-center text-[var(--burgundy)] mb-6 transition-transform group-hover:scale-110 duration-300">
                 <feature.icon size={32} strokeWidth={1.5} />
               </div>
-              <h3 className="serif text-lg font-medium text-[var(--charcoal)] mb-3">{feature.title}</h3>
+              <h3 className=" text-lg font-medium text-[var(--charcoal)] mb-3">{feature.title}</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">{feature.description}</p>
             </div>
           ))}
@@ -45,3 +45,4 @@ const TrustSignals = () => {
 };
 
 export default TrustSignals;
+

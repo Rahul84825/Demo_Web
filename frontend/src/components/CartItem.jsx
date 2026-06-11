@@ -28,15 +28,15 @@ function CartItem({ item }) {
         <img
           src={item.image}
           alt={item.name}
-          className="h-20 w-20 flex-shrink-0 rounded-xl object-cover border border-[#f0dfc6]"
+          className="h-20 w-20 flex-shrink-0 rounded-xl object-cover border border-[#E2E8F0]"
         />
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
-              <h3 className="truncate text-sm font-medium text-[#3b2417]">{item.name}</h3>
+              <h3 className="truncate text-sm font-medium text-[#0F172A]">{item.name}</h3>
               <p className="mt-0.5 text-xs text-[#8c7358]">{item.category || "product"}</p>
-              {variantLabel && <p className="mt-0.5 text-[11px] text-[#a67f52]">{variantLabel}</p>}
+              {variantLabel && <p className="mt-0.5 text-[11px] text-slate-500">{variantLabel}</p>}
             </div>
             <button
               type="button"
@@ -49,7 +49,7 @@ function CartItem({ item }) {
           </div>
 
           <div className="mt-3 flex items-center justify-between gap-3">
-            <div className="text-sm font-medium text-[#e8883a]">{formatCurrency(itemPrice)}</div>
+            <div className="text-sm font-medium text-[var(--surface-border)]">{formatCurrency(itemPrice)}</div>
 
             <div className="flex items-center gap-2 bg-[#fff2e2] px-2 py-1 rounded-full">
               <button
@@ -61,7 +61,7 @@ function CartItem({ item }) {
               >
                 <Minus size={14} />
               </button>
-              <span className="px-3 text-center text-sm font-medium text-[#3b2417]">{qty}</span>
+              <span className="px-3 text-center text-sm font-medium text-[#0F172A]">{qty}</span>
               <button
                 type="button"
                 onClick={() => updateQty(qty + 1)}
@@ -80,3 +80,5 @@ function CartItem({ item }) {
 }
 
 export default CartItem;
+
+

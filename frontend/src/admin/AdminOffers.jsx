@@ -64,20 +64,20 @@ const SearchableSelect = ({ label, placeholder, value, options, onChange, error 
 
   return (
     <div className="relative" ref={containerRef}>
-      <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">{label}</label>
+      <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">{label}</label>
       <div 
         onClick={() => setIsOpen(!isOpen)}
-        className={`input-field flex items-center justify-between cursor-pointer ${isOpen ? 'ring-2 ring-[var(--gold)] border-[var(--gold)]' : ''}`}
+        className={`input-field flex items-center justify-between cursor-pointer ${isOpen ? 'ring-2 ring-cyan-500 border-cyan-500' : ''}`}
       >
-        <span className={selectedOption ? 'text-[var(--charcoal)]' : 'text-gray-400'}>
+        <span className={selectedOption ? 'text-slate-900' : 'text-gray-400'}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDown size={14} className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </div>
 
       {isOpen && (
-        <div className="absolute z-[100] mt-2 w-full bg-white rounded-2xl border border-[var(--surface-border)] shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-          <div className="p-3 border-b border-[var(--surface-border)] bg-[var(--cream)]/30">
+        <div className="absolute z-[100] mt-2 w-full bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="p-3 border-b border-slate-200 bg-slate-50/30">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
               <input 
@@ -86,14 +86,14 @@ const SearchableSelect = ({ label, placeholder, value, options, onChange, error 
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search..."
-                className="w-full h-9 bg-white rounded-xl pl-9 pr-4 text-xs font-medium focus:outline-none border border-[var(--surface-border)] focus:border-[var(--gold)]"
+                className="w-full h-9 bg-white rounded-xl pl-9 pr-4 text-xs font-medium focus:outline-none border border-slate-200 focus:border-cyan-500"
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
           </div>
           <div className="max-h-[200px] overflow-y-auto py-2">
             {filteredOptions.length === 0 ? (
-              <div className="px-4 py-3 text-[10px] text-[var(--muted)] text-center italic">No results found</div>
+              <div className="px-4 py-3 text-[10px] text-slate-500 text-center italic">No results found</div>
             ) : (
               filteredOptions.map((opt) => (
                 <div 
@@ -104,7 +104,7 @@ const SearchableSelect = ({ label, placeholder, value, options, onChange, error 
                     setIsOpen(false);
                     setSearch("");
                   }}
-                  className={`px-4 py-2.5 text-xs font-medium cursor-pointer transition-colors hover:bg-[var(--cream)] flex items-center justify-between ${value === opt.id ? 'bg-[var(--cream)] text-[var(--burgundy)]' : 'text-[var(--charcoal)]'}`}
+                  className={`px-4 py-2.5 text-xs font-medium cursor-pointer transition-colors hover:bg-slate-50 flex items-center justify-between ${value === opt.id ? 'bg-slate-50 text-blue-600' : 'text-slate-900'}`}
                 >
                   {opt.label}
                   {value === opt.id && <CheckCircle2 size={14} />}
@@ -196,26 +196,26 @@ const OfferModal = ({ offer, products, categories, onSave, onClose }) => {
 
   return createPortal(
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[24px] border border-[var(--surface-border)] bg-white p-6 shadow-2xl animate-in zoom-in-95 duration-200 sm:p-8">
+      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[24px] border border-slate-200 bg-white p-6 shadow-2xl animate-in zoom-in-95 duration-200 sm:p-8">
         <div className="mb-8 flex items-center justify-between">
-          <h3 className="serif text-xl font-medium text-[var(--charcoal)]">{offer ? "Edit Offer" : "Create Offer"}</h3>
-          <button onClick={onClose} className="rounded-full p-2 hover:bg-[var(--cream)] transition-colors"><X size={20} /></button>
+          <h3 className=" text-xl font-medium text-slate-900">{offer ? "Edit Offer" : "Create Offer"}</h3>
+          <button onClick={onClose} className="rounded-full p-2 hover:bg-slate-50 transition-colors"><X size={20} /></button>
         </div>
 
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="sm:col-span-2">
-              <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Offer Title</label>
-              <input value={form.title} onChange={(e) => set("title", e.target.value)} className="input-field" placeholder="e.g. Diwali Sweets Extravaganza" />
+              <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Offer Title</label>
+              <input value={form.title} onChange={(e) => set("title", e.target.value)} className="input-field" placeholder="e.g. Diwali products Extravaganza" />
             </div>
 
             <div className="sm:col-span-2">
-              <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Description</label>
+              <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Description</label>
               <textarea value={form.description} onChange={(e) => set("description", e.target.value)} className="input-field min-h-[80px]" placeholder="Short, sweet message for the customers..." />
             </div>
 
             <div>
-              <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Offer Type</label>
+              <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Offer Type</label>
               <select value={form.offerType} onChange={(e) => set("offerType", e.target.value)} className="input-field">
                 {OFFER_TYPES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
               </select>
@@ -223,11 +223,11 @@ const OfferModal = ({ offer, products, categories, onSave, onClose }) => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Priority</label>
+                <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Priority</label>
                 <input type="number" value={form.priority} onChange={(e) => set("priority", e.target.value)} className="input-field" />
               </div>
               <div>
-                <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Discount %</label>
+                <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Discount %</label>
                 <input type="number" value={form.discountPercent} onChange={(e) => set("discountPercent", e.target.value)} className="input-field" />
               </div>
             </div>
@@ -258,18 +258,18 @@ const OfferModal = ({ offer, products, categories, onSave, onClose }) => {
           </div>
 
           <div>
-            <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Banner Image</label>
+            <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Banner Image</label>
             <div 
               onClick={() => !uploading && document.getElementById('offer-img').click()}
-              className="aspect-[21/9] rounded-2xl border-2 border-dashed border-[var(--surface-border)] bg-[var(--cream)]/30 overflow-hidden flex flex-col items-center justify-center cursor-pointer relative group transition-all hover:bg-[var(--cream)]/50"
+              className="aspect-[21/9] rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/30 overflow-hidden flex flex-col items-center justify-center cursor-pointer relative group transition-all hover:bg-slate-50/50"
             >
               {form.image && !uploading ? (
                 <img src={form.image} className="w-full h-full object-cover" alt="Banner Preview" />
               ) : (
                 <div className={`text-center p-4 transition-opacity ${uploading ? 'opacity-0' : 'opacity-100'}`}>
-                  <ImageIcon size={32} className="mx-auto text-[var(--muted)] mb-2 opacity-50" />
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)]">Upload Banner</p>
-                  <p className="text-[9px] text-[var(--muted)] mt-1 opacity-60">(Recommended: 1200 x 500px)</p>
+                  <ImageIcon size={32} className="mx-auto text-slate-500 mb-2 opacity-50" />
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-slate-500">Upload Banner</p>
+                  <p className="text-[9px] text-slate-500 mt-1 opacity-60">(Recommended: 1200 x 500px)</p>
                 </div>
               )}
               
@@ -277,17 +277,17 @@ const OfferModal = ({ offer, products, categories, onSave, onClose }) => {
               
               {uploading && (
                 <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-300">
-                  <div className="w-10 h-10 border-4 border-[var(--burgundy)] border-t-transparent rounded-full animate-spin mb-3" />
-                  <p className="text-[10px] font-bold text-[var(--burgundy)] uppercase tracking-[0.2em]">Uploading...</p>
+                  <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-3" />
+                  <p className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Uploading...</p>
                 </div>
               )}
             </div>
           </div>
 
-          <div className="flex items-center justify-between p-4 rounded-2xl bg-[var(--cream)]/30 border border-[var(--surface-border)]">
+          <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50/30 border border-slate-200">
             <div>
-              <p className="text-sm font-medium text-[var(--charcoal)]">Offer Active</p>
-              <p className="text-[10px] text-[var(--muted)] font-medium">Toggle visibility on storefront</p>
+              <p className="text-sm font-medium text-slate-900">Offer Active</p>
+              <p className="text-[10px] text-slate-500 font-medium">Toggle visibility on storefront</p>
             </div>
             <button 
               onClick={() => set("isActive", !form.isActive)}
@@ -348,16 +348,16 @@ const AdminOffers = () => {
     <div className="mx-auto max-w-7xl animate-in fade-in duration-500 page-enter space-y-10">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="section-title mb-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface-strong)] text-[var(--burgundy)] text-[10px] font-medium uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-blue-600 text-[10px] font-medium uppercase tracking-widest mb-3">
             <Sparkles size={12} /> Promotions
           </div>
-          <h2 className="serif font-medium">Offers & Deals</h2>
+          <h2 className=" font-medium">Offers & Deals</h2>
           <p className="font-medium">Create high-impact marketing banners and discount offers.</p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative group">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)] group-focus-within:text-[var(--gold)] transition-colors" size={16} />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-cyan-500 transition-colors" size={16} />
             <input 
               type="text" 
               placeholder="Search offers..." 
@@ -373,46 +373,46 @@ const AdminOffers = () => {
       </div>
 
       {filteredOffers.length === 0 ? (
-        <div className="py-20 text-center rounded-3xl border-2 border-dashed border-[var(--surface-border)] bg-white">
-          <div className="h-12 w-12 rounded-full bg-[var(--cream)] flex items-center justify-center mx-auto mb-4 text-[var(--muted)]">
+        <div className="py-20 text-center rounded-3xl border-2 border-dashed border-slate-200 bg-white">
+          <div className="h-12 w-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-4 text-slate-500">
             <Percent size={24} />
           </div>
-          <h3 className="text-sm font-medium text-[var(--charcoal)]">No offers found</h3>
-          <p className="text-xs text-[var(--muted)] mt-1">Try a different search term or create a new promotion.</p>
+          <h3 className="text-sm font-medium text-slate-900">No offers found</h3>
+          <p className="text-xs text-slate-500 mt-1">Try a different search term or create a new promotion.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredOffers.map((offer) => (
-            <div key={offer._id} className="bg-white rounded-3xl border border-[var(--surface-border)] overflow-hidden hover:shadow-xl transition-all duration-500 group flex flex-col h-full shadow-sm">
-              <div className="relative aspect-[16/10] overflow-hidden bg-[var(--cream)]">
+            <div key={offer._id} className="bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-500 group flex flex-col h-full shadow-sm">
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-50">
                 {offer.image ? (
                   <img src={offer.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--gold)]/10 to-[var(--burgundy)]/10">
-                    <Percent size={40} className="text-[var(--muted)] opacity-20" />
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-500/10 to-blue-600/10">
+                    <Percent size={40} className="text-slate-500 opacity-20" />
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4">
-                  <span className="bg-[var(--saffron)] text-white text-[10px] font-medium px-3 py-1 rounded-lg shadow-xl uppercase tracking-widest">{offer.discountPercent}% OFF</span>
+                  <span className="bg-cyan-400 text-white text-[10px] font-medium px-3 py-1 rounded-lg shadow-xl uppercase tracking-widest">{offer.discountPercent}% OFF</span>
                 </div>
               </div>
 
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-medium text-[var(--charcoal)] leading-tight mb-2">{offer.title}</h3>
-                    <p className="text-[10px] font-medium text-[var(--muted)] uppercase tracking-widest">{offer.offerType}</p>
+                    <h3 className="text-lg font-medium text-slate-900 leading-tight mb-2">{offer.title}</h3>
+                    <p className="text-[10px] font-medium text-slate-500 uppercase tracking-widest">{offer.offerType}</p>
                   </div>
                   <div className="flex gap-1 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onClick={() => setModal(offer)} className="p-2 hover:bg-[var(--cream)] rounded-lg transition-colors bg-[var(--cream)]/30 sm:bg-transparent" title="Edit"><Pencil size={16} /></button>
+                    <button onClick={() => setModal(offer)} className="p-2 hover:bg-slate-50 rounded-lg transition-colors bg-slate-50/30 sm:bg-transparent" title="Edit"><Pencil size={16} /></button>
                     <button onClick={() => setDeleteConfirm(offer._id)} className="p-2 hover:bg-red-50 text-rose-500 rounded-lg transition-colors bg-rose-50/50 sm:bg-transparent" title="Delete"><Trash2 size={16} /></button>
                   </div>
                 </div>
 
-                <p className="text-xs text-[var(--muted)] line-clamp-2 mb-6 font-medium leading-relaxed">{offer.description}</p>
+                <p className="text-xs text-slate-500 line-clamp-2 mb-6 font-medium leading-relaxed">{offer.description}</p>
 
-                <div className="mt-auto pt-6 border-t border-[var(--surface-border)] flex justify-between items-center">
+                <div className="mt-auto pt-6 border-t border-slate-200 flex justify-between items-center">
                   <button 
                     disabled={busyId === offer._id}
                     onClick={() => handleToggle(offer._id)}
@@ -421,7 +421,7 @@ const AdminOffers = () => {
                   >
                     {busyId === offer._id ? "..." : offer.isActive ? "Active" : "Inactive"}
                   </button>
-                  <span className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)]">Priority: {offer.priority}</span>
+                  <span className="text-[10px] font-medium uppercase tracking-widest text-slate-500">Priority: {offer.priority}</span>
                 </div>
               </div>
             </div>
@@ -433,12 +433,12 @@ const AdminOffers = () => {
 
       {deleteConfirm && createPortal(
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-md px-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-[24px] border border-[var(--surface-border)] shadow-2xl p-8 max-w-sm w-full text-center animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-[24px] border border-slate-200 shadow-2xl p-8 max-w-sm w-full text-center animate-in zoom-in-95 duration-200">
             <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500 shadow-inner">
               <Trash2 size={32} />
             </div>
-            <h3 className="serif text-xl font-medium text-[var(--charcoal)] mb-2 text-center">Remove Offer?</h3>
-            <p className="text-xs text-[var(--muted)] mb-8 leading-relaxed font-medium">This promotion will be permanently removed from the storefront slider.</p>
+            <h3 className=" text-xl font-medium text-slate-900 mb-2 text-center">Remove Offer?</h3>
+            <p className="text-xs text-slate-500 mb-8 leading-relaxed font-medium">This promotion will be permanently removed from the storefront slider.</p>
             <div className="flex gap-4">
               <button onClick={() => setDeleteConfirm(null)} className="flex-1 btn-outline font-medium h-12">Cancel</button>
               <button 
@@ -462,3 +462,5 @@ const AdminOffers = () => {
 };
 
 export default AdminOffers;
+
+

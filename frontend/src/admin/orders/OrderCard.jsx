@@ -22,6 +22,7 @@ const OrderCard = ({
   onReject,
   onHandover,
   onMarkReady, 
+  onMarkPreparing,
   onMarkDelivered, 
   isBusy 
 }) => {
@@ -57,26 +58,26 @@ const OrderCard = ({
     <div 
       onClick={() => onSelect?.(order)}
       className={`relative overflow-hidden rounded-[24px] border transition-all duration-300 bg-white cursor-pointer
-        ${isActive ? 'border-[#8b4513] shadow-lg ring-1 ring-[#8b4513]/20' : 'border-[#e6d3b3] shadow-sm hover:border-[#b67b3a]'}`}
+        ${isActive ? 'border-blue-600 shadow-lg ring-1 ring-blue-500/20' : 'border-slate-200 shadow-sm hover:border-[#4F46E5]'}`}
     >
       {/* ── HEADER ── */}
-      <div className="p-4 sm:p-5 border-b border-[#e6d3b3]/50 bg-[#fffaf3]/50">
+      <div className="p-4 sm:p-5 border-b border-slate-200/50 bg-slate-50/50">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-2xl bg-white border border-[#f0e0c4] flex items-center justify-center text-[#8b4513] shadow-sm">
+            <div className="h-12 w-12 rounded-2xl bg-white border border-[#E2E8F0] flex items-center justify-center text-slate-900 shadow-sm">
               <Package size={24} />
             </div>
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[#b67b3a]">Order ID</div>
-              <div className="text-sm font-bold text-[#2d1b0e]">#{order.orderNumber || order._id?.slice(-6).toUpperCase()}</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#4F46E5]">Order ID</div>
+              <div className="text-sm font-bold text-slate-900">#{order.orderNumber || order._id?.slice(-6).toUpperCase()}</div>
             </div>
           </div>
 
           <div className="flex items-center gap-4 text-right">
             <div className="hidden sm:block">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[#b67b3a]">Time</div>
-              <div className="flex items-center gap-1.5 text-sm font-bold text-[#2d1b0e]">
-                <Clock size={14} className="text-[#a67f52]" />
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#4F46E5]">Time</div>
+              <div className="flex items-center gap-1.5 text-sm font-bold text-slate-900">
+                <Clock size={14} className="text-slate-500" />
                 {formattedTime}
               </div>
             </div>
@@ -93,32 +94,32 @@ const OrderCard = ({
       <div className="px-4 py-5 sm:px-5 grid grid-cols-1 md:grid-cols-2 gap-5 bg-white">
         <div className="space-y-3 min-w-0">
           <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-full bg-[#f5e6d3] flex items-center justify-center border border-[#e6d3b3] shrink-0">
-              <span className="text-xs font-bold text-[#8b4513]">{order.customer?.name?.[0]?.toUpperCase() || 'G'}</span>
+            <div className="h-8 w-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-200 shrink-0">
+              <span className="text-xs font-bold text-slate-900">{order.customer?.name?.[0]?.toUpperCase() || 'G'}</span>
             </div>
-            <span className="text-sm font-bold text-[#2d1b0e] truncate">{order.customer?.name || "Guest Customer"}</span>
+            <span className="text-sm font-bold text-slate-900 truncate">{order.customer?.name || "Guest Customer"}</span>
           </div>
           <div className="flex flex-col gap-2 pl-0 sm:pl-11">
-            <a href={`tel:${order.customer?.phone}`} onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 text-xs font-medium text-[#7a5c3a] hover:text-[#8b4513] w-fit">
+            <a href={`tel:${order.customer?.phone}`} onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-900 w-fit">
               <Phone size={14} className="shrink-0" /> <span className="truncate">{order.customer?.phone || "No Phone"}</span>
             </a>
-            <div className="flex items-center gap-2 text-xs font-medium text-[#7a5c3a] w-full min-w-0">
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-500 w-full min-w-0">
               <Mail size={14} className="shrink-0" /> <span className="truncate">{order.customer?.email || "No Email"}</span>
             </div>
           </div>
         </div>
 
         <div className="space-y-3 md:text-right flex flex-col items-start md:items-end min-w-0">
-          <div className="flex items-center gap-2 bg-[#fffaf3] border border-[#e6d3b3] px-3 py-1.5 rounded-xl shadow-sm w-fit max-w-full">
-            <Icon size={14} className="text-[#8b4513] shrink-0" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#2d1b0e] truncate">{payMethod}</span>
+          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl shadow-sm w-fit max-w-full">
+            <Icon size={14} className="text-slate-900 shrink-0" />
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-900 truncate">{payMethod}</span>
             <span className={`ml-2 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest shrink-0 ${payStatusMeta.cls}`}>
               {payStatusMeta.label}
             </span>
           </div>
           <div className="flex items-start gap-2 w-full">
-            <MapPin size={14} className="text-[#a67f52] shrink-0 mt-0.5 md:hidden" />
-            <span className="text-xs font-medium text-[#7a5c3a] line-clamp-2 leading-relaxed break-words text-left md:text-right w-full">
+            <MapPin size={14} className="text-slate-500 shrink-0 mt-0.5 md:hidden" />
+            <span className="text-xs font-medium text-slate-500 line-clamp-2 leading-relaxed break-words text-left md:text-right w-full">
               {[order.shippingAddress?.line1, order.shippingAddress?.city, order.shippingAddress?.postalCode].filter(Boolean).join(", ")}
             </span>
           </div>
@@ -127,26 +128,26 @@ const OrderCard = ({
 
       {/* ── RIDER INFO (IF ASSIGNED) ── */}
       {order.rider?.name && (
-        <div className="px-4 py-3 mx-4 mb-4 rounded-xl bg-[#fffaf3] border border-[#e6d3b3] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm overflow-hidden">
+        <div className="px-4 py-3 mx-4 mb-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm overflow-hidden">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="h-10 w-10 rounded-full bg-white border border-[#f0e0c4] flex items-center justify-center text-[#8b4513] shadow-sm shrink-0">
+            <div className="h-10 w-10 rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-slate-900 shadow-sm shrink-0">
               <Truck size={18} />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
-                <div className="text-[9px] font-bold uppercase tracking-widest text-[#b67b3a]">Assigned Rider</div>
-                <span className="px-1.5 py-0.5 rounded bg-[#8b4513]/10 text-[#8b4513] text-[8px] font-bold uppercase tracking-tighter">
+                <div className="text-[9px] font-bold uppercase tracking-widest text-[#4F46E5]">Assigned Rider</div>
+                <span className="px-1.5 py-0.5 rounded bg-blue-600/10 text-slate-900 text-[8px] font-bold uppercase tracking-tighter">
                   {order.delivery?.provider || "DemoDelivery"}
                 </span>
               </div>
-              <div className="text-xs font-bold text-[#2d1b0e] truncate">{order.rider.name}</div>
-              <div className="text-[10px] font-medium text-[#7a5c3a]">{order.rider.phone}</div>
+              <div className="text-xs font-bold text-slate-900 truncate">{order.rider.name}</div>
+              <div className="text-[10px] font-medium text-slate-500">{order.rider.phone}</div>
             </div>
           </div>
           {status === "READY" && (
-            <div className="bg-white px-3 py-1.5 rounded-lg border border-[#e6d3b3] shadow-sm w-fit sm:ml-auto shrink-0">
-              <div className="text-[9px] font-bold uppercase tracking-widest text-[#b67b3a]">DemoDelivery</div>
-              <div className="text-[10px] font-black text-[#2d1b0e] tracking-widest">ASSIGNED</div>
+            <div className="bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm w-fit sm:ml-auto shrink-0">
+              <div className="text-[9px] font-bold uppercase tracking-widest text-[#4F46E5]">DemoDelivery</div>
+              <div className="text-[10px] font-black text-slate-900 tracking-widest">ASSIGNED</div>
             </div>
           )}
         </div>
@@ -156,13 +157,13 @@ const OrderCard = ({
       <div className="px-4 pb-4 sm:px-5 sm:pb-5">
         <button 
           onClick={toggleExpand}
-          className="w-full flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-[#fffaf3] border border-[#e6d3b3] hover:bg-[#f5e6d3] transition-colors shadow-sm"
+          className="w-full flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm"
         >
-          <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold text-[#2d1b0e] uppercase tracking-widest">
-            <Receipt size={16} className="text-[#a67f52] shrink-0" />
+          <div className="flex items-center gap-2 text-[10px] sm:text-xs font-bold text-slate-900 uppercase tracking-widest">
+            <Receipt size={16} className="text-slate-500 shrink-0" />
             <span className="truncate">Summary ({itemCount} Items)</span>
           </div>
-          <div className="text-[#8b4513] bg-white rounded-full p-1 border border-[#e6d3b3] shrink-0">
+          <div className="text-slate-900 bg-white rounded-full p-1 border border-slate-200 shrink-0">
             {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
         </button>
@@ -171,21 +172,21 @@ const OrderCard = ({
           <div className="mt-4 space-y-3 animate-in slide-in-from-top-2 duration-300">
             <div className="space-y-2">
               {items.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3 sm:gap-4 p-3 rounded-xl border border-dashed border-[#e6d3b3] bg-white">
-                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#fffaf3] border border-[#f0e0c4] overflow-hidden shrink-0">
+                <div key={idx} className="flex items-center gap-3 sm:gap-4 p-3 rounded-xl border border-dashed border-slate-200 bg-white">
+                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-slate-50 border border-[#E2E8F0] overflow-hidden shrink-0">
                     {item.imageSnapshot || item.image ? (
                       <img src={item.imageSnapshot || item.image} alt="" className="h-full w-full object-cover mix-blend-multiply" />
                     ) : (
-                      <div className="h-full w-full flex items-center justify-center text-[#e6d3b3]"><Package size={16} /></div>
+                      <div className="h-full w-full flex items-center justify-center text-slate-200"><Package size={16} /></div>
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-bold text-[#2d1b0e] truncate">{item.titleSnapshot || item.name}</div>
-                    <div className="text-[10px] font-medium text-[#7a5c3a] uppercase tracking-wider mt-0.5 truncate">
+                    <div className="text-xs font-bold text-slate-900 truncate">{item.titleSnapshot || item.name}</div>
+                    <div className="text-[10px] font-medium text-slate-500 uppercase tracking-wider mt-0.5 truncate">
                       {item.selectedVariant?.label || item.variantLabel || 'Regular'} × {item.quantity}
                     </div>
                   </div>
-                  <div className="text-[10px] sm:text-xs font-black text-[#2d1b0e] bg-[#f5e6d3] px-2 py-1 rounded-md shrink-0">
+                  <div className="text-[10px] sm:text-xs font-black text-slate-900 bg-slate-50 px-2 py-1 rounded-md shrink-0">
                     {formatCurrency(item.finalAmount || item.subtotal || 0)}
                   </div>
                 </div>
@@ -193,8 +194,8 @@ const OrderCard = ({
             </div>
             
             {/* ── BILL SUMMARY ── */}
-            <div className="p-4 rounded-xl bg-[#fffaf3] border border-[#e6d3b3] space-y-3 shadow-inner">
-              <div className="flex justify-between text-xs font-medium text-[#7a5c3a]">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3 shadow-inner">
+              <div className="flex justify-between text-xs font-medium text-slate-500">
                 <span>Items Subtotal</span>
                 <span>{formatCurrency(subtotal - (totals.gstTotal || order.gstTotal || 0))}</span>
               </div>
@@ -204,7 +205,7 @@ const OrderCard = ({
                   <span>{formatCurrency(totals.gstTotal || order.gstTotal)}</span>
                 </div>
               )}
-              <div className="flex justify-between text-xs font-medium text-[#7a5c3a]">
+              <div className="flex justify-between text-xs font-medium text-slate-500">
                 <span>Delivery</span>
                 <span className={shippingFee === 0 ? "text-emerald-600 font-bold" : ""}>
                   {shippingFee > 0 ? formatCurrency(shippingFee) : "FREE"}
@@ -216,10 +217,10 @@ const OrderCard = ({
                   <span>-{formatCurrency(totals.discountTotal)}</span>
                 </div>
               )}
-              <div className="h-px bg-[#e6d3b3] my-2" />
+              <div className="h-px bg-slate-50 my-2" />
               <div className="flex justify-between items-end gap-2">
-                <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-[#2d1b0e]">Grand Total</span>
-                <span className="text-lg sm:text-xl font-black text-[#8b4513]">{formatCurrency(grandTotal)}</span>
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-900">Grand Total</span>
+                <span className="text-lg sm:text-xl font-black text-slate-900">{formatCurrency(grandTotal)}</span>
               </div>
             </div>
           </div>
@@ -227,7 +228,7 @@ const OrderCard = ({
       </div>
 
       {/* ── ACTIONS ── */}
-      <div className="p-4 sm:p-5 border-t border-[#e6d3b3]/50 bg-[#fffaf3]/50">
+      <div className="p-4 sm:p-5 border-t border-slate-200/50 bg-slate-50/50">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           {status === "PLACED" && (
             <>
@@ -250,11 +251,22 @@ const OrderCard = ({
             </>
           )}
 
+          {status === "ACCEPTED" && (
+            <button 
+              onClick={(e) => { e.stopPropagation(); onMarkPreparing(order); }}
+              disabled={isBusy}
+              className="w-full h-12 rounded-xl bg-blue-600 text-white text-[11px] font-bold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {isBusy ? <Loader2 size={16} className="animate-spin" /> : <Clock size={16} />}
+              Mark Preparing
+            </button>
+          )}
+
           {status === "PREPARING" && (
             <button 
               onClick={(e) => { e.stopPropagation(); onMarkReady(order); }}
               disabled={isBusy}
-              className="w-full h-12 rounded-xl bg-[#b67b3a] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#a67f52] transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full h-12 rounded-xl bg-[#4F46E5] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#a67f52] transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isBusy ? <Loader2 size={16} className="animate-spin" /> : <Truck size={16} />}
               Mark Ready
@@ -273,13 +285,18 @@ const OrderCard = ({
           )}
 
           {status === "PICKED_UP" && (
-            <div className="w-full text-center py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#a67f52] flex items-center justify-center gap-2 bg-[#fffaf3] border border-dashed border-[#e6d3b3] rounded-xl h-12">
-              <Truck size={14} className="animate-pulse" /> Out For Delivery
-            </div>
+            <button 
+              onClick={(e) => { e.stopPropagation(); onMarkDelivered(order); }}
+              disabled={isBusy}
+              className="w-full h-12 rounded-xl bg-emerald-600 text-white text-[11px] font-bold uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {isBusy ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle2 size={16} />}
+              Mark Delivered
+            </button>
           )}
 
           {(status === "DELIVERED" || status === "REJECTED" || status === "CANCELLED") && (
-            <div className="w-full text-center py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#a67f52]">
+            <div className="w-full text-center py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
               Order {status === "DELIVERED" ? "Completed" : "Closed"}
             </div>
           )}
@@ -290,3 +307,4 @@ const OrderCard = ({
 };
 
 export default OrderCard;
+

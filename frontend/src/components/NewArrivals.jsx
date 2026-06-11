@@ -22,20 +22,20 @@ function NewArrivals({ initialCategory = "all", title = "New Arrivals" }) {
   return (
     <section className="py-8 md:py-16 bg-[var(--cream)] relative overflow-hidden">
       {/* Background Decorative Blur */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 h-[600px] w-[600px] bg-[var(--saffron)]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 h-[600px] w-[600px] bg-[var(--accent)]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <SectionContainer className="relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div className="section-title mb-0">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-[var(--surface-strong)] text-[var(--gold)] text-[10px] font-black tracking-widest uppercase">
-               {initialCategory === 'all' ? 'Freshly Prepared' : 'Curated Collection'}
+               {initialCategory === 'all' ? 'Newly Released' : 'Curated Collection'}
             </div>
-            <h2 className="serif text-3xl md:text-4xl">{title}</h2>
-            <p className="max-w-xl text-sm md:text-base leading-relaxed font-medium text-[var(--muted)]">Handcrafted sweets made with traditional recipes, premium desi ghee, and pure love.</p>
+            <h2 className=" text-3xl md:text-4xl">{title}</h2>
+            <p className="max-w-xl text-sm md:text-base leading-relaxed font-medium text-[var(--muted)]">Explore our newest catalog additions, selected for premium performance, quality, and modern design.</p>
           </div>
           
           <button 
-            onClick={() => navigate("/sweets")}
+            onClick={() => navigate("/products")}
             className="flex items-center gap-2 text-xs md:text-sm font-bold text-[var(--burgundy)] hover:text-[var(--charcoal)] transition-colors group uppercase tracking-[0.2em]"
           >
             Full Catalog <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -67,9 +67,9 @@ function NewArrivals({ initialCategory = "all", title = "New Arrivals" }) {
                 <div className="w-20 h-20 bg-[var(--cream)] rounded-full flex items-center justify-center mx-auto mb-6 text-[var(--muted)]/30">
                    <Sparkles size={40} />
                 </div>
-                <h3 className="serif text-2xl font-medium text-[var(--charcoal)] mb-2">No sweets here yet</h3>
+                <h3 className=" text-2xl font-medium text-[var(--charcoal)] mb-2">No products here yet</h3>
                 <p className="text-sm text-[var(--muted)] font-medium mb-8">Try a different category or check back later!</p>
-                <button onClick={() => navigate("/sweets")} className="btn-primary h-12 px-8">Browse All product</button>
+                <button onClick={() => navigate("/products")} className="btn-primary h-12 px-8">Browse All product</button>
               </div>
             )}
           </>
@@ -80,3 +80,5 @@ function NewArrivals({ initialCategory = "all", title = "New Arrivals" }) {
 }
 
 export default NewArrivals;
+
+

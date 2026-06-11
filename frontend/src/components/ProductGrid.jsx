@@ -3,18 +3,18 @@ import ProductCard from "./ProductCard";
 import { useProducts } from "../context/ProductContext";
 
 const ProductCardSkeleton = () => (
-  <div className="w-full max-w-[320px] flex animate-pulse flex-col overflow-hidden rounded-2xl bg-white border border-[#f0e6d6]">
-    <div className="aspect-[4/5] w-full bg-[#f5ede0]" />
+  <div className="w-full max-w-[320px] flex animate-pulse flex-col overflow-hidden rounded-2xl bg-white border border-[#E2E8F0]">
+    <div className="aspect-[4/5] w-full bg-[#F1F5F9]" />
     <div className="flex flex-col gap-3 p-4">
-      <div className="h-3.5 bg-[#f0e6d6] rounded-full w-3/4" />
-      <div className="h-3 bg-[#f0e6d6] rounded-full w-1/2" />
+      <div className="h-3.5 bg-[#E2E8F0] rounded-full w-3/4" />
+      <div className="h-3 bg-[#E2E8F0] rounded-full w-1/2" />
       <div className="mt-1 flex gap-2">
-        <div className="h-6 w-14 bg-[#f0e6d6] rounded-md" />
-        <div className="h-6 w-14 bg-[#f0e6d6] rounded-md" />
+        <div className="h-6 w-14 bg-[#E2E8F0] rounded-md" />
+        <div className="h-6 w-14 bg-[#E2E8F0] rounded-md" />
       </div>
-      <div className="h-5 bg-[#f0e6d6] rounded-full w-1/3" />
-      <div className="h-px bg-[#f0e6d6]" />
-      <div className="h-12 bg-[#f0e6d6] rounded-xl w-full" />
+      <div className="h-5 bg-[#E2E8F0] rounded-full w-1/3" />
+      <div className="h-px bg-[#E2E8F0]" />
+      <div className="h-12 bg-[#E2E8F0] rounded-xl w-full" />
     </div>
   </div>
 );
@@ -22,8 +22,8 @@ const ProductCardSkeleton = () => (
 const EmptyState = () => (
   <div className="col-span-full flex items-center justify-center py-20 text-center">
     <div className="flex flex-col items-center gap-3">
-      <PackageX className="h-7 w-7 text-[#a0836b]" />
-      <h3 className="text-[15px] font-medium text-[#1c1c1c]">No products found</h3>
+      <PackageX className="h-7 w-7 text-[#64748B]" />
+      <h3 className="text-[15px] font-medium text-[#0F172A]">No products found</h3>
     </div>
   </div>
 );

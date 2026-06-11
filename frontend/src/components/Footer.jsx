@@ -4,13 +4,14 @@ import {
   Instagram, MessageCircle,
   Shield, Truck, RefreshCw,
   ChevronRight,
+  Package
 } from "lucide-react";
 import brandLogo from "../assets/logo.png"
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const QUICK_LINKS = [
   { label: "Home", to: "/" },
-  { label: "All Products", to: "/sweets" },
+  { label: "All Products", to: "/products" },
   { label: "My Orders", to: "/my-orders" },
   { label: "About Us", to: "/about" },
   { label: "Contact Us", to: "/contact" },
@@ -27,273 +28,190 @@ const CONTACT_INFO = [
   {
     icon: MapPin,
     label: "Address",
-    value: "Demo Address Line 1, Demo Address Line 2, Konark Nagar, Demo City, Demo City 411014",
+    value: "DemoMart Tech Park, Block A, Cyber City 411014",
     href: null,
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+91 98581 06106",
-    href: "tel:+919858106106",
+    value: "+1 800 555 0199",
+    href: "tel:+18005550199",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "admin@demomart.com",
-    href: "mailto:admin@demomart.com",
+    value: "support@demomart.com",
+    href: "mailto:support@demomart.com",
   },
   {
     icon: Clock,
     label: "Hours",
-    value: "Mon – Sun: 9:00 AM – 10:00 PM",
+    value: "Mon – Sun: 24/7 Online Support",
     href: null,
   },
 ];
 
 const TRUST_BADGES = [
-  { icon: Shield, label: "Authentic Products" },
-  { icon: Truck, label: "Store Pickup Available" },
-  { icon: RefreshCw, label: "GST Billing" },
+  { icon: Shield, label: "Secure Payments" },
+  { icon: Truck, label: "Fast Nationwide Delivery" },
+  { icon: RefreshCw, label: "30-Day Returns" },
 ];
 
 const SOCIAL = [
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    href: "https://wa.me/919999999999",
-    hover: "hover:bg-green-500 hover:border-green-500 hover:text-white hover:shadow-lg hover:shadow-green-500/20",
+    href: "#",
+    hover: "hover:bg-green-500 hover:border-green-500 hover:text-white",
   },
   {
     icon: Instagram,
     label: "Instagram",
-    href: "https://instagram.com/productworld",
-    hover: "hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:shadow-lg hover:shadow-pink-600/20",
+    href: "#",
+    hover: "hover:bg-pink-600 hover:border-pink-600 hover:text-white",
   },
 ];
 
-// ── Footer ────────────────────────────────────────────────────────────────────
 const Footer = () => {
   const navigate = useNavigate();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-[#1e0f0a] font-['Inter',system-ui,sans-serif]">
+    <footer className="bg-slate-900 text-slate-300 font-sans border-t border-slate-800">
+      <div className="mx-auto max-w-[1440px] px-6 lg:px-12 pt-16 pb-12">
+        {/* Brand row + trust badges */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-10 border-b border-slate-800">
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center gap-3 shrink-0 group transition-all"
+          >
+            <div className="h-12 w-12 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-lg">
+              <Package size={24} />
+            </div>
+            <div className="flex flex-col items-start leading-none">
+              <span className="text-2xl font-black tracking-tight text-white">DemoMart</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-400 mt-1">Tech & Lifestyle</span>
+            </div>
+          </button>
 
-      {/* Warm ambient glow */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-28 w-4/5 -translate-x-1/2
-                      rounded-full bg-[rgba(122,40,40,0.18)] blur-[80px]" />
-
-      {/* ── Main section ── */}
-      <div className="relative z-10">
-        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 pt-14 pb-12">
-
-          {/* Brand row + trust badges */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6
-                          pb-10 border-b border-white/[0.08]">
-
-            <button
-              onClick={() => navigate("/")}
-              className="group flex items-center gap-2 sm:gap-4 shrink-0 transition-all duration-500"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-[var(--gold)]/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-700" />
-                <img src={brandLogo} alt="Logo" className="relative object-contain transition-all duration-700 ease-out h-16 w-16 sm:h-20 sm:w-20" />
+          {/* Trust badges */}
+          <div className="flex flex-wrap gap-3">
+            {TRUST_BADGES.map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-800/50 px-4 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-blue-500/50 hover:bg-blue-500/10 hover:text-blue-400"
+              >
+                <Icon className="h-4 w-4 shrink-0 text-blue-500" />
+                {label}
               </div>
-              <div className="flex flex-col items-start leading-none">
-                <span className="font-serif text-2xl sm:text-3xl font-black tracking-tighter text-[#fff8f0]">
-                  product
-                </span>
-                <span className="font-sans text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.4em] text-[#e8883a]">
-                  World
-                </span>
-              </div>
-            </button>
+            ))}
+          </div>
+        </div>
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-2">
-              {TRUST_BADGES.map(({ icon: Icon, label }) => (
-                <div
+        {/* 4-col grid */}
+        <div className="grid grid-cols-1 gap-12 pt-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+          {/* Col 1 — About + Social */}
+          <div className="sm:col-span-2 lg:col-span-4 lg:pr-8">
+            <p className="mb-8 max-w-sm text-sm leading-relaxed text-slate-400">
+              DemoMart is your ultimate destination for premium electronics, modern lifestyle goods, and everyday essentials. Discover quality products with fast shipping and secure checkout.
+            </p>
+            <div className="flex items-center gap-3">
+              {SOCIAL.map(({ icon: Icon, label, href, hover }) => (
+                <a
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10
-                                 bg-white/5 px-3.5 py-2 text-xs font-medium text-[rgba(255,248,240,0.70)]
-                                 transition-colors duration-150
-                                 hover:border-[rgba(232,136,58,0.25)] hover:bg-[rgba(232,136,58,0.10)]
-                                 hover:text-[rgba(255,248,240,0.90)]"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className={`flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-400 transition-all ${hover}`}
                 >
-                  <Icon className="h-3.5 w-3.5 shrink-0 text-[#e8883a]" />
-                  {label}
-                </div>
+                  <Icon className="h-5 w-5" />
+                </a>
               ))}
             </div>
-
           </div>
 
-          {/* 4-col grid */}
-          <div className="grid grid-cols-1 gap-10 pt-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-
-            {/* Col 1 — About + Social */}
-            <div className="sm:col-span-2 lg:col-span-4 lg:pr-6">
-              <p className="mb-6 max-w-[340px] text-[13px] font-normal leading-[1.75]
-                                text-[rgba(255,248,240,0.55)]">
-                Your trusted destination for authentic Indian sweets, handcrafted daily
-                with the finest ingredients. Proudly serving customers across India.
-              </p>
-
-              <div className="flex items-center gap-2.5">
-                {SOCIAL.map(({ icon: Icon, label, href, hover }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className={`flex h-[38px] w-[38px] items-center justify-center rounded-xl
-                                    border border-white/[0.12] bg-white/[0.06]
-                                    text-[rgba(255,248,240,0.70)] no-underline
-                                    transition-all duration-200 hover:-translate-y-0.5 ${hover}`}
+          {/* Col 2 — Quick Links */}
+          <div className="lg:col-span-2">
+            <h4 className="mb-6 text-xs font-bold uppercase tracking-widest text-slate-100">Explore</h4>
+            <ul className="flex flex-col gap-3">
+              {QUICK_LINKS.map(({ label, to }) => (
+                <li key={label}>
+                  <NavLink
+                    to={to}
+                    className="group inline-flex items-center text-sm font-medium text-slate-400 hover:text-blue-400 transition-colors"
                   >
-                    <Icon className="h-4 w-4" />
-                  </a>
-                ))}
-                <span className="ml-1 text-[10px] font-medium uppercase tracking-[0.16em]
-                                     text-[rgba(255,248,240,0.30)]">
-                  Follow us
-                </span>
-              </div>
-            </div>
+                    <ChevronRight className="h-3 w-3 shrink-0 text-blue-500 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0 mr-1" />
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Col 2 — Quick Links */}
-            <div className="lg:col-span-2">
-              <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#fff8f0]">
-                Quick Links
-              </h4>
-              <ul className="flex flex-col gap-2.5 p-0 m-0 list-none">
-                {QUICK_LINKS.map(({ label, to }) => (
-                  <li key={label}>
-                    <NavLink
-                      to={to}
-                      className="group inline-flex items-center gap-0 text-[13px] font-medium
-                                     text-[rgba(255,248,240,0.65)] no-underline
-                                     transition-all duration-150 hover:gap-1.5 hover:text-[#e8883a]"
-                    >
-                      <ChevronRight className="h-3 w-3 shrink-0 text-[#e8883a] opacity-0
-                                                   -translate-x-1.5 transition-all duration-150
-                                                   group-hover:opacity-100 group-hover:translate-x-0" />
-                      {label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Col 3 — Support */}
+          <div className="lg:col-span-3">
+            <h4 className="mb-6 text-xs font-bold uppercase tracking-widest text-slate-100">Customer Support</h4>
+            <ul className="flex flex-col gap-3">
+              {SUPPORT_LINKS.map(({ label, to }) => (
+                <li key={label}>
+                  <NavLink
+                    to={to}
+                    className="group inline-flex items-center text-sm font-medium text-slate-400 hover:text-blue-400 transition-colors"
+                  >
+                    <ChevronRight className="h-3 w-3 shrink-0 text-blue-500 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0 mr-1" />
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Col 3 — Support */}
-            <div className="lg:col-span-3">
-              <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#fff8f0]">
-                Support
-              </h4>
-              <ul className="flex flex-col gap-2.5 p-0 m-0 list-none">
-                {SUPPORT_LINKS.map(({ label, to }) => (
-                  <li key={label}>
-                    <NavLink
-                      to={to}
-                      className="group inline-flex items-center gap-0 text-[13px] font-medium
-                                     text-[rgba(255,248,240,0.65)] no-underline
-                                     transition-all duration-150 hover:gap-1.5 hover:text-[#e8883a]"
-                    >
-                      <ChevronRight className="h-3 w-3 shrink-0 text-[#e8883a] opacity-0
-                                                   -translate-x-1.5 transition-all duration-150
-                                                   group-hover:opacity-100 group-hover:translate-x-0" />
-                      {label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+          {/* Col 4 — Newsletter/Contact */}
+          <div className="lg:col-span-3">
+            <h4 className="mb-6 text-xs font-bold uppercase tracking-widest text-slate-100">Stay Updated</h4>
+            <p className="text-sm text-slate-400 mb-4">Subscribe to our newsletter for the latest tech drops and exclusive offers.</p>
+            <div className="flex gap-2 mb-8">
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              />
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+                Subscribe
+              </button>
             </div>
-
-            {/* Col 4 — Contact */}
-            <div className="lg:col-span-3">
-              <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#fff8f0]">
-                Contact Us
-              </h4>
-              <ul className="flex flex-col gap-4 p-0 m-0 list-none">
-                {CONTACT_INFO.map(({ icon: Icon, label, value, href }) => (
-                  <li key={label} className="group flex items-start gap-3">
-                    {/* Icon box */}
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl
-                                        border border-white/10 bg-white/[0.06]
-                                        transition-colors duration-150
-                                        group-hover:border-[rgba(232,136,58,0.35)]
-                                        group-hover:bg-[rgba(232,136,58,0.15)]">
-                      <Icon className="h-3.5 w-3.5 text-[#e8883a]" />
-                    </div>
-                    <div>
-                      <p className="mb-0.5 text-[9px] font-medium uppercase tracking-[0.18em]
-                                       text-[rgba(255,248,240,0.30)]">
-                        {label}
-                      </p>
-                      {href ? (
-                        <a
-                          href={href}
-                          className="text-xs font-medium text-[rgba(255,248,240,0.70)] no-underline
-                                         transition-colors duration-150 hover:text-[#e8883a]"
-                        >
-                          {value}
-                        </a>
-                      ) : (
-                        <p className="m-0 max-w-[200px] text-xs font-medium leading-relaxed
-                                          text-[rgba(255,248,240,0.70)]">
-                          {value}
-                        </p>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-''
+            
+            <ul className="flex flex-col gap-3">
+              {CONTACT_INFO.slice(1).map(({ icon: Icon, label, value, href }) => (
+                <li key={label} className="flex items-center gap-3 text-sm text-slate-400">
+                  <Icon className="h-4 w-4 text-slate-500 shrink-0" />
+                  {href ? (
+                    <a href={href} className="hover:text-blue-400 transition-colors">{value}</a>
+                  ) : (
+                    <span>{value}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
 
-      {/* ── Bottom bar ── */}
-      <div className="relative z-10 border-t border-white/[0.07] bg-black/25">
-        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
-
-            <p className="text-xs font-medium text-[rgba(255,248,240,0.35)]">
-              © {year}{" "}
-              <span className="font-medium text-[rgba(255,248,240,0.60)]">DemoMart</span>
-              . All rights reserved.
-            </p>/
-
-
-
-
-
-
-            <div className="flex items-center gap-4">
-              <p className="flex items-center gap-1.5 text-xs font-medium
-                                text-[rgba(255,248,240,0.30)]">
-                Made with{" "}
-                <span className="text-[#e8883a]">♥</span>
-                {" "}in Maharashtra
-              </p>
-
-              <span className="hidden h-1 w-1 rounded-full bg-white/15 sm:block" />
-
-              <NavLink
-                to="/built-by"
-                className="text-xs font-medium text-[rgba(255,248,240,0.30)] no-underline
-                               transition-colors duration-150 hover:text-[#e8883a]"
-              >
-                Who built this?
-              </NavLink>
+      {/* Bottom bar */}
+      <div className="border-t border-slate-800 bg-slate-950">
+        <div className="mx-auto max-w-[1440px] px-6 lg:px-12 py-6">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <p className="text-xs text-slate-500">
+              © {year} <span className="font-bold text-slate-300">DemoMart</span>. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6">
+              <NavLink to="/privacy-policy" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">Privacy</NavLink>
+              <NavLink to="/terms-conditions" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">Terms</NavLink>
             </div>
-
           </div>
         </div>
       </div>
-
     </footer>
   );
 };

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const STATUS_META = {
   PLACED: { label: "Order Placed", cls: "bg-blue-100 text-blue-700", icon: Clock },
+  ACCEPTED: { label: "Order Accepted", cls: "bg-sky-100 text-sky-700", icon: Clock },
   PREPARING: { label: "Preparing", cls: "bg-amber-100 text-amber-700", icon: Clock },
   READY: { label: "Ready", cls: "bg-indigo-100 text-indigo-700", icon: Package },
   PICKED_UP: { label: "Picked Up", cls: "bg-purple-100 text-purple-700", icon: Package },
@@ -50,8 +51,8 @@ const MyOrders = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 py-12 md:py-20">
       <div className="mb-10">
-        <h1 className="serif text-3xl md:text-4xl text-[var(--charcoal)] mb-2">My Orders</h1>
-        <p className="text-[var(--muted)]">Track and manage your sweet deliveries.</p>
+        <h1 className=" text-3xl md:text-4xl text-[var(--charcoal)] mb-2">My Orders</h1>
+        <p className="text-[var(--muted)]">Track and manage your order deliveries.</p>
       </div>
 
       {orders.length === 0 ? (
@@ -59,10 +60,10 @@ const MyOrders = () => {
           <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-[var(--surface-strong)] text-[var(--burgundy)]">
             <ShoppingBag size={40} />
           </div>
-          <h2 className="serif text-2xl mb-4">No orders found</h2>
-          <p className="text-[var(--muted)] mb-8">Looks like you haven't ordered any sweets yet.</p>
+          <h2 className=" text-2xl mb-4">No orders found</h2>
+          <p className="text-[var(--muted)] mb-8">Looks like you haven't ordered any products yet.</p>
           <button 
-            onClick={() => navigate("/sweets")}
+            onClick={() => navigate("/products")}
             className="btn-primary px-8 py-3 rounded-xl"
           >
             Start Shopping
@@ -237,3 +238,5 @@ const MyOrders = () => {
 };
 
 export default MyOrders;
+
+

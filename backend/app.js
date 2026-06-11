@@ -206,18 +206,18 @@ app.use("/api/payment", (req, res, next) => {
       endpoint: req.path,
       method: req.method,
       bodyKeys: Object.keys(req.body),
-      hasDemoPaymentOrderId: !!req.body?.demopayment_order_id,
-      hasDemoPaymentPaymentId: !!req.body?.demopayment_payment_id,
-      hasDemoPaymentSignature: !!req.body?.demopayment_signature,
+      hasRazorpayOrderId: !!req.body?.razorpay_order_id,
+      hasRazorpayPaymentId: !!req.body?.razorpay_payment_id,
+      hasRazorpaySignature: !!req.body?.razorpay_signature,
       hasOrderData: !!req.body?.orderData,
       timestamp: new Date().toISOString()
     });
 
     if (req.path === "/verify") {
       logger.info("🔐 PAYMENT VERIFY REQUEST DETAILS", {
-        demopaymentOrderId: req.body?.demopayment_order_id,
-        demopaymentPaymentId: req.body?.demopayment_payment_id,
-        signatureProvided: req.body?.demopayment_signature,
+        razorpayOrderId: req.body?.razorpay_order_id,
+        razorpayPaymentId: req.body?.razorpay_payment_id,
+        signatureProvided: req.body?.razorpay_signature,
         orderDataCustomer: req.body?.orderData?.customer?.name,
         orderDataItemCount: Array.isArray(req.body?.orderData?.items) ? req.body.orderData.items.length : 0,
         orderDataAmount: req.body?.orderData?.amount

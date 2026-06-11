@@ -12,15 +12,15 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
-const DATABASE_URI = process.env.MONGODB_URI;
+const DATABASE_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
 
 const ADMIN_EMAIL = "admin@gmail.com";
-const ADMIN_PASSWORD = "Admin@AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\logs\\\\Personal\\\\SyncEngine-2026-06-09.0815.10112.123.odl";
+const ADMIN_PASSWORD = "Admin@123";
 
 const categories = [
   { name: "Electronics", slug: "electronics", is_active: true, showInNavbar: true },
   { name: "Fashion", slug: "fashion", is_active: true, showInNavbar: true },
-  { name: "Home Decor", slug: "home-decor", is_active: true, showInNavbar: true },
+  { name: "Home", slug: "home", is_active: true, showInNavbar: true },
   { name: "Accessories", slug: "accessories", is_active: true, showInNavbar: true },
   { name: "Sports", slug: "sports", is_active: true, showInNavbar: true }
 ];
@@ -34,10 +34,10 @@ const products = [
   { name: "Women's Summer Dress", category: "Fashion", price: 1299 },
   { name: "Running Shoes", category: "Fashion", price: 2499 },
   { name: "Leather Wallet", category: "Fashion", price: 599 },
-  { name: "Ceramic Vase", category: "Home Decor", price: 399 },
-  { name: "Wall Clock", category: "Home Decor", price: 799 },
-  { name: "Cotton Bedsheet", category: "Home Decor", price: 1100 },
-  { name: "Table Lamp", category: "Home Decor", price: 650 },
+  { name: "Ceramic Vase", category: "Home", price: 399 },
+  { name: "Wall Clock", category: "Home", price: 799 },
+  { name: "Cotton Bedsheet", category: "Home", price: 1100 },
+  { name: "Table Lamp", category: "Home", price: 650 },
   { name: "Polarized Sunglasses", category: "Accessories", price: 1200 },
   { name: "Silver Necklace", category: "Accessories", price: 1800 },
   { name: "Classic Wristwatch", category: "Accessories", price: 2500 },
@@ -51,7 +51,7 @@ const products = [
 const demoProducts = products.map((p, i) => ({
   name: p.name,
   category: p.category,
-  description: \`High quality \${p.name.toLowerCase()} for all your needs.\`,
+  description: `High quality ${p.name.toLowerCase()} for all your needs.`,
   image: "https://via.placeholder.com/400?text=" + encodeURIComponent(p.name),
   gstPercent: 18,
   packingCharges: 50,
@@ -68,9 +68,12 @@ const demoProducts = products.map((p, i) => ({
   isAvailable: true
 }));
 
+const farFutureDate = new Date();
+farFutureDate.setFullYear(farFutureDate.getFullYear() + 10);
+
 const coupons = [
-  { code: "WELCOME50", discountType: "FLAT", discountValue: 50, minOrderAmount: 500, isActive: true },
-  { code: "SAVE10", discountType: "PERCENTAGE", discountValue: 10, minOrderAmount: 1000, isActive: true }
+  { code: "WELCOME50", discountType: "FLAT", discountValue: 50, minOrderAmount: 500, expiresAt: farFutureDate, isActive: true },
+  { code: "SAVE10", discountType: "PERCENTAGE", discountValue: 10, minOrderAmount: 1000, expiresAt: farFutureDate, isActive: true }
 ];
 
 const heroSlides = [
@@ -78,45 +81,53 @@ const heroSlides = [
   { title: "Summer Collection", subtitle: "Up to 50% Off", description: "Upgrade your wardrobe with our latest fashion trends.", image: "https://via.placeholder.com/1200x400?text=Hero+Banner+2", isActive: true }
 ];
 
+export const seedAllData = async () => {
+  // Clear existing
+  await User.deleteMany({});
+  await Category.deleteMany({});
+  await Product.deleteMany({});
+  await Coupon.deleteMany({});
+  await HeroSlide.deleteMany({});
+
+  // Admin
+  const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, 10);
+  await User.create({ name: "Demo Admin", email: ADMIN_EMAIL, password: hashedPassword, isAdmin: true });
+  console.log("Admin seeded.");
+
+  // Categories
+  await Category.insertMany(categories);
+  console.log("Categories seeded.");
+
+  // Products
+  await Product.insertMany(demoProducts);
+  console.log("Products seeded.");
+
+  // Coupons
+  await Coupon.insertMany(coupons);
+  console.log("Coupons seeded.");
+
+  // Hero Slides
+  await HeroSlide.insertMany(heroSlides);
+  console.log("Hero Slides seeded.");
+};
+
 const seedDatabase = async () => {
   try {
     await mongoose.connect(DATABASE_URI);
     console.log("Connected to MongoDB.");
-
-    // Clear existing
-    await User.deleteMany({});
-    await Category.deleteMany({});
-    await Product.deleteMany({});
-    await Coupon.deleteMany({});
-    await HeroSlide.deleteMany({});
-
-    // Admin
-    const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, 10);
-    await User.create({ name: "Demo Admin", email: ADMIN_EMAIL, password: hashedPassword, isAdmin: true });
-    console.log("Admin seeded.");
-
-    // Categories
-    await Category.insertMany(categories);
-    console.log("Categories seeded.");
-
-    // Products
-    await Product.insertMany(demoProducts);
-    console.log("Products seeded.");
-
-    // Coupons
-    await Coupon.insertMany(coupons);
-    console.log("Coupons seeded.");
-
-    // Hero Slides
-    await HeroSlide.insertMany(heroSlides);
-    console.log("Hero Slides seeded.");
-
+    await seedAllData();
     console.log("Database seeding completed successfully!");
-    process.exit();
+    process.exit(0);
   } catch (err) {
     console.error("Seeding failed:", err);
     process.exit(1);
   }
 };
 
-seedDatabase();
+const isMain = process.argv[1] && (
+  path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url))
+);
+
+if (isMain) {
+  seedDatabase();
+}

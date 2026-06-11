@@ -18,6 +18,7 @@ const AdminOrders = () => {
     acceptOrder,
     rejectOrder,
     markOrderReady,
+    markOrderPreparing,
     markOrderPickedUp,
     markOrderDelivered,
   } = useProducts();
@@ -129,12 +130,12 @@ const AdminOrders = () => {
   return (
     <div className="space-y-6 page-enter max-w-full overflow-x-hidden">
       {/* ── HEADER ── */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 bg-white p-5 sm:p-6 md:p-8 rounded-[24px] sm:rounded-[32px] border border-[#e6d3b3] shadow-sm">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 bg-white p-5 sm:p-6 md:p-8 rounded-[24px] sm:rounded-[32px] border border-slate-200 shadow-sm">
         <div className="section-title mb-0 w-full lg:w-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface-strong)] text-[var(--burgundy)] text-[10px] font-medium uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-blue-600 text-[10px] font-medium uppercase tracking-widest mb-3">
             <Sparkles size={12} /> Realtime Control
           </div>
-          <h2 className="serif text-2xl sm:text-3xl md:text-4xl">Orders Management</h2>
+          <h2 className=" text-2xl sm:text-3xl md:text-4xl">Orders Management</h2>
           <p className="text-xs sm:text-sm">{orders.length} total orders · {formatCurrency(totalRevenue)} revenue</p>
         </div>
 
@@ -142,13 +143,13 @@ const AdminOrders = () => {
           <button 
             onClick={handleManualSync}
             disabled={busyOrderId === "sync"}
-            className="w-fit h-10 px-4 rounded-xl border border-[#e6d3b3] bg-white text-[10px] font-bold uppercase tracking-widest text-[#8b4513] hover:bg-[#f5e6d3] transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm shrink-0"
+            className="w-fit h-10 px-4 rounded-xl border border-slate-200 bg-white text-[10px] font-bold uppercase tracking-widest text-slate-900 hover:bg-slate-50 transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm shrink-0"
           >
             {busyOrderId === "sync" ? <Loader2 size={14} className="animate-spin" /> : <Clock size={14} />}
             <span className="truncate">Sync Delivery</span>
           </button>
           <div className="relative w-full sm:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" size={16} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={16} />
             <input
               type="text"
               placeholder="Search..."
@@ -166,12 +167,12 @@ const AdminOrders = () => {
       {/* ── ORDERS LIST ── */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-start">
         {filteredOrders.length === 0 ? (
-          <div className="col-span-full py-20 text-center rounded-3xl border-2 border-dashed border-[var(--surface-border)] bg-white">
-            <div className="h-12 w-12 rounded-full bg-[var(--cream)] flex items-center justify-center mx-auto mb-4 text-[var(--muted)]">
+          <div className="col-span-full py-20 text-center rounded-3xl border-2 border-dashed border-slate-200 bg-white">
+            <div className="h-12 w-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-4 text-slate-500">
               <Filter size={24} />
             </div>
-            <h3 className="text-sm font-medium text-[var(--charcoal)]">No orders found</h3>
-            <p className="text-xs text-[var(--muted)] mt-1">Try changing the filters or search query.</p>
+            <h3 className="text-sm font-medium text-slate-900">No orders found</h3>
+            <p className="text-xs text-slate-500 mt-1">Try changing the filters or search query.</p>
           </div>
         ) : (
           filteredOrders.map((order) => (
@@ -184,6 +185,7 @@ const AdminOrders = () => {
               onReject={(o) => setRejectModal({ open: true, order: o })}
               onHandover={(o) => { console.log("STEP_REACHED: Admin button click (Handover)"); handleAction(o._id, () => markOrderPickedUp(o._id)); }}
               onMarkReady={(o) => { console.log("STEP_REACHED: Admin button click (Mark Ready)"); handleAction(o._id, () => markOrderReady(o._id)); }}
+              onMarkPreparing={(o) => handleAction(o._id, () => markOrderPreparing(o._id))}
               onMarkDelivered={(o) => handleAction(o._id, () => markOrderDelivered(o._id))}
               isBusy={busyOrderId === order._id}
             />
@@ -197,6 +199,7 @@ const AdminOrders = () => {
         onClose={() => setSelectedId(null)}
         onHandover={(o) => handleAction(o._id, () => markOrderPickedUp(o._id))}
         onMarkReady={(o) => handleAction(o._id, () => markOrderReady(o._id))}
+        onMarkPreparing={(o) => handleAction(o._id, () => markOrderPreparing(o._id))}
         onMarkDelivered={(o) => handleAction(o._id, () => markOrderDelivered(o._id))}
         onSync={handleManualSync}
       />
@@ -219,3 +222,4 @@ const AdminOrders = () => {
 };
 
 export default AdminOrders;
+

@@ -44,8 +44,8 @@ const FilterDropdown = ({ label, value, options, onChange }) => {
         }}
         className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[12px] font-medium whitespace-nowrap select-none transition-all duration-150 active:scale-[0.98]
           ${isActive
-            ? "border-[#d4a017] bg-[#d4a017] text-white shadow-sm"
-            : "border-[#e8d5b7] bg-[#fffaf3] text-[#3b2417] hover:border-red-900/20 hover:bg-[#fff3e0]"
+            ? "border-[#6366F1] bg-[#6366F1] text-white shadow-sm"
+            : "border-[#e8d5b7] bg-slate-50 text-[#0F172A] hover:border-red-900/20 hover:bg-[#fff3e0]"
           }`}
       >
         {selectedLabel}
@@ -55,7 +55,7 @@ const FilterDropdown = ({ label, value, options, onChange }) => {
       </button>
 
       {open && (
-        <div className="absolute left-0 top-[calc(100%+8px)] z-50 min-w-[200px] max-h-[300px] overflow-y-auto rounded-[16px] border border-[#e8d5b7] bg-[#fffaf3] shadow-[0_10px_32px_rgba(122,40,40,0.12)] animate-in fade-in slide-in-from-top-2 duration-150 scrollbar-thin scrollbar-thumb-[var(--gold)]/20">
+        <div className="absolute left-0 top-[calc(100%+8px)] z-50 min-w-[200px] max-h-[300px] overflow-y-auto rounded-[16px] border border-[#e8d5b7] bg-slate-50 shadow-[0_10px_32px_rgba(99, 102, 241,0.12)] animate-in fade-in slide-in-from-top-2 duration-150 scrollbar-thin scrollbar-thumb-[var(--gold)]/20">
           <div className="flex flex-col py-1">
             {options.map((option) => {
               const isSelected = value === option.id;
@@ -70,8 +70,8 @@ const FilterDropdown = ({ label, value, options, onChange }) => {
                   }}
                   className={`w-full px-4 py-2.5 text-left text-[13px] font-medium transition-colors duration-150
                     ${isSelected
-                      ? "bg-[#7a2828]/5 text-[#d4a017]"
-                      : "bg-transparent text-[#3b2417] hover:bg-[#e8883a]/10"
+                      ? "bg-[#6366F1]/5 text-[#6366F1]"
+                      : "bg-transparent text-[#0F172A] hover:bg-[var(--surface-border)]/10"
                     }`}
                 >
                   {option.label}
@@ -133,9 +133,9 @@ const ProductFilter = ({ filters = {}, onChange, totalResults, onClear }) => {
   ].filter(Boolean);
 
   return (
-    <div className="w-full border-b border-[#e8d5b7] bg-[#fff8f0] px-4 py-4 sm:px-0">
+    <div className="w-full border-b border-[#e8d5b7] bg-[var(--surface-border)] px-4 py-4 sm:px-0">
       <div className="flex flex-wrap items-center gap-2">
-        <div className="mr-2 flex shrink-0 items-center gap-1.5 text-[#a0836b]">
+        <div className="mr-2 flex shrink-0 items-center gap-1.5 text-[#64748B]">
           <SlidersHorizontal className="h-4 w-4" />
           <span className="text-[11px] font-medium uppercase tracking-wider">Filters</span>
         </div>
@@ -167,8 +167,8 @@ const ProductFilter = ({ filters = {}, onChange, totalResults, onClear }) => {
           }}
           className={`inline-flex shrink-0 select-none items-center gap-2 rounded-full border px-4 py-2 text-[12px] font-medium transition-all duration-150 active:scale-[0.98]
             ${filters?.inStock
-              ? "border-[#d4a017] bg-[#d4a017] text-white shadow-sm"
-              : "border-[#e8d5b7] bg-[#fffaf3] text-[#3b2417] hover:border-red-900/20 hover:bg-[#fff3e0]"
+              ? "border-[#6366F1] bg-[#6366F1] text-white shadow-sm"
+              : "border-[#e8d5b7] bg-slate-50 text-[#0F172A] hover:border-red-900/20 hover:bg-[#fff3e0]"
             }`}
         >
           <PackageCheck className="h-3.5 w-3.5" />
@@ -177,8 +177,8 @@ const ProductFilter = ({ filters = {}, onChange, totalResults, onClear }) => {
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-4">
           {totalResults !== undefined && (
-            <span className="whitespace-nowrap text-[11px] text-[#a0836b] sm:text-[12px]">
-              <span className="font-medium text-[#3b2417]">{totalResults}</span> products
+            <span className="whitespace-nowrap text-[11px] text-[#64748B] sm:text-[12px]">
+              <span className="font-medium text-[#0F172A]">{totalResults}</span> products
             </span>
           )}
 
@@ -189,7 +189,7 @@ const ProductFilter = ({ filters = {}, onChange, totalResults, onClear }) => {
                 console.log("[ProductFilter] clear filters");
                 onClear?.();
               }}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-dashed border-[#a0836b]/50 bg-transparent px-3 py-1.5 text-[11px] font-medium text-[#a0836b] transition-all duration-150 active:scale-[0.98] hover:border-[#7a2828]/50 hover:bg-[#7a2828]/5 hover:text-[#7a2828] sm:text-[12px]"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-dashed border-[#64748B]/50 bg-transparent px-3 py-1.5 text-[11px] font-medium text-[#64748B] transition-all duration-150 active:scale-[0.98] hover:border-[#6366F1]/50 hover:bg-[#6366F1]/5 hover:text-[#6366F1] sm:text-[12px]"
             >
               <X className="h-3.5 w-3.5" />
               <span>Clear</span>
@@ -200,7 +200,7 @@ const ProductFilter = ({ filters = {}, onChange, totalResults, onClear }) => {
 
       {hasActiveFilters && (
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="mr-1 text-[11px] font-medium text-[#a0836b]">Active:</span>
+          <span className="mr-1 text-[11px] font-medium text-[#64748B]">Active:</span>
           {activePills.map(({ label, onRemove }) => (
             <span
               key={label}
@@ -227,3 +227,4 @@ const ProductFilter = ({ filters = {}, onChange, totalResults, onClear }) => {
 };
 
 export default ProductFilter;
+

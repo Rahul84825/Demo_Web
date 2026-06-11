@@ -32,7 +32,7 @@ const categorySchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["sweets", "other"],
+      enum: ["products", "other"],
       default: "other"
     },
     order: {

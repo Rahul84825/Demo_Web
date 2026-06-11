@@ -6,7 +6,8 @@ export const configureCloudinary = () => {
   const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
   if (!cloudName || !apiKey || !apiSecret) {
-    throw new Error("Cloudinary configuration is missing");
+    console.warn("⚠️ Cloudinary configuration is missing. Image uploads will fail.");
+    return cloudinary;
   }
 
   cloudinary.config({

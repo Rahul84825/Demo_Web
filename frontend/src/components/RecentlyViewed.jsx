@@ -46,7 +46,7 @@ const RecentlyViewed = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-[var(--surface-strong)] text-[var(--gold)] text-[10px] font-black tracking-widest uppercase">
                Your History
             </div>
-            <h2 className="serif text-2xl md:text-3xl lg:text-4xl">Recently Viewed</h2>
+            <h2 className=" text-2xl md:text-3xl lg:text-4xl">Recently Viewed</h2>
             <p className="max-w-md text-xs md:text-sm font-medium text-[var(--muted)]">Items you've explored recently. Ready to add them to your bag?</p>
           </div>
         </div>
@@ -71,3 +71,4 @@ const RecentlyViewed = () => {
 };
 
 export default RecentlyViewed;
+

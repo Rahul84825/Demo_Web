@@ -64,7 +64,7 @@ function ProductCard({ product }) {
   return (
     <div 
       onClick={() => navigate(`/product/${productId}`)}
-      className="group bg-white rounded-3xl border border-[var(--surface-border)] overflow-hidden cursor-pointer flex flex-col h-full relative transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-20px_rgba(139,30,63,0.15)] active:scale-[0.98]"
+      className="group bg-white rounded-3xl border border-[var(--surface-border)] overflow-hidden cursor-pointer flex flex-col h-full relative transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-20px_rgba(99,102,241,0.15)] active:scale-[0.98]"
     >
       {/* ── IMAGE SECTION ── */}
       <div className="relative aspect-square overflow-hidden bg-[var(--surface-strong)]/30">

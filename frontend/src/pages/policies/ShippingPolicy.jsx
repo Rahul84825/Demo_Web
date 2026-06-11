@@ -16,7 +16,7 @@ const ShippingPolicy = () => {
     <div className="min-h-[60vh] bg-[var(--cream)]">
       <SEO 
         title="Shipping Policy"
-        description="Understand DemoMart's shipping and delivery timelines. We offer same-day delivery for fresh sweets in Demo City."
+        description="Understand DemoMart's shipping and delivery timelines. We offer same-day delivery for fresh products in Demo City."
         canonical="/shipping-policy"
       />
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
@@ -26,7 +26,7 @@ const ShippingPolicy = () => {
           <section>
             <h2 className="mb-3 text-2xl font-medium text-[var(--charcoal)]">Delivery Information</h2>
             <p>
-              We ship fresh product and sweets directly to your doorstep. All orders are carefully packed
+              We ship fresh product and products directly to your doorstep. All orders are carefully packed
               to ensure quality upon delivery.
             </p>
           </section>
@@ -66,3 +66,4 @@ const ShippingPolicy = () => {
 };
 
 export default ShippingPolicy;
+

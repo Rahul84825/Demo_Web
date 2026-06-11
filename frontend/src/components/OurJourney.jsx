@@ -6,7 +6,7 @@ const DEFAULT_MILESTONES = [
   {
     year: "2019",
     title: "A Sweet Start",
-    description: "We started as a small family-run shop with one goal: bring authentic traditional sweets to Demo City.",
+    description: "We started as a small family-run shop with one goal: bring authentic traditional products to Demo City.",
   },
   {
     year: "2021",
@@ -50,7 +50,7 @@ const OurJourney = ({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-16 md:py-28 bg-[#fffaf3] pattern-bg"
+      className="relative overflow-hidden py-16 md:py-28 bg-slate-50 pattern-bg"
     >
       {/* Decorative Blur Elements */}
       <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] bg-[var(--gold)]/5 rounded-full blur-3xl pointer-events-none" />
@@ -71,7 +71,7 @@ const OurJourney = ({
             </div>
 
             {/* Heading */}
-            <h2 className="serif mb-4 text-3xl md:text-5xl font-medium leading-[1.1] text-[var(--charcoal)]">
+            <h2 className=" mb-4 text-3xl md:text-5xl font-medium leading-[1.1] text-[var(--charcoal)]">
               {title}
             </h2>
 
@@ -93,7 +93,7 @@ const OurJourney = ({
                   style={{ transitionDelay: `${300 + (i * 150)}ms` }}
                   className={`group flex gap-5 rounded-[24px] border border-[var(--surface-border)] bg-white/40 p-5 backdrop-blur-sm transition-all duration-500
                              ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}
-                             hover:bg-white hover:shadow-[0_20px_40px_-10px_rgba(139,30,63,0.1)] hover:-translate-y-1`}
+                             hover:bg-white hover:shadow-[0_20px_40px_-10px_rgba(99,102,241,0.1)] hover:-translate-y-1`}
                 >
                   {/* Year Circle */}
                   <div className="flex shrink-0 flex-col items-center gap-2">
@@ -110,7 +110,7 @@ const OurJourney = ({
                     <div className="mb-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--gold)]">
                       {item.year}
                     </div>
-                    <h3 className="serif mb-1 text-lg font-medium text-[var(--charcoal)] group-hover:text-[var(--burgundy)] transition-colors">
+                    <h3 className=" mb-1 text-lg font-medium text-[var(--charcoal)] group-hover:text-[var(--burgundy)] transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-xs md:text-sm font-medium leading-relaxed text-[var(--muted)]">
@@ -132,7 +132,7 @@ const OurJourney = ({
               {/* Decorative Frame */}
               <div className="absolute inset-0 border-2 border-[var(--gold)]/20 rounded-[40px] rotate-2 transform translate-x-4 translate-y-4 pointer-events-none" />
               
-              <div className="group relative overflow-hidden rounded-[32px] sm:rounded-[48px] border-4 border-white bg-[#fff3e0] shadow-[0_40px_80px_-20px_rgba(45,27,14,0.2)] transition-all duration-700 hover:shadow-2xl">
+              <div className="group relative overflow-hidden rounded-[32px] sm:rounded-[48px] border-4 border-white bg-[#EEF2FF] shadow-[0_40px_80px_-20px_rgba(99,102,241,0.2)] transition-all duration-700 hover:shadow-2xl">
                 {/* Image */}
                 <div className="aspect-[4/5] sm:aspect-square overflow-hidden">
                   {image?.src && !imgError ? (
@@ -143,7 +143,7 @@ const OurJourney = ({
                       className="h-full w-full object-cover transition-all duration-1000 ease-out group-hover:scale-110 group-hover:rotate-2"
                     />
                   ) : (
-                    <div className="h-full w-full bg-gradient-to-br from-[#fff6e9] via-[#fdebd0] to-[#f5dfc0]" />
+                    <div className="h-full w-full bg-gradient-to-br from-[#EEF2FF] via-[#EEF2FF]/80 to-[#EEF2FF]/50" />
                   )}
                 </div>
 
@@ -167,3 +167,4 @@ const OurJourney = ({
 };
 
 export default OurJourney;
+

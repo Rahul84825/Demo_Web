@@ -1,6 +1,5 @@
 import crypto from "crypto";
 import mongoose from "mongoose";
-import DemoPayment from "demopayment";
 import Order, { ORDER_STATUSES } from "../models/Order.js";
 import Coupon from "../models/Coupon.js";
 import { getIo } from "../socket.js";
@@ -18,11 +17,21 @@ import {
   sendOrderRejectedEmail
   } from "../services/emailService.js";
 
+class DemoPayment {
+  constructor() {
+    this.payments = {
+      refund: async (paymentId, options) => {
+        console.log(`[MOCK REFUND] Initiated refund of ${options.amount / 100} INR for payment ${paymentId}`);
+        return {
+          id: `ref_mock_${Date.now()}`
+        };
+      }
+    };
+  }
+}
+
 const getDemoPaymentClient = () => {
-  const keyId = process.env.demopayment_KEY_ID;
-  const keySecret = process.env.demopayment_KEY_SECRET;
-  if (!keyId || !keySecret) return null;
-  return new DemoPayment({ key_id: keyId, key_secret: keySecret });
+  return new DemoPayment();
 };
 
 
@@ -271,8 +280,7 @@ export const acceptOrder = async (req, res) => {
       return res.status(404).json({ success: false, message: "Order not found" });
     }
 
-    if (order.status === "PREPARING" || order.status === "ACCEPTED") {
-      // If already preparing, update ETA
+    if (order.status === "ACCEPTED") {
       order.preparation.etaMinutes = etaMinutes;
       order.preparation.readyBy = new Date(Date.now() + etaMinutes * 60 * 1000);
       await order.save();
@@ -283,9 +291,8 @@ export const acceptOrder = async (req, res) => {
       return res.status(400).json({ success: false, message: `Cannot accept order in ${order.status} state` });
     }
 
-    order.status = "PREPARING"; // Swiggy style: Accepted = Preparing
-    order.statusTimestamps.preparingAt = new Date();
-    order.preparation.startsAt = new Date();
+    order.status = "ACCEPTED";
+    order.statusTimestamps.acceptedAt = new Date();
     if (Number.isFinite(etaMinutes)) {
       order.preparation.etaMinutes = etaMinutes;
       order.preparation.readyBy = new Date(Date.now() + etaMinutes * 60 * 1000);
@@ -293,9 +300,7 @@ export const acceptOrder = async (req, res) => {
 
     await order.save();
 
-    // ── DO NOT CREATE DemoDelivery TASK YET ──
-    // In Swiggy/Zomato model, we wait until food is READY before dispatching the rider.
-    logger.info(`✅ Order ${order._id} accepted and preparing. Delivery assignment deferred until READY.`);
+    logger.info(`✅ Order ${order._id} accepted. Status set to ACCEPTED.`);
 
     emitOrderEvent("orderAccepted", sanitizeOrder(order));
     sendOrderAcceptedEmail(order).catch(err => logger.error("Failed to send accepted email", err));
@@ -404,12 +409,13 @@ export const markPreparing = async (req, res) => {
       return res.status(200).json({ success: true, order: sanitizeOrder(order) });
     }
 
-    if (order.status !== "PLACED") {
+    if (order.status !== "PLACED" && order.status !== "ACCEPTED") {
       return res.status(400).json({ success: false, message: `Cannot mark preparing from ${order.status}` });
     }
 
     order.status = "PREPARING";
     order.statusTimestamps.preparingAt = new Date();
+    order.preparation.startsAt = new Date();
     await order.save();
 
     emitOrderEvent("orderPreparing", sanitizeOrder(order));
@@ -516,7 +522,7 @@ export const markDelivered = async (req, res) => {
     }
 
     // Enforce webhook-only status synchronization for delivery provider orders
-    if (order.delivery && order.delivery.provider) {
+    if (order.delivery && order.delivery.provider && order.delivery.provider !== "mock") {
       return res.status(400).json({
         success: false,
         message: "Manual delivery completion is disabled. Status updates are synchronized automatically via delivery partner webhooks."

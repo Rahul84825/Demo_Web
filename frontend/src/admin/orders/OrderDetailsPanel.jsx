@@ -13,7 +13,7 @@ import OrderTimer from "./OrderTimer";
 const OrderDetailsPanel = ({ order, onClose }) => {
   if (!order) {
     return (
-      <div className="rounded-3xl border border-dashed border-[#e6d3b3] bg-[#fffaf3] p-8 text-center text-sm text-[#7a5c3a]">
+      <div className="rounded-3xl border border-dashed border-slate-200 bg-slate-50 p-8 text-center text-sm text-slate-500">
         Select an order to see details.
       </div>
     );
@@ -34,14 +34,14 @@ const OrderDetailsPanel = ({ order, onClose }) => {
   const delivery = order.delivery || {};
 
   return (
-    <div className="rounded-3xl border border-[#e6d3b3] bg-[#fffaf3] shadow-sm">
-      <div className="flex items-center justify-between border-b border-[#e6d3b3] px-6 py-5">
+    <div className="rounded-3xl border border-slate-200 bg-slate-50 shadow-sm">
+      <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
         <div>
-          <div className="text-xs uppercase tracking-[0.3em] text-[#b67b3a]">Order Details</div>
-          <div className="text-lg font-medium text-[#2d1b0e]">#{order.orderNumber || order.orderId}</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-[#4F46E5]">Order Details</div>
+          <div className="text-lg font-medium text-slate-900">#{order.orderNumber || order.orderId}</div>
         </div>
         {onClose && (
-          <button onClick={onClose} className="text-xs font-medium text-[#8b4513]">
+          <button onClick={onClose} className="text-xs font-medium text-slate-900">
             Close
           </button>
         )}
@@ -61,11 +61,11 @@ const OrderDetailsPanel = ({ order, onClose }) => {
         </div>
 
         <div className="grid gap-4 text-sm sm:grid-cols-2">
-          <div className="rounded-2xl border border-[#f0e0c4] bg-[#fff8ec] p-4">
-            <div className="flex items-center gap-2 text-xs font-medium text-[#8b4513]">
+          <div className="rounded-2xl border border-[#E2E8F0] bg-[#EEF2FF] p-4">
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-900">
               <User className="h-4 w-4" /> Customer
             </div>
-            <div className="mt-2 space-y-1 text-[#2d1b0e]">
+            <div className="mt-2 space-y-1 text-slate-900">
               <div className="font-medium">{order.customer?.name || "Guest"}</div>
               {order.customer?.phone && (
                 <div className="flex items-center gap-2 text-xs text-[#6d4c41]">
@@ -80,8 +80,8 @@ const OrderDetailsPanel = ({ order, onClose }) => {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#f0e0c4] bg-[#fff8ec] p-4">
-            <div className="flex items-center gap-2 text-xs font-medium text-[#8b4513]">
+          <div className="rounded-2xl border border-[#E2E8F0] bg-[#EEF2FF] p-4">
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-900">
               <MapPin className="h-4 w-4" /> Delivery Address
             </div>
             <div className="mt-2 text-xs text-[#6d4c41] leading-relaxed">
@@ -92,8 +92,8 @@ const OrderDetailsPanel = ({ order, onClose }) => {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#f0e0c4] bg-[#fff8ec] p-4">
-          <div className="flex items-center gap-2 text-xs font-medium text-[#8b4513]">
+        <div className="rounded-2xl border border-[#E2E8F0] bg-[#EEF2FF] p-4">
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-900">
             <Timer className="h-4 w-4" /> Preparation
           </div>
           <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
@@ -104,11 +104,11 @@ const OrderDetailsPanel = ({ order, onClose }) => {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#f0e0c4] bg-[#fff8ec] p-4">
-          <div className="flex items-center gap-2 text-xs font-medium text-[#8b4513]">
+        <div className="rounded-2xl border border-[#E2E8F0] bg-[#EEF2FF] p-4">
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-900">
             <Truck className="h-4 w-4" /> Delivery Status
           </div>
-          <div className="mt-2 text-sm text-[#2d1b0e]">
+          <div className="mt-2 text-sm text-slate-900">
             {delivery.status || order.deliveryStatus || "pending"}
           </div>
           {delivery.trackingUrl && (
@@ -116,43 +116,43 @@ const OrderDetailsPanel = ({ order, onClose }) => {
               href={delivery.trackingUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 inline-flex text-xs font-medium text-[#8b4513]"
+              className="mt-2 inline-flex text-xs font-medium text-slate-900"
             >
               Track order
             </a>
           )}
         </div>
 
-        <div className="rounded-2xl border border-[#f0e0c4] bg-[#fff8ec] p-4">
-          <div className="flex items-center gap-2 text-xs font-medium text-[#8b4513]">
+        <div className="rounded-2xl border border-[#E2E8F0] bg-[#EEF2FF] p-4">
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-900">
             <Truck className="h-4 w-4" /> Rider Details
           </div>
-          <div className="mt-2 text-sm text-[#2d1b0e]">
+          <div className="mt-2 text-sm text-slate-900">
             {rider.name || "Assigning soon"}
           </div>
           {rider.phone && <div className="text-xs text-[#6d4c41]">{rider.phone}</div>}
           {rider.vehicleNumber && <div className="text-xs text-[#6d4c41]">{rider.vehicleNumber}</div>}
         </div>
 
-        <div className="rounded-2xl border border-[#f0e0c4] bg-[#fff8ec] p-4">
-          <div className="text-xs font-medium text-[#8b4513]">Order Items</div>
+        <div className="rounded-2xl border border-[#E2E8F0] bg-[#EEF2FF] p-4">
+          <div className="text-xs font-medium text-slate-900">Order Items</div>
           <div className="mt-3 space-y-2 text-sm">
             {items.map((item) => (
               <div key={item._id || item.productId} className="flex items-start justify-between gap-3">
                 <div>
-                  <div className="font-medium text-[#2d1b0e]">{item.titleSnapshot || item.name}</div>
+                  <div className="font-medium text-slate-900">{item.titleSnapshot || item.name}</div>
                   <div className="text-xs text-[#6d4c41]">
                     {item.selectedVariant?.label || "Standard"} · Qty {item.quantity}
                   </div>
                 </div>
-                <div className="font-medium text-[#2d1b0e]">{formatCurrency(item.finalAmount || item.price || 0)}</div>
+                <div className="font-medium text-slate-900">{formatCurrency(item.finalAmount || item.price || 0)}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#f0e0c4] bg-[#fff8ec] p-4">
-          <div className="text-xs font-medium text-[#8b4513]">Pricing</div>
+        <div className="rounded-2xl border border-[#E2E8F0] bg-[#EEF2FF] p-4">
+          <div className="text-xs font-medium text-slate-900">Pricing</div>
           <div className="mt-3 space-y-2 text-sm text-[#6d4c41]">
             <div className="flex justify-between">
               <span>Items Subtotal</span>
@@ -172,7 +172,7 @@ const OrderDetailsPanel = ({ order, onClose }) => {
                 <span>-{formatCurrency(order?.totals?.discountTotal || 0)}</span>
               </div>
             )}
-            <div className="flex justify-between font-medium text-[#2d1b0e]">
+            <div className="flex justify-between font-medium text-slate-900">
               <span>Grand Total</span>
               <span>{formatCurrency(order?.totals?.grandTotal || order.total || 0)}</span>
             </div>
@@ -184,3 +184,4 @@ const OrderDetailsPanel = ({ order, onClose }) => {
 };
 
 export default OrderDetailsPanel;
+

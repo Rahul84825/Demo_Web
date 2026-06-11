@@ -64,7 +64,7 @@ function PaymentSuccessPage() {
           <div className="h-20 w-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6 text-amber-500">
             <AlertCircle size={40} />
           </div>
-          <h2 className="serif text-3xl mb-4 text-[var(--charcoal)]">Order Not Found</h2>
+          <h2 className=" text-3xl mb-4 text-[var(--charcoal)]">Order Not Found</h2>
           <p className="text-[var(--muted)] mb-8">We couldn't retrieve your order details. If you've just placed an order, it might take a moment to sync.</p>
           <button onClick={() => navigate("/")} className="btn-primary w-full">Return to Shop</button>
         </div>
@@ -83,8 +83,8 @@ function PaymentSuccessPage() {
           <div className="h-20 w-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500 shadow-inner">
             <CheckCircle2 size={40} />
           </div>
-          <h1 className="serif text-4xl md:text-5xl mb-3 text-[var(--charcoal)]">Order Placed!</h1>
-          <p className="text-[var(--muted)] font-medium">Thank you for choosing DemoMart. Your treats are being prepared with love.</p>
+          <h1 className=" text-4xl md:text-5xl mb-3 text-[var(--charcoal)]">Order Placed!</h1>
+          <p className="text-[var(--muted)] font-medium">Thank you for choosing DemoMart. Your items are being prepared with love.</p>
           
           <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--surface-strong)] text-[var(--burgundy)] font-medium text-sm uppercase tracking-widest">
             Order #{order.orderNumber || order._id?.slice(-6).toUpperCase()}
@@ -96,12 +96,20 @@ function PaymentSuccessPage() {
           <div className="flex justify-between relative">
             <div className="absolute top-5 left-0 w-full h-0.5 bg-[var(--surface-strong)] -z-0" />
             <div className="absolute top-5 left-0 h-0.5 bg-green-500 transition-all duration-1000 -z-0" 
-                 style={{ width: status === 'DELIVERED' ? '100%' : status === 'READY' ? '66%' : status === 'PREPARING' ? '33%' : '10%' }} />
+                 style={{ 
+                   width: status === 'ACCEPTED' ? '20%' : 
+                          status === 'PREPARING' ? '40%' : 
+                          status === 'READY' ? '60%' : 
+                          status === 'PICKED_UP' ? '80%' : 
+                          status === 'DELIVERED' ? '100%' : '0%' 
+                 }} />
             
             {[
               { label: 'Placed', icon: Package, active: true },
-              { label: 'Preparing', icon: Home, active: ['PREPARING', 'READY', 'DELIVERED'].includes(status) },
-              { label: 'Out for Delivery', icon: Truck, active: ['READY', 'DELIVERED'].includes(status) },
+              { label: 'Accepted', icon: Clock, active: ['ACCEPTED', 'PREPARING', 'READY', 'PICKED_UP', 'DELIVERED'].includes(status) },
+              { label: 'Preparing', icon: Home, active: ['PREPARING', 'READY', 'PICKED_UP', 'DELIVERED'].includes(status) },
+              { label: 'Ready', icon: Package, active: ['READY', 'PICKED_UP', 'DELIVERED'].includes(status) },
+              { label: 'In Delivery', icon: Truck, active: ['PICKED_UP', 'DELIVERED'].includes(status) },
               { label: 'Delivered', icon: CheckCircle2, active: status === 'DELIVERED' }
             ].map((s, i) => (
               <div key={i} className="flex flex-col items-center gap-3 relative z-10">
@@ -169,8 +177,8 @@ function PaymentSuccessPage() {
           <button onClick={() => navigate("/")} className="btn-primary px-10 h-14 w-full sm:w-auto shadow-lg">
             Continue Shopping
           </button>
-          <button onClick={() => navigate("/sweets")} className="btn-outline px-10 h-14 w-full sm:w-auto">
-            Order More Sweets
+          <button onClick={() => navigate("/products")} className="btn-outline px-10 h-14 w-full sm:w-auto">
+            Order More products
           </button>
         </div>
       </div>
@@ -179,3 +187,5 @@ function PaymentSuccessPage() {
 }
 
 export default PaymentSuccessPage;
+
+

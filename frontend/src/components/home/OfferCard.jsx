@@ -9,8 +9,8 @@ const OfferCard = ({ offer }) => {
 
   const handleClick = () => {
     if (offer.linked_product_id) navigate(`/product/${offer.linked_product_id}`);
-    else if (offer.linked_category_id) navigate(`/sweets?category=${offer.linked_category_id}`);
-    else navigate("/sweets");
+    else if (offer.linked_category_id) navigate(`/products?category=${offer.linked_category_id}`);
+    else navigate("/products");
   };
 
   return (
@@ -31,7 +31,7 @@ const OfferCard = ({ offer }) => {
         <div className="inline-block self-start px-2 py-0.5 bg-[var(--saffron)] text-white text-[10px] font-medium rounded-lg mb-3 shadow-lg">
           {offer.discountPercent}% OFF
         </div>
-        <h3 className="text-white serif text-xl md:text-2xl font-medium mb-2 drop-shadow-md leading-tight">{offer.title}</h3>
+        <h3 className="text-white  text-xl md:text-2xl font-medium mb-2 drop-shadow-md leading-tight">{offer.title}</h3>
         <p className="text-white/70 text-xs line-clamp-2 mb-4 font-medium">{offer.description}</p>
         
         <div className="flex items-center gap-2 text-[10px] font-medium text-[var(--saffron)] opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
@@ -43,3 +43,5 @@ const OfferCard = ({ offer }) => {
 };
 
 export default OfferCard;
+
+

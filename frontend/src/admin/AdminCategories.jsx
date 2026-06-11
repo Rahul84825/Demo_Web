@@ -15,7 +15,7 @@ const CategoryModal = ({ category, onSave, onClose }) => {
     is_active: category?.is_active ?? true,
     showInNavbar: category?.showInNavbar ?? false,
     showInHomepage: category?.showInHomepage ?? false,
-    type: category?.type === "sweets" ? "sweets" : "other",
+    type: category?.type === "products" ? "products" : "other",
     image: null,
     imagePreview: category?.image || null,
     order: category?.order || 0
@@ -59,7 +59,7 @@ const CategoryModal = ({ category, onSave, onClose }) => {
       payload.append("is_active", !!form.is_active);
       payload.append("showInNavbar", !!form.showInNavbar);
       payload.append("showInHomepage", !!form.showInHomepage);
-      payload.append("type", form.type === "sweets" ? "sweets" : "other");
+      payload.append("type", form.type === "products" ? "products" : "other");
       payload.append("order", Number(form.order || 0));
       if (form.image) payload.append("image", form.image);
 
@@ -76,37 +76,37 @@ const CategoryModal = ({ category, onSave, onClose }) => {
 
   return createPortal(
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-md px-4 animate-in fade-in duration-200">
-      <div className="bg-white rounded-[24px] border border-[var(--surface-border)] shadow-2xl w-full max-w-md p-6 sm:p-8 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-[24px] border border-slate-200 shadow-2xl w-full max-w-md p-6 sm:p-8 max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between mb-8">
-          <h3 className="serif text-xl font-medium text-[var(--charcoal)]">{category ? "Edit Category" : "Add Category"}</h3>
-          <button onClick={onClose} className="p-2 hover:bg-[var(--cream)] rounded-full transition-colors"><X size={20} /></button>
+          <h3 className=" text-xl font-medium text-slate-900">{category ? "Edit Category" : "Add Category"}</h3>
+          <button onClick={onClose} className="p-2 hover:bg-slate-50 rounded-full transition-colors"><X size={20} /></button>
         </div>
 
         <div className="space-y-6">
           <div>
-            <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Category Name</label>
-            <input value={form.name} onChange={(e) => set("name", e.target.value)} className="input-field" placeholder="e.g. Traditional Sweets" />
+            <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Category Name</label>
+            <input value={form.name} onChange={(e) => set("name", e.target.value)} className="input-field" placeholder="e.g. Traditional products" />
             {errors.name && <p className="text-[10px] text-red-500 mt-1">{errors.name}</p>}
           </div>
 
           <div>
-            <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Cover Image</label>
+            <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Cover Image</label>
             <div 
               onClick={() => !loading && fileInputRef.current?.click()}
-              className="aspect-video rounded-2xl border-2 border-dashed border-[var(--surface-border)] bg-[var(--cream)]/30 overflow-hidden flex flex-col items-center justify-center cursor-pointer relative group transition-all hover:bg-[var(--cream)]/50"
+              className="aspect-video rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/30 overflow-hidden flex flex-col items-center justify-center cursor-pointer relative group transition-all hover:bg-slate-50/50"
             >
               {form.imagePreview ? (
                 <img src={form.imagePreview} className="w-full h-full object-cover" alt="Category Preview" />
               ) : (
                 <div className="text-center p-4">
-                  <ImageIcon size={24} className="mx-auto text-[var(--muted)] mb-2 opacity-50" />
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)]">Upload Image</p>
+                  <ImageIcon size={24} className="mx-auto text-slate-500 mb-2 opacity-50" />
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-slate-500">Upload Image</p>
                 </div>
               )}
               <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageSelect} className="hidden" />
               {loading && (
                 <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center animate-in fade-in duration-300">
-                  <div className="w-8 h-8 border-4 border-[var(--burgundy)] border-t-transparent rounded-full animate-spin" />
+                  <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
             </div>
@@ -114,19 +114,19 @@ const CategoryModal = ({ category, onSave, onClose }) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Type</label>
+              <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Type</label>
               <select value={form.type} onChange={(e) => set("type", e.target.value)} className="input-field">
-                <option value="sweets">Sweets</option>
+                <option value="products">products</option>
                 <option value="other">Other</option>
               </select>
             </div>
             <div>
-              <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] mb-2 block">Order</label>
+              <label className="text-[10px] font-medium uppercase tracking-widest text-slate-500 mb-2 block">Order</label>
               <input type="number" value={form.order} onChange={(e) => set("order", e.target.value)} className="input-field" />
             </div>
           </div>
 
-          <div className="space-y-3 pt-2 border-t border-[var(--surface-border)]">
+          <div className="space-y-3 pt-2 border-t border-slate-200">
             {[
               { id: 'is_active', label: 'Category Active', desc: 'Visible in storefront' },
               { id: 'showInNavbar', label: 'Show in Navbar', desc: 'Display in top menu' },
@@ -134,8 +134,8 @@ const CategoryModal = ({ category, onSave, onClose }) => {
             ].map(toggle => (
               <div key={toggle.id} className="flex items-center justify-between">
                 <div>
-                  <p className="text-[12px] font-medium text-[var(--charcoal)]">{toggle.label}</p>
-                  <p className="text-[10px] text-[var(--muted)] font-medium">{toggle.desc}</p>
+                  <p className="text-[12px] font-medium text-slate-900">{toggle.label}</p>
+                  <p className="text-[10px] text-slate-500 font-medium">{toggle.desc}</p>
                 </div>
                 <button 
                   onClick={() => set(toggle.id, !form[toggle.id])}
@@ -193,18 +193,18 @@ function AdminCategories() {
 
   return (
     <div className="animate-in fade-in duration-500 max-w-7xl mx-auto page-enter space-y-8 md:space-y-10">
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 bg-white p-5 sm:p-6 md:p-8 rounded-[24px] sm:rounded-[32px] border border-[#e6d3b3] shadow-sm">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 bg-white p-5 sm:p-6 md:p-8 rounded-[24px] sm:rounded-[32px] border border-slate-200 shadow-sm">
         <div className="section-title mb-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface-strong)] text-[var(--burgundy)] text-[10px] font-medium uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-blue-600 text-[10px] font-medium uppercase tracking-widest mb-3">
             <Sparkles size={12} /> Structure
           </div>
-          <h2 className="serif text-2xl sm:text-3xl md:text-4xl">Categories</h2>
-          <p className="text-xs sm:text-sm font-medium text-[#7a5c3a]">Organize your catalog and control navigation visibility.</p>
+          <h2 className=" text-2xl sm:text-3xl md:text-4xl">Categories</h2>
+          <p className="text-xs sm:text-sm font-medium text-slate-500">Organize your catalog and control navigation visibility.</p>
         </div>
         
         <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
           <div className="relative group flex-1 lg:w-64">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)] group-focus-within:text-[var(--gold)] transition-colors" size={16} />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-cyan-500 transition-colors" size={16} />
             <input 
               type="text" 
               placeholder="Search..." 
@@ -220,42 +220,42 @@ function AdminCategories() {
       </div>
 
       {filteredCategories.length === 0 ? (
-        <div className="py-20 text-center rounded-3xl border-2 border-dashed border-[var(--surface-border)] bg-white">
-          <div className="h-12 w-12 rounded-full bg-[var(--cream)] flex items-center justify-center mx-auto mb-4 text-[var(--muted)]">
+        <div className="py-20 text-center rounded-3xl border-2 border-dashed border-slate-200 bg-white">
+          <div className="h-12 w-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-4 text-slate-500">
             <Package size={24} />
           </div>
-          <h3 className="text-sm font-medium text-[var(--charcoal)]">No categories found</h3>
-          <p className="text-xs text-[var(--muted)] mt-1">Try a different search term or add a new category.</p>
+          <h3 className="text-sm font-medium text-slate-900">No categories found</h3>
+          <p className="text-xs text-slate-500 mt-1">Try a different search term or add a new category.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredCategories.map((cat) => (
-            <div key={cat._id} className="bg-white rounded-3xl border border-[var(--surface-border)] overflow-hidden hover:shadow-xl transition-all duration-500 group flex flex-col h-full shadow-sm">
-              <div className="relative aspect-video overflow-hidden bg-[var(--cream)]">
+            <div key={cat._id} className="bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-500 group flex flex-col h-full shadow-sm">
+              <div className="relative aspect-video overflow-hidden bg-slate-50">
                 {cat.image ? (
                   <img src={cat.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-[var(--surface-strong)]/30"><Package size={32} className="text-[var(--muted)] opacity-20" /></div>
+                  <div className="w-full h-full flex items-center justify-center bg-slate-100/30"><Package size={32} className="text-slate-500 opacity-20" /></div>
                 )}
                 <div className="absolute top-3 left-3 flex gap-2">
                   {cat.is_active === false && <span className="bg-rose-500 text-white text-[8px] font-medium px-2 py-0.5 rounded-full uppercase tracking-widest shadow-lg">Inactive</span>}
-                  {cat.showInNavbar && <span className="bg-[var(--gold)] text-white text-[8px] font-medium px-2 py-0.5 rounded-full uppercase tracking-widest shadow-lg">Navbar</span>}
+                  {cat.showInNavbar && <span className="bg-cyan-500 text-white text-[8px] font-medium px-2 py-0.5 rounded-full uppercase tracking-widest shadow-lg">Navbar</span>}
                 </div>
               </div>
 
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-base font-medium text-[var(--charcoal)] mb-1">{cat.name}</h3>
-                    <p className="text-[10px] font-medium text-[var(--muted)] uppercase tracking-widest">{cat.type}</p>
+                    <h3 className="text-base font-medium text-slate-900 mb-1">{cat.name}</h3>
+                    <p className="text-[10px] font-medium text-slate-500 uppercase tracking-widest">{cat.type}</p>
                   </div>
                   <div className="flex gap-1 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onClick={() => setModal(cat)} className="p-2 hover:bg-[var(--cream)] rounded-lg transition-colors bg-[var(--cream)]/30 sm:bg-transparent" title="Edit"><Pencil size={14} /></button>
+                    <button onClick={() => setModal(cat)} className="p-2 hover:bg-slate-50 rounded-lg transition-colors bg-slate-50/30 sm:bg-transparent" title="Edit"><Pencil size={14} /></button>
                     <button onClick={() => setDeleteConfirm(cat)} className="p-2 hover:bg-red-50 text-rose-500 rounded-lg transition-colors bg-rose-50/50 sm:bg-transparent" title="Delete"><Trash2 size={14} /></button>
                   </div>
                 </div>
 
-                <div className="mt-auto pt-4 border-t border-[var(--surface-border)] flex justify-between items-center text-[10px] font-medium uppercase tracking-widest text-[var(--muted)]">
+                <div className="mt-auto pt-4 border-t border-slate-200 flex justify-between items-center text-[10px] font-medium uppercase tracking-widest text-slate-500">
                   <span>{linkedProductCount(cat.slug)} Products</span>
                   <span>Order: {cat.order}</span>
                 </div>
@@ -269,12 +269,12 @@ function AdminCategories() {
 
       {deleteConfirm && createPortal(
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-md px-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-[24px] border border-[var(--surface-border)] shadow-2xl p-8 max-w-sm w-full text-center animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-[24px] border border-slate-200 shadow-2xl p-8 max-w-sm w-full text-center animate-in zoom-in-95 duration-200">
             <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500 shadow-inner">
               <Trash2 size={32} />
             </div>
-            <h3 className="serif text-xl font-medium text-[var(--charcoal)] mb-2 text-center">Delete Category?</h3>
-            <p className="text-xs text-[var(--muted)] mb-8 font-medium">This will remove <span className="font-medium text-[var(--charcoal)]">{deleteConfirm.name}</span>. Products in this category will need re-assignment.</p>
+            <h3 className=" text-xl font-medium text-slate-900 mb-2 text-center">Delete Category?</h3>
+            <p className="text-xs text-slate-500 mb-8 font-medium">This will remove <span className="font-medium text-slate-900">{deleteConfirm.name}</span>. Products in this category will need re-assignment.</p>
             <div className="flex gap-4">
               <button onClick={() => setDeleteConfirm(null)} className="flex-1 btn-outline h-12">Cancel</button>
               <button 
@@ -297,3 +297,5 @@ function AdminCategories() {
 }
 
 export default AdminCategories;
+
+

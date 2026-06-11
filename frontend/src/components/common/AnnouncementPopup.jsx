@@ -39,7 +39,7 @@ const AnnouncementPopup = () => {
       />
 
       {/* Popup Content */}
-      <div className="relative w-full max-w-[500px] md:max-w-[550px] bg-white rounded-[32px] border border-[rgba(212,160,23,0.18)] shadow-[0_32px_64px_-12px_rgba(45,27,14,0.3)] overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-8 duration-500">
+      <div className="relative w-full max-w-[500px] md:max-w-[550px] bg-white rounded-[32px] border border-[rgba(99, 102, 241,0.18)] shadow-[0_32px_64px_-12px_rgba(45,27,14,0.3)] overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-8 duration-500">
         
         {/* Design Element: Top Gold Gradient Bar */}
         <div className="h-2 w-full bg-gradient-to-r from-[var(--gold)] via-[var(--saffron)] to-[var(--gold)]" />
@@ -66,7 +66,7 @@ const AnnouncementPopup = () => {
 
           {/* Message Body */}
           <div className="space-y-6">
-            <div className="bg-[var(--cream)]/50 border border-[rgba(212,160,23,0.1)] p-6 rounded-2xl">
+            <div className="bg-[var(--cream)]/50 border border-[rgba(99, 102, 241,0.1)] p-6 rounded-2xl">
               <p className="text-[15px] sm:text-base leading-relaxed text-[var(--charcoal)] font-medium text-center">
                 We are currently accepting orders between <span className="text-[var(--burgundy)] font-bold">8:30 AM</span> and <span className="text-[var(--burgundy)] font-bold">10:30 PM</span>.
               </p>

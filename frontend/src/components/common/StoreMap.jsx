@@ -66,8 +66,8 @@ const StoreMap = ({
       {!isLoaded && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-br from-[#fffaf3] to-[#f5ebe0] animate-pulse">
           <div className="flex flex-col items-center gap-3">
-            <Loader2 className="h-8 w-8 text-[#b76a1f] animate-spin" />
-            <p className="text-sm font-medium text-[#6e5443]">Loading map...</p>
+            <Loader2 className="h-8 w-8 text-[#6366F1] animate-spin" />
+            <p className="text-sm font-medium text-[#475569]">Loading map...</p>
           </div>
         </div>
       )}

@@ -43,7 +43,6 @@ function CheckoutPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // Load initial state from localStorage
   const [form, setForm] = useState(() => {
     try {
       const saved = localStorage.getItem(CHECKOUT_STORAGE_KEY);
@@ -52,7 +51,6 @@ function CheckoutPage() {
       
       const baseForm = parsed?.form || { name: "", phone: "", email: "", address: "", city: "", pincode: "", state: "Maharashtra" };
       
-      // Prioritize pincode from shared storage if it exists and form pincode is empty
       if (lastPincode && !baseForm.pincode) {
         baseForm.pincode = lastPincode;
       }
@@ -82,7 +80,6 @@ function CheckoutPage() {
   const [validatingCoupon, setValidatingCoupon] = useState(false);
   const [isOrderSuccessful, setIsOrderSuccessful] = useState(false);
 
-  // ── NEW: Delivery Availability States ──
   const [deliveryInfo, setDeliveryInfo] = useState(null);
   const [isValidatingPincode, setIsValidatingPincode] = useState(false);
   const [pincodeError, setPincodeError] = useState("");
@@ -90,7 +87,6 @@ function CheckoutPage() {
 
   const isMountedRef = useRef(true);
 
-  // Derive pricing totals using the shared pricing engine with backend override
   const { 
     subtotal, 
     total, 
@@ -105,16 +101,14 @@ function CheckoutPage() {
   } = calculateTotals(cart, { 
     coupon: appliedCoupon, 
     pincode: form.pincode,
-    // OVERRIDE: Use backend-calculated fee if we have a successful availability check
     manualShipping: deliveryInfo?.deliveryAvailable ? deliveryInfo.deliveryFee : null
   });
 
-  // Effective availability based on backend check and error state
   const isAvailable = useMemo(() => {
-    if (form.pincode.length < 6) return true; // Don't block while typing
+    if (form.pincode.length < 6) return true;
     if (pincodeError) return false;
     if (deliveryInfo) return deliveryInfo.deliveryAvailable;
-    return true; // Default to true until validation completes
+    return true;
   }, [pincodeError, deliveryInfo, form.pincode]);
 
   const isAddressValid = form.name && form.phone && form.address && form.city && form.pincode.length === 6 && isAvailable;
@@ -128,12 +122,10 @@ function CheckoutPage() {
     localStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify({ form, step }));
   }, [form, step]);
 
-  // ── EFFECT: Validate Pincode via Backend ──
   useEffect(() => {
     async function validatePincode() {
       const pc = String(form.pincode).trim();
       
-      // Only trigger on exact 6 digits
       if (pc.length !== 6) {
         setDeliveryInfo(null);
         setPincodeError("");
@@ -148,7 +140,6 @@ function CheckoutPage() {
         if (data.success) {
           setDeliveryInfo(data);
           if (data.deliveryAvailable) {
-            // Auto-fill City from authoritative backend data
             setForm(prev => ({ ...prev, city: data.city || "Demo City" }));
           } else {
             setPincodeError(data.message || "Delivery unavailable for this pincode.");
@@ -167,7 +158,6 @@ function CheckoutPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Pincode restriction: Numbers only, max 6
     if (name === "pincode") {
       const val = value.replace(/\D/g, "").slice(0, 6);
       setForm(prev => ({ ...prev, [name]: val }));
@@ -206,7 +196,6 @@ function CheckoutPage() {
   const handleApplyAvailableCoupon = (code) => {
     setCouponCode(code);
     setShowOffers(false);
-    // Auto-trigger validation
     setTimeout(() => {
       handleApplyCoupon();
     }, 100);
@@ -216,10 +205,8 @@ function CheckoutPage() {
     setIsOrderSuccessful(true);
     dispatch({ type: "CLEAR" });
     localStorage.removeItem(CHECKOUT_STORAGE_KEY);
-    // Persist last order ID for recovery if page refreshes
     if (order?._id) sessionStorage.setItem("last_order_id", order._id);
     
-    // Non-blocking fetch
     fetchProducts().catch(console.error);
     
     navigate("/payment-success", { state: { order }, replace: true });
@@ -230,7 +217,6 @@ function CheckoutPage() {
     
     setProcessing(true);
     try {
-      // Direct mock verify request
       const verifyPayload = {
         demopayment_order_id: `demo_order_${Date.now()}`,
         demopayment_payment_id: `demo_payment_${Date.now()}`,
@@ -280,82 +266,80 @@ function CheckoutPage() {
   if (cart.length === 0 && !isOrderSuccessful) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-10 text-center">
-        <h2 className="serif text-3xl mb-4">Your cart is empty</h2>
+        <h2 className="text-3xl font-extrabold mb-4 text-slate-900">Your cart is empty</h2>
         <button onClick={() => navigate("/")} className="btn-primary">Go Shopping</button>
       </div>
     );
   }
 
   return (
-    <div className="page-enter min-h-[60vh] bg-[var(--cream)] px-4 py-8 md:py-12">
+    <div className="page-enter min-h-[60vh] bg-slate-50 px-4 py-8 md:py-12">
       <div className="max-w-6xl mx-auto">
         <div className="section-title mb-8 lg:mb-10">
-          <h2 className="serif lg:text-5xl text-4xl">Checkout</h2>
-          <p className="text-sm lg:text-base opacity-80">Complete your order and enjoy premium Indian sweets.</p>
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900">Checkout</h2>
+          <p className="text-sm lg:text-base text-slate-500 mt-2">Complete your order securely.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 lg:gap-10">
-          <div className="space-y-6 lg:space-y-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 lg:gap-10">
+          <div className="space-y-6 lg:space-y-8">
             {/* ── STEP 1: ADDRESS ── */}
-            <div className={`bg-white rounded-2xl border border-[var(--surface-border)] p-5 md:p-6 transition-opacity ${step === 2 ? 'opacity-60 grayscale' : ''}`}>
-              <div className="flex items-center gap-3 mb-5">
-                <div className="h-8 w-8 rounded-full bg-[var(--burgundy)] text-white flex items-center justify-center font-medium">1</div>
-                <h3 className="serif text-xl">Delivery Address</h3>
+            <div className={`bg-white rounded-3xl border border-slate-200 p-6 md:p-8 transition-opacity ${step === 2 ? 'opacity-60 grayscale' : 'shadow-xl shadow-slate-200/40'}`}>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/20">1</div>
+                <h3 className="text-xl font-bold text-slate-900">Delivery Details</h3>
               </div>
               
               {step === 1 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="md:col-span-2">
-                    <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] block mb-1.5">Full Name</label>
-                    <input name="name" value={form.name} onChange={handleChange} className="input-field" placeholder="John Doe" />
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-slate-500 block mb-2">Full Name</label>
+                    <input name="name" value={form.name} onChange={handleChange} className="input-field bg-slate-50" placeholder="John Doe" />
                   </div>
                   <div>
-                    <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] block mb-1.5">Phone Number</label>
-                    <input name="phone" value={form.phone} onChange={handleChange} className="input-field" placeholder="+91 98765 43210" />
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-slate-500 block mb-2">Phone Number</label>
+                    <input name="phone" value={form.phone} onChange={handleChange} className="input-field bg-slate-50" placeholder="+91 98765 43210" />
                   </div>
                   <div>
-                    <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] block mb-1.5">Email</label>
-                    <input name="email" value={form.email} onChange={handleChange} className="input-field" placeholder="john@example.com" />
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-slate-500 block mb-2">Email</label>
+                    <input name="email" value={form.email} onChange={handleChange} className="input-field bg-slate-50" placeholder="john@example.com" />
                   </div>
                   <div className="md:col-span-2 relative">
-                    <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] block mb-1.5">Full Address</label>
-                    <input name="address" value={form.address} onChange={handleChange} className="input-field" placeholder="Flat, Street, Area" />
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-slate-500 block mb-2">Full Address</label>
+                    <input name="address" value={form.address} onChange={handleChange} className="input-field bg-slate-50" placeholder="Flat, Street, Area" />
                   </div>
                   <div>
-                    <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] block mb-1.5">Pincode</label>
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-slate-500 block mb-2">Pincode</label>
                     <div className="relative">
-                      <input name="pincode" value={form.pincode} onChange={handleChange} className="input-field" placeholder="411014" />
+                      <input name="pincode" value={form.pincode} onChange={handleChange} className="input-field bg-slate-50" placeholder="411014" />
                       {isValidatingPincode && (
-                        <div className="absolute right-4 bottom-3 text-[var(--burgundy)]">
+                        <div className="absolute right-4 bottom-3 text-blue-600">
                           <Loader2 size={18} className="animate-spin" />
                         </div>
                       )}
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)] block mb-1.5">City</label>
-                    <input name="city" value={form.city} onChange={handleChange} className="input-field" placeholder="Demo City" readOnly />
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-slate-500 block mb-2">City</label>
+                    <input name="city" value={form.city} onChange={handleChange} className="input-field bg-slate-50" placeholder="Demo City" readOnly />
                   </div>
                   
                   {pincodeError && (
-                    <div className="md:col-span-2 p-4 rounded-xl bg-orange-50 border border-orange-200 text-orange-800 text-xs font-medium animate-in fade-in slide-in-from-top-2">
-                      <div className="flex items-center gap-2 mb-1">
-                        <MapPinOff size={16} />
-                        <span className="font-bold uppercase tracking-tight">Not Serviceable</span>
+                    <div className="md:col-span-2 p-5 rounded-2xl bg-rose-50 border border-rose-100 text-rose-800 text-sm font-medium animate-in fade-in slide-in-from-top-2">
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPinOff size={18} className="text-rose-500" />
+                        <span className="font-bold">Not Serviceable</span>
                       </div>
-                      <p className="font-bold">{pincodeError}</p>
-                      <span className="block mt-1 opacity-70">Please contact us at +91 99999 99999 for special assistance.</span>
+                      <p className="text-rose-700">{pincodeError}</p>
                     </div>
                   )}
 
                   {!pincodeError && deliveryInfo?.deliveryAvailable && (
-                    <div className="md:col-span-2 p-4 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-800 animate-in fade-in">
-                      <div className="flex items-center gap-2 mb-1">
-                        <MapPin size={16} className="text-emerald-500" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Delivery Available</span>
+                    <div className="md:col-span-2 p-5 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-800 animate-in fade-in">
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPin size={18} className="text-emerald-500" />
+                        <span className="font-bold">Delivery Available</span>
                       </div>
-                      <div className="text-xs font-medium">
-                        Area: <span className="font-bold">{deliveryInfo.area}</span> <br />
+                      <div className="text-sm text-emerald-700">
                         Est. Delivery: <span className="font-bold">{deliveryInfo.eta}</span>
                       </div>
                     </div>
@@ -364,57 +348,57 @@ function CheckoutPage() {
                   <button 
                     disabled={!isAddressValid || isValidatingPincode}
                     onClick={() => setStep(2)}
-                    className="md:col-span-2 btn-primary h-12 mt-4 disabled:opacity-50"
+                    className="md:col-span-2 h-14 mt-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-slate-900/20"
                   >
-                    {!isAvailable ? "Delivery Unavailable" : isValidatingPincode ? "Validating Pincode..." : "Review Order & Pay →"}
+                    {!isAvailable ? "Delivery Unavailable" : isValidatingPincode ? "Validating..." : "Continue to Payment"}
                   </button>
                 </div>
               )}
               {step === 2 && (
-                <div className="text-sm font-medium text-[var(--charcoal)]">
+                <div className="text-sm font-medium text-slate-600 bg-slate-50 p-4 rounded-xl">
                   {form.name} • {form.phone} <br />
                   {form.address}, {form.city} - {form.pincode}
-                  <button onClick={() => setStep(1)} className="text-[var(--burgundy)] font-medium ml-2 underline">Edit</button>
+                  <button onClick={() => setStep(1)} className="text-blue-600 font-bold ml-3 hover:underline">Edit</button>
                 </div>
               )}
             </div>
 
             {/* ── STEP 2: PAYMENT ── */}
             {step === 2 && (
-              <div className="bg-white rounded-2xl border border-[var(--surface-border)] p-5 md:p-6 animate-in slide-in-from-top-4 duration-500">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="h-8 w-8 rounded-full bg-[var(--burgundy)] text-white flex items-center justify-center font-medium">2</div>
-                  <h3 className="serif text-xl">Payment Method</h3>
+              <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-xl shadow-slate-200/40 animate-in slide-in-from-top-4 duration-500">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/20">2</div>
+                  <h3 className="text-xl font-bold text-slate-900">Payment Method</h3>
                 </div>
 
-                <div className="space-y-3 mb-6">
+                <div className="space-y-4 mb-8">
                   {[
                     { id: 'demopayment', label: 'Online Payment', desc: 'UPI, Cards, Net Banking', icon: '💳' }
                   ].map(method => (
                     <label 
                       key={method.id}
-                      className="flex items-center p-3 md:p-4 rounded-xl border-2 border-[var(--saffron)] bg-[var(--surface-strong)]/30 transition-all cursor-default"
+                      className="flex items-center p-4 md:p-5 rounded-2xl border-2 border-blue-500 bg-blue-50/50 transition-all cursor-default"
                     >
                       <div className="text-2xl mr-4">{method.icon}</div>
                       <div className="flex-1">
-                        <div className="font-medium text-sm text-[var(--charcoal)]">{method.label}</div>
-                        <div className="text-[10px] text-[var(--muted)]">{method.desc}</div>
+                        <div className="font-bold text-sm text-blue-900">{method.label}</div>
+                        <div className="text-[11px] font-medium text-blue-600 mt-0.5">{method.desc}</div>
                       </div>
-                      <div className="h-5 w-5 rounded-full border-2 flex items-center justify-center border-[var(--burgundy)]">
-                        <div className="h-2.5 w-2.5 rounded-full bg-[var(--burgundy)]" />
+                      <div className="h-6 w-6 rounded-full border-2 flex items-center justify-center border-blue-600">
+                        <div className="h-3 w-3 rounded-full bg-blue-600" />
                       </div>
                     </label>
                   ))}
                 </div>
 
-                {errorMessage && <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs font-medium">{errorMessage}</div>}
+                {errorMessage && <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-100 text-rose-700 text-sm font-bold">{errorMessage}</div>}
 
                 <button 
                   disabled={processing}
                   onClick={handleOnlinePayment}
-                  className="w-full btn-primary h-11 md:h-12 shadow-lg text-sm"
+                  className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all disabled:opacity-70 shadow-lg shadow-blue-500/30 text-base"
                 >
-                  {processing ? 'Processing...' : `Place Order (${formatCurrency(total)})`}
+                  {processing ? 'Processing Securely...' : `Pay ${formatCurrency(total)}`}
                 </button>
               </div>
             )}
@@ -422,115 +406,101 @@ function CheckoutPage() {
 
           {/* ── SIDEBAR: SUMMARY ── */}
           <div className="space-y-6">
-            <div className="bg-[var(--charcoal)] rounded-2xl p-5 md:p-6 text-white sticky top-28 shadow-2xl">
-              <h3 className="serif text-xl text-[var(--saffron)] mb-5">Order Summary</h3>
-              <div className="space-y-3 max-h-[280px] overflow-y-auto custom-scrollbar pr-2 mb-5 border-b border-white/10 pb-5">
+            <div className="bg-slate-900 rounded-3xl p-6 md:p-8 text-white sticky top-28 shadow-2xl">
+              <h3 className="text-lg font-bold text-white mb-6">Order Summary</h3>
+              <div className="space-y-4 max-h-[320px] overflow-y-auto custom-scrollbar pr-3 mb-6 border-b border-slate-700 pb-6">
                 {cart.map(item => (
-                  <div key={`${item.productId}-${item.variantId}`} className="flex gap-3">
-                    <img src={item.image} className="h-10 w-10 rounded-lg object-cover bg-white/10" alt="" />
-                    <div className="flex-1 min-w-0 text-[11px]">
-                      <div className="font-medium truncate">{item.name}</div>
-                      <div className="text-white/60">{item.variantLabel} × {item.quantity}</div>
+                  <div key={`${item.productId}-${item.variantId}`} className="flex gap-4">
+                    <div className="h-14 w-14 rounded-xl bg-slate-800 flex items-center justify-center overflow-hidden shrink-0">
+                       <img src={item.image} className="w-full h-full object-contain mix-blend-screen bg-white" alt="" />
                     </div>
-                    <div className="font-medium text-xs">{formatCurrency(item.price * item.quantity)}</div>
+                    <div className="flex-1 min-w-0 text-xs">
+                      <div className="font-bold text-slate-100 truncate">{item.name}</div>
+                      <div className="text-slate-400 font-medium mt-1">{item.variantLabel} × {item.quantity}</div>
+                    </div>
+                    <div className="font-bold text-sm text-white">{formatCurrency(item.price * item.quantity)}</div>
                   </div>
                 ))}
               </div>
-              <div className="space-y-2.5 text-[11px] font-medium text-white/70 mb-5">
+              <div className="space-y-3.5 text-xs font-medium text-slate-300 mb-6">
                 <div className="flex justify-between">
-                  <span>Items (Excl. Tax)</span>
-                  <span>{formatCurrency(subtotal)}</span>
+                  <span>Subtotal</span>
+                  <span className="text-white">{formatCurrency(subtotal)}</span>
                 </div>
                 {gstTotal > 0 && (
-                  <div className="flex justify-between text-[var(--saffron)]">
-                    <span>GST Amount</span>
-                    <span>{formatCurrency(gstTotal)}</span>
-                  </div>
-                )}
-                {packingTotal > 0 && (
-                  <div className="flex justify-between text-[var(--saffron)]">
-                    <span>Packing Charges</span>
-                    <span>{formatCurrency(packingTotal)}</span>
+                  <div className="flex justify-between">
+                    <span>Tax</span>
+                    <span className="text-white">{formatCurrency(gstTotal)}</span>
                   </div>
                 )}
                 
                 {/* ── COUPON SECTION ── */}
-                <div className="py-4 border-y border-white/5 my-2 space-y-3">
+                <div className="py-5 border-y border-slate-700 my-4 space-y-4">
                   {!appliedCoupon ? (
                     <div className="flex gap-2">
                       <input 
                         type="text" 
                         value={couponCode} 
                         onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                        placeholder="OFFER CODE"
-                        className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-[10px] uppercase tracking-widest outline-none focus:border-[var(--saffron)] transition-colors"
+                        placeholder="PROMO CODE"
+                        className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-xs uppercase font-bold outline-none focus:border-blue-500 transition-colors text-white placeholder:text-slate-500"
                       />
                       <button 
                         onClick={handleApplyCoupon}
                         disabled={validatingCoupon || !couponCode.trim()}
-                        className="bg-[var(--saffron)] text-[var(--charcoal)] px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest disabled:opacity-50 hover:bg-white transition-colors"
+                        className="bg-blue-600 text-white px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider disabled:opacity-50 hover:bg-blue-500 transition-colors"
                       >
                         {validatingCoupon ? "..." : "Apply"}
                       </button>
                     </div>
                   ) : (
-                    <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 flex items-center justify-between animate-in zoom-in-95 duration-300">
+                    <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 flex items-center justify-between animate-in zoom-in-95 duration-300">
                       <div>
-                        <div className="text-[10px] font-black text-emerald-400 tracking-[0.2em] uppercase">Applied: {appliedCoupon.code}</div>
-                        <div className="text-[9px] text-emerald-400/70 font-medium">Extra savings unlocked!</div>
+                        <div className="text-xs font-bold text-emerald-400 uppercase">Code: {appliedCoupon.code}</div>
+                        <div className="text-[10px] text-emerald-400/80 font-medium mt-0.5">Applied successfully</div>
                       </div>
-                      <button onClick={handleRemoveCoupon} className="text-white/40 hover:text-white transition-colors">
-                        <MessageSquare size={14} />
+                      <button onClick={handleRemoveCoupon} className="text-slate-400 hover:text-white transition-colors">
+                        <MessageSquare size={16} />
                       </button>
                     </div>
                   )}
 
                   {couponError && (
-                    <div className="text-[10px] font-bold text-red-400 px-1 animate-in fade-in slide-in-from-top-1 duration-300">
-                      ⚠️ {couponError}
+                    <div className="text-[11px] font-bold text-rose-400 px-1 animate-in fade-in">
+                      {couponError}
                     </div>
                   )}
 
                   {couponDiscount > 0 && (
                     <div className="flex justify-between text-emerald-400 font-bold">
-                      <span>Coupon Discount</span>
+                      <span>Discount</span>
                       <span>-{formatCurrency(couponDiscount)}</span>
                     </div>
                   )}
 
                   <button 
                     onClick={() => setShowOffers(true)}
-                    className="flex items-center justify-center gap-1.5 w-full py-1.5 text-[9px] font-black uppercase tracking-[0.15em] text-[var(--saffron)] hover:text-white transition-colors border border-[var(--saffron)]/20 rounded-lg bg-[var(--saffron)]/5"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 text-[10px] font-bold uppercase tracking-widest text-blue-400 hover:bg-blue-500/10 transition-colors rounded-xl border border-blue-500/20 bg-blue-500/5"
                   >
-                    <Tag size={10} /> View Available Offers
+                    <Tag size={12} /> View Offers
                   </button>
                 </div>
 
-                <div className="flex justify-between items-center py-2 border-b border-white/5 mb-2">
-                  <div className="flex flex-col gap-0.5">
-                    <span className="text-[10px] text-white/40 uppercase tracking-wider flex items-center gap-1">
-                      <Truck size={10} /> {deliveryLabel}
+                <div className="flex justify-between items-center py-2">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-widest flex items-center gap-1">
+                      <Truck size={12} /> Shipping
                     </span>
-                    <span>Delivery Fee</span>
                   </div>
-                  <span className={deliveryFee === 0 ? "text-emerald-400 font-bold" : ""}>
+                  <span className={deliveryFee === 0 ? "text-emerald-400 font-bold" : "text-white"}>
                     {deliveryFee === 0 ? "FREE" : formatCurrency(deliveryFee)}
                   </span>
                 </div>
-
-                {!isFreeDelivery && (
-                  <div className="bg-white/5 p-3 rounded-xl border border-white/10 animate-in fade-in duration-500">
-                    <p className="text-[10px] leading-tight text-white/80">
-                      Add <span className="text-[var(--saffron)] font-bold">{formatCurrency(deliveryThreshold - subtotal)}</span> more for <span className="text-emerald-400 font-bold tracking-tight">FREE DELIVERY</span> in this area.
-                    </p>
-                  </div>
-                )}
               </div>
-              <div className="flex justify-between items-center text-lg font-medium pt-4 border-t border-white/10">
-                <span className="serif text-[var(--saffron)]">Total</span>
-                <span>{formatCurrency(total)}</span>
+              <div className="flex justify-between items-center text-xl font-extrabold pt-6 border-t border-slate-700">
+                <span className="text-white">Total</span>
+                <span className="text-blue-400">{formatCurrency(total)}</span>
               </div>
-              <p className="text-[10px] text-center text-white/40 mt-4 italic">{TAX_MESSAGE}</p>
             </div>
           </div>
         </div>

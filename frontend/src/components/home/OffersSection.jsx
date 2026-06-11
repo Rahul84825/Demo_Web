@@ -29,7 +29,7 @@ const OffersSection = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-[var(--surface-strong)] text-[var(--gold)] text-[10px] font-black tracking-widest uppercase">
               <Tag size={12} className="animate-bounce" /> Exclusive Deals
             </div>
-            <h2 className="serif text-3xl md:text-4xl">Festive Offers</h2>
+            <h2 className=" text-3xl md:text-4xl">Festive Offers</h2>
             <p className="max-w-xl text-sm md:text-base leading-relaxed font-medium text-[var(--muted)]">Don't miss out on our limited-time curated selections at special prices. Pure tradition, pure joy.</p>
           </div>
         </div>
@@ -51,3 +51,4 @@ const OffersSection = () => {
 };
 
 export default OffersSection;
+

@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useProducts } from "../context/ProductContext";
-import brandLogo from "../assets/logo.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ function Navbar() {
 
   const handleSearch = (e) => {
     if (e.key === "Enter" && search.trim()) {
-      navigate(`/sweets?search=${encodeURIComponent(search.trim())}`);
+      navigate(`/products?search=${encodeURIComponent(search.trim())}`);
       setSearch("");
       setSearchFocused(false);
       setMobileOpen(false);
@@ -76,7 +75,7 @@ function Navbar() {
     <>
       <nav className={`sticky top-0 z-[100] w-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] border-b ${
         scrolled 
-          ? 'bg-white/90 backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(139,30,63,0.15)] border-gray-100 py-2.5' 
+          ? 'bg-white/90 backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(99,102,241,0.15)] border-gray-100 py-2.5' 
           : 'bg-[var(--cream)] border-transparent py-4'
       }`}>
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4 lg:gap-8">
@@ -87,14 +86,13 @@ function Navbar() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-[var(--gold)]/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-700" />
-              <img src={brandLogo} alt="Logo" className={`relative object-contain transition-all duration-700 ease-out ${scrolled ? 'h-12 w-12' : 'h-16 w-16'}`} />
             </div>
             <div className="flex flex-col items-start leading-none">
               <span className={`font-serif font-black tracking-tighter transition-all duration-500 ${scrolled ? 'text-base text-[var(--burgundy)]' : 'text-xl text-[var(--burgundy)]'}`}>
-                product
+                Demo
               </span>
               <span className={`font-sans font-bold uppercase tracking-[0.3em] transition-all duration-500 ${scrolled ? 'text-[7px] text-[var(--gold)]' : 'text-[9px] text-[var(--gold)]'}`}>
-                World
+                Website
               </span>
             </div>
           </button>
@@ -111,7 +109,7 @@ function Navbar() {
                 onKeyDown={handleSearch}
                 onFocus={() => setSearchFocused(true)}
                 onBlur={() => setSearchFocused(false)}
-                placeholder="Search treats..." 
+                placeholder="Search products..." 
                 className="bg-transparent w-full h-full text-sm font-medium focus:outline-none placeholder:text-gray-400 transition-all"
               />
               <div className={`hidden lg:flex items-center gap-1.5 px-2 py-1 rounded-lg bg-gray-50 border border-gray-100 text-[9px] font-bold text-gray-400 transition-all duration-500 ${searchFocused ? 'opacity-0 translate-x-4' : 'opacity-100'}`}>
@@ -127,7 +125,7 @@ function Navbar() {
             {/* Desktop Quick Nav */}
             <div className="hidden lg:flex items-center gap-6 mr-6 border-r border-gray-200 pr-8">
               <button 
-                onClick={() => navigate("/sweets")}
+                onClick={() => navigate("/products")}
                 className="text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--charcoal)] hover:text-[var(--burgundy)] transition-all relative group/nav"
               >
                 Products
@@ -144,13 +142,13 @@ function Navbar() {
                 
                 {/* Mega Menu Dropdown */}
                 <div className={`absolute left-0 top-full pt-4 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${dropOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'}`}>
-                  <div className="bg-white rounded-3xl border border-gray-100 shadow-[0_40px_80px_-15px_rgba(139,30,63,0.2)] p-6 min-w-[280px] overflow-hidden">
+                  <div className="bg-white rounded-3xl border border-gray-100 shadow-[0_40px_80px_-15px_rgba(99,102,241,0.2)] p-6 min-w-[280px] overflow-hidden">
                     <div className="grid grid-cols-1 gap-1">
-                      <div className="text-[9px] font-black text-[var(--gold)] uppercase tracking-[0.3em] mb-3 pl-3 opacity-60">Sweets & product</div>
+                      <div className="text-[9px] font-black text-[var(--gold)] uppercase tracking-[0.3em] mb-3 pl-3 opacity-60">Product Catalog</div>
                       {navbarCategories.map(cat => (
                         <button
                           key={cat._id}
-                          onClick={() => handleNav(`/sweets?category=${cat.slug}`)}
+                          onClick={() => handleNav(`/products?category=${cat.slug}`)}
                           className="flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-bold text-gray-600 hover:bg-[var(--cream)] hover:text-[var(--burgundy)] transition-all duration-300 group/item"
                         >
                           {cat.name}
@@ -248,10 +246,10 @@ function Navbar() {
                 </div>
                 <div className="flex flex-col items-start leading-none">
                   <span className="font-serif text-xl font-black tracking-tighter text-[var(--burgundy)]">
-                    product
+                    Demo
                   </span>
                   <span className="font-sans text-[8px] font-bold uppercase tracking-[0.3em] text-[var(--gold)]">
-                    World
+                    Mart
                   </span>
                 </div>
               </div>
@@ -269,7 +267,7 @@ function Navbar() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   onKeyDown={handleSearch}
-                  placeholder="Search sweets..." 
+                  placeholder="Search products..." 
                   className="relative w-full h-14 bg-transparent rounded-2xl pl-12 pr-4 text-sm font-medium focus:outline-none" 
                 />
               </div>
@@ -278,7 +276,7 @@ function Navbar() {
                 <p className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--gold)] opacity-70 ml-2">Main Menu</p>
                 <div className="grid grid-cols-1 gap-2">
                   <button 
-                    onClick={() => handleNav("/sweets")} 
+                    onClick={() => handleNav("/products")} 
                     className="flex items-center justify-between p-5 bg-white rounded-2xl text-sm font-bold text-[var(--charcoal)] shadow-sm active:scale-[0.98] transition-all border border-gray-100/50 animate-in slide-in-from-right duration-500 delay-100"
                   >
                     Explore Shop <ChevronRight size={16} className="text-[var(--burgundy)]" />
@@ -290,7 +288,7 @@ function Navbar() {
                       {navbarCategories.map((cat, idx) => (
                         <button 
                           key={cat._id} 
-                          onClick={() => handleNav(`/sweets?category=${cat.slug}`)} 
+                          onClick={() => handleNav(`/products?category=${cat.slug}`)} 
                           style={{ animationDelay: `${200 + (idx * 50)}ms` }}
                           className="flex items-center justify-between p-4 border border-gray-100 bg-white/50 rounded-2xl text-xs font-bold text-gray-600 active:scale-[0.98] transition-all animate-in slide-in-from-right duration-500"
                         >

@@ -104,32 +104,32 @@ const AdminHeroBannerManager = () => {
     <div className="animate-in fade-in duration-500 space-y-10 page-enter">
       {/* ── HEADER ── */}
       <div className="section-title">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface-strong)] text-[var(--burgundy)] text-[10px] font-medium uppercase tracking-widest mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-blue-600 text-[10px] font-medium uppercase tracking-widest mb-3">
           <Sparkles size={12} /> Visual Experience
         </div>
-        <h2 className="serif">Hero Banner Manager</h2>
+        <h2 className="">Hero Banner Manager</h2>
         <p>Upload and manage homepage slider images to showcase DemoMart.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* ── UPLOAD BOX ── */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white rounded-3xl border border-[var(--surface-border)] p-6 shadow-sm">
-            <label className="w-full cursor-pointer border-2 border-dashed border-[var(--surface-border)] hover:border-[var(--gold)] rounded-2xl p-8 flex flex-col items-center justify-center gap-3 bg-[var(--cream)]/30 transition-all group">
-              <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm border border-[var(--surface-border)] group-hover:scale-110 transition-transform">
-                <ImagePlus size={24} className="text-[var(--muted)]" />
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
+            <label className="w-full cursor-pointer border-2 border-dashed border-slate-200 hover:border-cyan-500 rounded-2xl p-8 flex flex-col items-center justify-center gap-3 bg-slate-50/30 transition-all group">
+              <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-200 group-hover:scale-110 transition-transform">
+                <ImagePlus size={24} className="text-slate-500" />
               </div>
-              <p className="text-sm font-medium text-[var(--charcoal)]">Select Banner Images</p>
-              <p className="text-[10px] font-medium text-[var(--muted)] uppercase tracking-wider">Multi-upload (max 10)</p>
+              <p className="text-sm font-medium text-slate-900">Select Banner Images</p>
+              <p className="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Multi-upload (max 10)</p>
               <input type="file" multiple accept="image/*" className="hidden" onChange={handleFileSelect} disabled={uploading} />
             </label>
 
             {previewItems.length > 0 && (
               <div className="mt-6 space-y-3">
-                <p className="text-[10px] font-medium text-[var(--muted)] uppercase tracking-widest">Selected ({previewItems.length})</p>
+                <p className="text-[10px] font-medium text-slate-500 uppercase tracking-widest">Selected ({previewItems.length})</p>
                 <div className="grid grid-cols-3 gap-2">
                   {previewItems.map((item, idx) => (
-                    <div key={idx} className="aspect-video rounded-lg overflow-hidden border border-[var(--surface-border)] bg-gray-50">
+                    <div key={idx} className="aspect-video rounded-lg overflow-hidden border border-slate-200 bg-gray-50">
                       <img src={item.url} alt="" className="w-full h-full object-cover" />
                     </div>
                   ))}
@@ -171,28 +171,28 @@ const AdminHeroBannerManager = () => {
         {/* ── LIVE PREVIEW GRID ── */}
         <div className="lg:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="serif text-xl font-medium text-[var(--charcoal)]">Current Slideshow</h3>
-            <span className="text-[10px] font-medium text-[var(--muted)] bg-[var(--surface-strong)] px-3 py-1 rounded-full uppercase tracking-widest border border-[var(--surface-border)]">
+            <h3 className=" text-xl font-medium text-slate-900">Current Slideshow</h3>
+            <span className="text-[10px] font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full uppercase tracking-widest border border-slate-200">
               {images.length} Active Slides
             </span>
           </div>
 
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-pulse">
-              {[1, 2].map(i => <div key={i} className="aspect-video bg-white rounded-3xl border border-[var(--surface-border)]" />)}
+              {[1, 2].map(i => <div key={i} className="aspect-video bg-white rounded-3xl border border-slate-200" />)}
             </div>
           ) : images.length === 0 ? (
-            <div className="py-20 text-center rounded-3xl border-2 border-dashed border-[var(--surface-border)] bg-white">
-              <XCircle size={32} className="text-[var(--muted)] mx-auto mb-3 opacity-30" />
-              <p className="text-sm font-medium text-[var(--muted)] uppercase tracking-widest">No custom slides yet</p>
-              <p className="text-xs text-[var(--muted)]/60 mt-1">Fallback system slides will be used on storefront.</p>
+            <div className="py-20 text-center rounded-3xl border-2 border-dashed border-slate-200 bg-white">
+              <XCircle size={32} className="text-slate-500 mx-auto mb-3 opacity-30" />
+              <p className="text-sm font-medium text-slate-500 uppercase tracking-widest">No custom slides yet</p>
+              <p className="text-xs text-slate-500/60 mt-1">Fallback system slides will be used on storefront.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {images.map((image) => {
                 const imageId = image._id || image.id;
                 return (
-                  <div key={imageId} className="group relative aspect-video rounded-3xl border border-[var(--surface-border)] overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-500">
+                  <div key={imageId} className="group relative aspect-video rounded-3xl border border-slate-200 overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-500">
                     <img src={image.url} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     
@@ -220,3 +220,4 @@ const AdminHeroBannerManager = () => {
 };
 
 export default AdminHeroBannerManager;
+

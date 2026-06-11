@@ -164,17 +164,17 @@ const AdminProducts = () => {
     <div className="animate-in fade-in duration-500 max-w-7xl mx-auto page-enter space-y-8 pb-20">
       
       {/* HEADER SECTION */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 bg-white p-5 sm:p-6 md:p-8 rounded-[24px] sm:rounded-[32px] border border-[#e6d3b3] shadow-sm">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 bg-white p-5 sm:p-6 md:p-8 rounded-[24px] sm:rounded-[32px] border border-slate-200 shadow-sm">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fffaf3] text-[#b67b3a] border border-[#f0e0c4] text-[10px] font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#4F46E5] border border-[#E2E8F0] text-[10px] font-bold uppercase tracking-widest mb-4">
             <LayoutGrid size={14} /> Inventory Management
           </div>
-          <h2 className="serif text-2xl sm:text-3xl md:text-4xl font-medium text-[#2d1b0e] mb-2">Product Catalog</h2>
-          <p className="text-xs sm:text-sm font-medium text-[#7a5c3a]">Manage sizes, pricing, and availability across your entire collection.</p>
+          <h2 className=" text-2xl sm:text-3xl md:text-4xl font-medium text-slate-900 mb-2">Product Catalog</h2>
+          <p className="text-xs sm:text-sm font-medium text-slate-500">Manage sizes, pricing, and availability across your entire collection.</p>
         </div>
         <button 
           onClick={() => navigate("/admin/add-product", { state: null })} 
-          className="h-12 sm:h-14 px-6 sm:px-8 rounded-xl sm:rounded-2xl bg-[#8b4513] text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-[#6b3410] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 shrink-0"
+          className="h-12 sm:h-14 px-6 sm:px-8 rounded-xl sm:rounded-2xl bg-blue-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-[#6b3410] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 shrink-0"
         >
           <PlusCircle size={18} /> Add New product
         </button>
@@ -183,13 +183,13 @@ const AdminProducts = () => {
       {/* FILTERS & SEARCH */}
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1 group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#a67f52] group-focus-within:text-[#8b4513] transition-colors" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-slate-900 transition-colors" />
           <input 
             type="text" 
             placeholder="Search..." 
             value={search} 
             onChange={(e) => setSearch(e.target.value)} 
-            className="w-full h-12 sm:h-14 pl-12 pr-4 bg-white border border-[#e6d3b3] rounded-xl sm:rounded-2xl text-sm font-medium text-[#2d1b0e] placeholder:text-[#a67f52] focus:outline-none focus:ring-2 focus:ring-[#8b4513]/20 focus:border-[#8b4513] transition-all shadow-sm" 
+            className="w-full h-12 sm:h-14 pl-12 pr-4 bg-white border border-slate-200 rounded-xl sm:rounded-2xl text-sm font-medium text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition-all shadow-sm" 
           />
         </div>
         
@@ -198,12 +198,12 @@ const AdminProducts = () => {
            <select 
              value={filterCat} 
              onChange={(e) => setFilterCat(e.target.value)} 
-             className="w-full h-12 sm:h-14 pl-4 pr-12 bg-white border border-[#e6d3b3] rounded-xl sm:rounded-2xl text-sm font-bold text-[#7a5c3a] focus:outline-none focus:ring-2 focus:ring-[#8b4513]/20 focus:border-[#8b4513] transition-all shadow-sm appearance-none cursor-pointer"
+             className="w-full h-12 sm:h-14 pl-4 pr-12 bg-white border border-slate-200 rounded-xl sm:rounded-2xl text-sm font-bold text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition-all shadow-sm appearance-none cursor-pointer"
            >
              <option value="all">All Categories</option>
              {(categories || []).map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
            </select>
-           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#a67f52]">
+           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
              <ChevronDown size={18} />
            </div>
         </div>
@@ -213,13 +213,13 @@ const AdminProducts = () => {
            <select 
              value={stockFilter} 
              onChange={(e) => setStockFilter(e.target.value)} 
-             className="w-full h-12 sm:h-14 pl-4 pr-12 bg-white border border-[#e6d3b3] rounded-xl sm:rounded-2xl text-sm font-bold text-[#7a5c3a] focus:outline-none focus:ring-2 focus:ring-[#8b4513]/20 focus:border-[#8b4513] transition-all shadow-sm appearance-none cursor-pointer"
+             className="w-full h-12 sm:h-14 pl-4 pr-12 bg-white border border-slate-200 rounded-xl sm:rounded-2xl text-sm font-bold text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition-all shadow-sm appearance-none cursor-pointer"
            >
              <option value="all">All Products ({counts.all})</option>
              <option value="inStock">In Stock ({counts.inStock})</option>
              <option value="outOfStock">Out Of Stock ({counts.outOfStock})</option>
            </select>
-           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#a67f52]">
+           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
              <ChevronDown size={18} />
            </div>
         </div>
@@ -230,11 +230,11 @@ const AdminProducts = () => {
         {/* Mobile View: Cards */}
         <div className="grid grid-cols-1 gap-4 md:hidden">
           {filtered.length === 0 ? (
-            <div className="bg-white rounded-[32px] border border-[#e6d3b3] p-12 text-center shadow-sm">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#fffaf3] mb-4 text-[#d4a373]">
+            <div className="bg-white rounded-[32px] border border-slate-200 p-12 text-center shadow-sm">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-50 mb-4 text-[#818CF8]">
                 <Package size={32} />
               </div>
-              <p className="text-sm font-bold text-[#7a5c3a]">No products found.</p>
+              <p className="text-sm font-bold text-slate-500">No products found.</p>
             </div>
           ) : (
             filtered.map((product) => {
@@ -247,33 +247,33 @@ const AdminProducts = () => {
               const hasVariants = variants.length > 0;
 
               return (
-                <div key={id} className={`bg-white rounded-3xl border border-[#e6d3b3] p-5 shadow-sm space-y-4 ${!product.isActive ? 'bg-gray-50/50' : ''}`}>
+                <div key={id} className={`bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-4 ${!product.isActive ? 'bg-gray-50/50' : ''}`}>
                   <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 rounded-2xl bg-white border border-[#f0e0c4] overflow-hidden shrink-0 shadow-sm relative">
+                    <div className="w-16 h-16 rounded-2xl bg-white border border-[#E2E8F0] overflow-hidden shrink-0 shadow-sm relative">
                       {preview ? (
                         <img src={preview} className="w-full h-full object-cover" alt={product.name} />
                       ) : (
-                        <Package size={24} className="text-[#e6d3b3] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        <Package size={24} className="text-slate-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                       )}
                       {!product.isActive && (
                         <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center">
-                          <span className="bg-[#2d1b0e] text-white text-[8px] font-bold px-1.5 py-0.5 rounded">HIDDEN</span>
+                          <span className="bg-blue-600 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">HIDDEN</span>
                         </div>
                       )}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="text-sm font-bold text-[#2d1b0e] leading-tight mb-1">{product.name}</h4>
-                      <p className="text-[10px] font-bold text-[#8b4513] uppercase tracking-widest">{getCategoryName(product.category)}</p>
+                      <h4 className="text-sm font-bold text-slate-900 leading-tight mb-1">{product.name}</h4>
+                      <p className="text-[10px] font-bold text-slate-900 uppercase tracking-widest">{getCategoryName(product.category)}</p>
                       <div className="flex items-center gap-2 mt-2">
-                        <span className="text-sm font-bold text-[#2d1b0e]">{formatCurrency(pricing.finalPrice)}</span>
+                        <span className="text-sm font-bold text-slate-900">{formatCurrency(pricing.finalPrice)}</span>
                         {pricing.mrp > pricing.finalPrice && (
-                          <span className="text-[10px] font-medium text-[#a67f52] line-through">{formatCurrency(pricing.mrp)}</span>
+                          <span className="text-[10px] font-medium text-slate-500 line-through">{formatCurrency(pricing.mrp)}</span>
                         )}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-[#e6d3b3]/50">
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-200/50">
                     <div className="flex items-center gap-3">
                       {!product.isSignature ? (
                         <button 
@@ -284,7 +284,7 @@ const AdminProducts = () => {
                            <div className={`absolute h-3 w-3 rounded-full bg-white transition-all shadow-sm ${product.isActive ? 'left-[16px]' : 'left-0.5'}`} />
                         </button>
                       ) : (
-                        <Sparkles size={14} className="text-[var(--gold)]" />
+                        <Sparkles size={14} className="text-cyan-500" />
                       )}
                       {/* Removed Stock display */}
                     </div>
@@ -292,7 +292,7 @@ const AdminProducts = () => {
                     <div className="flex items-center gap-2">
                       <button 
                         onClick={() => navigate("/admin/add-product", { state: { product, fromParams: searchParams.toString() } })}
-                        className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#fffaf3] border border-[#e6d3b3] text-[#7a5c3a] active:bg-[#f5e6d3]"
+                        className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 border border-slate-200 text-slate-500 active:bg-slate-50"
                       >
                         <Pencil size={14} />
                       </button>
@@ -305,7 +305,7 @@ const AdminProducts = () => {
                       {hasVariants && (
                         <button 
                           onClick={() => toggleExpand(id)}
-                          className={`h-9 px-3 rounded-xl text-[10px] font-bold uppercase tracking-widest border transition-all ${isExpanded ? 'bg-[#8b4513] text-white border-[#8b4513]' : 'bg-white text-[#7a5c3a] border-[#e6d3b3]'}`}
+                          className={`h-9 px-3 rounded-xl text-[10px] font-bold uppercase tracking-widest border transition-all ${isExpanded ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-500 border-slate-200'}`}
                         >
                           {isExpanded ? 'Hide Sizes' : 'Sizes'}
                         </button>
@@ -319,8 +319,8 @@ const AdminProducts = () => {
                         const vId = v._id || v.id;
                         const isAvail = v.isAvailable !== false;
                         return (
-                          <div key={vId} className={`p-3 rounded-2xl border flex items-center justify-between ${isAvail ? 'bg-[#fffaf3]/50 border-[#f0e0c4]' : 'bg-gray-50 border-gray-200 grayscale-[0.5]'}`}>
-                            <div className="text-[11px] font-bold text-[#2d1b0e]">{v.label} · <span className="text-[#8b4513]">{formatCurrency(v.sellingPrice)}</span></div>
+                          <div key={vId} className={`p-3 rounded-2xl border flex items-center justify-between ${isAvail ? 'bg-slate-50/50 border-[#E2E8F0]' : 'bg-gray-50 border-gray-200 grayscale-[0.5]'}`}>
+                            <div className="text-[11px] font-bold text-slate-900">{v.label} · <span className="text-slate-900">{formatCurrency(v.sellingPrice)}</span></div>
                             <button 
                               onClick={() => handleVariantToggle(id, vId, isAvail)}
                               className={`h-4 w-7 rounded-full transition-all relative flex items-center shrink-0 border ${isAvail ? 'bg-emerald-500 border-emerald-500' : 'bg-gray-200 border-gray-300'}`}
@@ -339,27 +339,27 @@ const AdminProducts = () => {
         </div>
 
         {/* Desktop View: Table */}
-        <div className="hidden md:block bg-white rounded-[32px] border border-[#e6d3b3] shadow-sm overflow-hidden">
+        <div className="hidden md:block bg-white rounded-[32px] border border-slate-200 shadow-sm overflow-hidden">
           <div className="overflow-x-auto custom-scrollbar">
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
-                <tr className="bg-[#fffaf3] border-b border-[#e6d3b3]">
-                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#b67b3a] w-[35%]">product & Detail</th>
-                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#b67b3a] w-[15%]">Category</th>
-                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#b67b3a] w-[15%]">Pricing</th>
-                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#b67b3a] w-[20%]">Status</th>
-                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#b67b3a] text-right w-[15%]">Actions</th>
+                <tr className="bg-slate-50 border-b border-slate-200">
+                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#4F46E5] w-[35%]">product & Detail</th>
+                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#4F46E5] w-[15%]">Category</th>
+                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#4F46E5] w-[15%]">Pricing</th>
+                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#4F46E5] w-[20%]">Status</th>
+                  <th className="px-6 py-5 text-[10px] font-bold uppercase tracking-widest text-[#4F46E5] text-right w-[15%]">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#e6d3b3]/50">
+              <tbody className="divide-y divide-slate-200/50">
                 {filtered.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="px-6 py-24 text-center">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#fffaf3] mb-4 text-[#d4a373]">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-50 mb-4 text-[#818CF8]">
                         <Package size={32} />
                       </div>
-                      <p className="text-sm font-bold text-[#7a5c3a]">No products found.</p>
-                      <p className="text-xs font-medium text-[#a67f52] mt-1">Try adjusting your search or filters.</p>
+                      <p className="text-sm font-bold text-slate-500">No products found.</p>
+                      <p className="text-xs font-medium text-slate-500 mt-1">Try adjusting your search or filters.</p>
                     </td>
                   </tr>
                 ) : (
@@ -375,27 +375,27 @@ const AdminProducts = () => {
                     return (
                       <React.Fragment key={id}>
                         {/* Main Product Row */}
-                        <tr className={`hover:bg-[#fffaf3]/50 transition-colors group ${isExpanded ? 'bg-[#fffaf3]' : ''}`}>
+                        <tr className={`hover:bg-slate-50/50 transition-colors group ${isExpanded ? 'bg-slate-50' : ''}`}>
                           <td className="px-6 py-5">
                             <div className="flex items-center gap-4">
-                              <div className="w-14 h-14 rounded-2xl bg-white border border-[#f0e0c4] overflow-hidden shrink-0 shadow-sm flex items-center justify-center p-1 relative">
+                              <div className="w-14 h-14 rounded-2xl bg-white border border-[#E2E8F0] overflow-hidden shrink-0 shadow-sm flex items-center justify-center p-1 relative">
                                 {preview ? (
                                   <img src={preview} className="w-full h-full object-cover rounded-xl" alt={product.name} />
                                 ) : (
-                                  <Package size={20} className="text-[#e6d3b3]" />
+                                  <Package size={20} className="text-slate-200" />
                                 )}
                                 {!product.isActive && (
                                   <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center rounded-xl">
-                                    <span className="bg-[#2d1b0e] text-white text-[8px] font-bold px-1.5 py-0.5 rounded">HIDDEN</span>
+                                    <span className="bg-blue-600 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">HIDDEN</span>
                                   </div>
                                 )}
                               </div>
                               <div className="min-w-0">
-                                <p className="text-sm font-bold text-[#2d1b0e] truncate hover:text-[#8b4513] transition-colors cursor-default" title={product.name}>
+                                <p className="text-sm font-bold text-slate-900 truncate hover:text-slate-900 transition-colors cursor-default" title={product.name}>
                                   {product.name}
                                 </p>
                                 <div className="flex items-center gap-2 mt-1">
-                                  <span className="text-[10px] font-medium text-[#7a5c3a] bg-[#f5e6d3]/50 px-2 py-0.5 rounded-md">
+                                  <span className="text-[10px] font-medium text-slate-500 bg-slate-50/50 px-2 py-0.5 rounded-md">
                                     {hasVariants ? `${variants.length} Sizes` : '1 Size'}
                                   </span>
                                   {product.gstPercent > 0 && (
@@ -409,15 +409,15 @@ const AdminProducts = () => {
                             </div>
                           </td>
                           <td className="px-6 py-5">
-                            <span className="inline-block bg-[#f5e6d3]/50 text-[#8b4513] text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase border border-[#e6d3b3]/50 shadow-sm">
+                            <span className="inline-block bg-slate-50/50 text-slate-900 text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase border border-slate-200/50 shadow-sm">
                               {getCategoryName(product.category)}
                             </span>
                           </td>
                           <td className="px-6 py-5">
                             <div className="flex flex-col justify-center">
-                              <span className="text-sm font-bold text-[#2d1b0e]">{formatCurrency(pricing.finalPrice)}</span>
+                              <span className="text-sm font-bold text-slate-900">{formatCurrency(pricing.finalPrice)}</span>
                               {pricing.mrp > pricing.finalPrice && (
-                                <span className="text-[10px] font-medium text-[#a67f52] line-through">
+                                <span className="text-[10px] font-medium text-slate-500 line-through">
                                   {formatCurrency(pricing.mrp)}
                                 </span>
                               )}
@@ -439,7 +439,7 @@ const AdminProducts = () => {
                                 </span>
                               </div>
                             ) : (
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] bg-[var(--gold)]/10 px-2 py-1 rounded-md">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-500 bg-cyan-500/10 px-2 py-1 rounded-md">
                                 Signature Item
                               </span>
                             )}
@@ -449,16 +449,16 @@ const AdminProducts = () => {
                               {hasVariants && (
                                 <button 
                                   onClick={() => toggleExpand(id)}
-                                  className={`h-9 px-3 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 ${isExpanded ? 'bg-[#8b4513] text-white border-[#8b4513] shadow-md' : 'bg-white text-[#7a5c3a] border-[#e6d3b3] hover:border-[#8b4513] hover:text-[#8b4513] shadow-sm'}`}
+                                  className={`h-9 px-3 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 ${isExpanded ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-white text-slate-500 border-slate-200 hover:border-blue-600 hover:text-slate-900 shadow-sm'}`}
                                 >
                                   Variants {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                                 </button>
                               )}
-                              <div className="flex items-center gap-1 bg-[#fffaf3] border border-[#e6d3b3] p-1 rounded-xl shadow-sm md:opacity-0 md:group-hover:opacity-100 transition-all">
-                                <button onClick={() => navigate("/admin/add-product", { state: { product, fromParams: searchParams.toString() } })} className="p-1.5 hover:bg-white hover:text-[#8b4513] text-[#7a5c3a] rounded-lg transition-all" title="Edit">
+                              <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 p-1 rounded-xl shadow-sm md:opacity-0 md:group-hover:opacity-100 transition-all">
+                                <button onClick={() => navigate("/admin/add-product", { state: { product, fromParams: searchParams.toString() } })} className="p-1.5 hover:bg-white hover:text-slate-900 text-slate-500 rounded-lg transition-all" title="Edit">
                                   <Pencil size={14} />
                                 </button>
-                                <div className="w-px h-4 bg-[#e6d3b3]" />
+                                <div className="w-px h-4 bg-slate-50" />
                                 <button onClick={() => setDeleteConfirm(id)} className="p-1.5 hover:bg-rose-50 text-rose-500 hover:text-rose-700 rounded-lg transition-all" title="Delete">
                                   <Trash2 size={14} />
                                 </button>
@@ -469,21 +469,21 @@ const AdminProducts = () => {
 
                         {/* Expandable Variants Row (Accordion Style) */}
                         {isExpanded && hasVariants && (
-                          <tr className="bg-[#fffaf3] border-b border-[#e6d3b3]">
+                          <tr className="bg-slate-50 border-b border-slate-200">
                             <td colSpan={5} className="px-0 py-0">
-                              <div className="px-6 py-4 bg-white/50 border-t border-dashed border-[#e6d3b3]/50">
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pl-12 border-l-2 border-[#8b4513]/20 ml-6 py-2">
+                              <div className="px-6 py-4 bg-white/50 border-t border-dashed border-slate-200/50">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pl-12 border-l-2 border-blue-600/20 ml-6 py-2">
                                   {variants.map((v, i) => {
                                     const vId = v._id || v.id;
                                     const isAvail = v.isAvailable !== false;
                                     const isBusy = busyId === vId;
                                     
                                     return (
-                                      <div key={vId} className={`p-4 rounded-2xl border flex items-center justify-between gap-4 transition-all ${isAvail ? 'bg-white border-[#f0e0c4] shadow-sm' : 'bg-gray-50 border-gray-200 grayscale-[0.5]'}`}>
+                                      <div key={vId} className={`p-4 rounded-2xl border flex items-center justify-between gap-4 transition-all ${isAvail ? 'bg-white border-[#E2E8F0] shadow-sm' : 'bg-gray-50 border-gray-200 grayscale-[0.5]'}`}>
                                         <div className="min-w-0">
-                                          <p className="text-sm font-bold text-[#2d1b0e] truncate">{v.label}</p>
+                                          <p className="text-sm font-bold text-slate-900 truncate">{v.label}</p>
                                           <div className="flex items-center gap-2 mt-1">
-                                            <p className="text-xs font-medium text-[#7a5c3a]">{formatCurrency(v.sellingPrice)}</p>
+                                            <p className="text-xs font-medium text-slate-500">{formatCurrency(v.sellingPrice)}</p>
                                             {/* Removed Stock display */}
                                           </div>
                                         </div>
@@ -515,17 +515,17 @@ const AdminProducts = () => {
 
       {/* DELETE CONFIRMATION MODAL */}
       {deleteConfirm && createPortal(
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#2d1b0e]/40 backdrop-blur-md px-4 transition-all duration-300 animate-in fade-in">
-          <div className="w-full max-w-sm rounded-[32px] border border-[#e6d3b3] bg-[#fffaf3] shadow-[0_32px_64px_-12px_rgba(45,27,14,0.3)] p-8 text-center transform transition-all animate-in zoom-in-95 duration-300">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-blue-600/40 backdrop-blur-md px-4 transition-all duration-300 animate-in fade-in">
+          <div className="w-full max-w-sm rounded-[32px] border border-slate-200 bg-slate-50 shadow-[0_32px_64px_-12px_rgba(45,27,14,0.3)] p-8 text-center transform transition-all animate-in zoom-in-95 duration-300">
             <div className="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-600 shadow-inner">
               <Trash2 size={36} />
             </div>
-            <h3 className="serif text-2xl font-medium text-[#2d1b0e] mb-3 text-center">Delete product?</h3>
-            <p className="text-sm text-[#7a5c3a] mb-8 leading-relaxed font-medium">This action is permanent. The product and all its variants will be removed from your storefront immediately.</p>
+            <h3 className=" text-2xl font-medium text-slate-900 mb-3 text-center">Delete product?</h3>
+            <p className="text-sm text-slate-500 mb-8 leading-relaxed font-medium">This action is permanent. The product and all its variants will be removed from your storefront immediately.</p>
             <div className="flex gap-4">
               <button 
                 onClick={() => setDeleteConfirm(null)} 
-                className="flex-1 h-12 rounded-2xl border-2 border-[#e6d3b3] text-[#8b4513] text-xs font-bold uppercase tracking-widest hover:bg-[#f5e6d3] transition-colors"
+                className="flex-1 h-12 rounded-2xl border-2 border-slate-200 text-slate-900 text-xs font-bold uppercase tracking-widest hover:bg-slate-50 transition-colors"
               >
                 Cancel
               </button>
@@ -545,3 +545,4 @@ const AdminProducts = () => {
 };
 
 export default AdminProducts;
+

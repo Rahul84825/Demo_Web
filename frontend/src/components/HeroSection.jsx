@@ -4,10 +4,10 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { getHeroSlides } from "../services/api";
 
 const HERO_CONTENT = {
-  subtitle: "Estd. 2020 — Pure Tradition",
+  subtitle: "SaaS-Grade Demo Platform",
   title: "DemoMart",
-  highlight: "Real Taste Of Demo City",
-  description: "Experience the finest collection of authentic Indian sweets, handcrafted using premium ingredients and heritage recipes passed through generations.",
+  highlight: "Next-Gen Retail Showcase",
+  description: "Discover curated electronics, fashion apparel, home goods, and active sports accessories in our premium client-ready demo store.",
   ctaPrimary: "Order Now",
   ctaSecondary: "Our Story"
 };
@@ -82,7 +82,7 @@ function HeroSection() {
 
           <h1 className="serif text-4xl md:text-7xl lg:text-8xl font-medium text-white leading-[1.05] mb-8 tracking-tighter animate-in slide-in-from-bottom-6 fade-in duration-700 delay-300">
             {HERO_CONTENT.title} <br />
-            <span className="block mt-2 text-[var(--gold)] bg-clip-text text-transparent bg-gradient-to-r from-[var(--gold)] via-[var(--saffron)] to-[var(--gold)] text-[0.85em] lg:text-[0.8em]">
+            <span className="block mt-2 text-[var(--gold)] bg-clip-text text-transparent bg-gradient-to-r from-[var(--gold)] via-[var(--accent)] to-[var(--gold)] text-[0.85em] lg:text-[0.8em]">
               {HERO_CONTENT.highlight}
             </span>
           </h1>
@@ -90,7 +90,7 @@ function HeroSection() {
           {/* ── PROMOTIONAL LINE ── */}
           <div className="animate-in slide-in-from-bottom-5 fade-in duration-700 delay-400 mb-8 flex items-center justify-center md:justify-start gap-3">
             <span className="h-px w-8 bg-[var(--gold)]/50" />
-            <span className="text-[var(--saffron)] font-black text-sm md:text-lg tracking-[0.12em] uppercase drop-shadow-lg">
+            <span className="text-[var(--accent)] font-black text-sm md:text-lg tracking-[0.12em] uppercase drop-shadow-lg">
               🎉 20% OFF ON YOUR FIRST ORDER
             </span>
             <span className="h-px w-8 bg-[var(--gold)]/50" />
@@ -102,8 +102,8 @@ function HeroSection() {
 
           <div className="flex flex-col sm:flex-row items-center gap-5 animate-in slide-in-from-bottom-10 fade-in duration-700 delay-700">
             <button
-              onClick={() => navigate("/sweets")}
-              className="btn-primary h-16 px-12 text-sm w-full sm:w-auto shadow-[0_20px_50px_-10px_rgba(139,30,63,0.5)] active:scale-95 group overflow-hidden relative"
+              onClick={() => navigate("/products")}
+              className="btn-primary h-16 px-12 text-sm w-full sm:w-auto shadow-[0_20px_50px_-10px_rgba(37,99,235,0.5)] active:scale-95 group overflow-hidden relative"
             >
               <span className="relative z-10 flex items-center gap-2">{HERO_CONTENT.ctaPrimary} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
@@ -119,7 +119,7 @@ function HeroSection() {
       </div>
       {/* ── OFFER BADGE ── */}
       <div className="hidden lg:flex absolute top-24 right-16 z-20">
-        <div className="w-36 h-36 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--saffron)] to-[#ff9f1c] shadow-[0_20px_50px_rgba(0,0,0,0.35)] flex flex-col items-center justify-center text-center border-4 border-white/20">
+        <div className="w-36 h-36 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--accent)] to-blue-500 shadow-[0_20px_50px_rgba(0,0,0,0.35)] flex flex-col items-center justify-center text-center border-4 border-white/20">
           <span className="text-4xl font-black text-white leading-none">
             20%
           </span>

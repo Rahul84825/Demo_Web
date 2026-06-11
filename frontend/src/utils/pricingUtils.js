@@ -21,8 +21,8 @@ export const calculateCartTotals = (cartItems = []) => {
     return sum + (itemPrice * itemQty);
   }, 0);
 
-  // Delivery fee: FREE if subtotal > ₹999, else ₹60
-  const deliveryFee = subtotal > DELIVERY_FREE_THRESHOLD ? 0 : DELIVERY_FEE;
+  // Delivery fee: Flat ₹60 for demo template
+  const deliveryFee = subtotal > 0 ? 60 : 0;
 
   // GST: 5% on subtotal + delivery
   const gst = Math.round((subtotal + deliveryFee) * GST_RATE * 100) / 100;
@@ -45,17 +45,17 @@ export const calculateCartTotals = (cartItems = []) => {
  */
 export const getDeliveryFee = (subtotal) => {
   const amount = Number(subtotal) || 0;
-  return amount > DELIVERY_FREE_THRESHOLD ? 0 : DELIVERY_FEE;
+  return amount > 0 ? DELIVERY_FEE : 0;
 };
 
 /**
  * Calculate how much more is needed for free delivery
+ * (Always returns 0 since free delivery threshold is removed for demo)
  * @param {number} subtotal - Cart subtotal
  * @returns {number} Amount needed for free delivery (0 if already free)
  */
 export const amountForFreeDelivery = (subtotal) => {
-  const amount = Number(subtotal) || 0;
-  return amount > DELIVERY_FREE_THRESHOLD ? 0 : DELIVERY_FREE_THRESHOLD - amount;
+  return 0;
 };
 
 /**

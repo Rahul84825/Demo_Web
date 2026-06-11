@@ -14,9 +14,9 @@ function OrderSuccessPage({ paymentInfo }) {
     : 0;
 
   return (
-    <main className="min-h-screen bg-[#fff8f0] font-['Inter',system-ui,sans-serif]">
+    <main className="min-h-screen bg-[var(--surface-border)] font-['Inter',system-ui,sans-]">
       {/* ── Success Header ── */}
-      <div className="relative overflow-hidden border-b border-[rgba(83,44,22,0.10)] bg-[#fffaf3]">
+      <div className="relative overflow-hidden border-b border-[rgba(99, 102, 241,0.10)] bg-slate-50">
         <div className="pointer-events-none absolute -right-16 -top-16 h-[360px] w-[360px]
                         rounded-full bg-[rgba(232,136,58,0.07)] blur-[70px]" />
         <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
@@ -29,11 +29,11 @@ function OrderSuccessPage({ paymentInfo }) {
               Order Confirmed
             </p>
           </div>
-          <h1 className="mb-3 text-3xl font-medium tracking-tight text-[#24140f] sm:text-4xl">
+          <h1 className="mb-3 text-3xl font-medium tracking-tight text-[#0F172A] sm:text-4xl">
             Order Placed Successfully!
           </h1>
-          <p className="max-w-xl text-[13px] font-medium leading-relaxed text-[#6e5443] sm:text-sm">
-            Your sweets are being prepared with care. We'll keep you updated every step of the way.
+          <p className="max-w-xl text-[13px] font-medium leading-relaxed text-[#475569] sm:text-sm">
+            Your products are being prepared with care. We'll keep you updated every step of the way.
           </p>
         </div>
       </div>
@@ -43,46 +43,46 @@ function OrderSuccessPage({ paymentInfo }) {
         {/* ── Order Summary ── */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16 mb-12">
           {/* Order Details Card */}
-          <div className="rounded-2xl border border-[rgba(83,44,22,0.10)] bg-white p-8 shadow-sm">
-            <h2 className="mb-6 text-lg font-medium tracking-tight text-[#24140f]">Order Details</h2>
+          <div className="rounded-2xl border border-[rgba(99, 102, 241,0.10)] bg-white p-8 shadow-sm">
+            <h2 className="mb-6 text-lg font-medium tracking-tight text-[#0F172A]">Order Details</h2>
             
             <div className="space-y-4">
-              <div className="flex items-start gap-4 pb-4 border-b border-[rgba(83,44,22,0.07)]">
+              <div className="flex items-start gap-4 pb-4 border-b border-[rgba(99, 102, 241,0.07)]">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
-                                bg-[rgba(212,160,23,0.10)] ring-1 ring-[rgba(212,160,23,0.18)]">
-                  <Package className="h-4 w-4 text-[#b76a1f]" />
+                                bg-[rgba(99, 102, 241,0.10)] ring-1 ring-[rgba(99, 102, 241,0.18)]">
+                  <Package className="h-4 w-4 text-[#6366F1]" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[rgba(83,44,22,0.40)]">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[rgba(99, 102, 241,0.40)]">
                     Order ID
                   </p>
-                  <p className="mt-1 text-sm font-medium text-[#24140f]">{orderId || "N/A"}</p>
+                  <p className="mt-1 text-sm font-medium text-[#0F172A]">{orderId || "N/A"}</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 pb-4 border-b border-[rgba(83,44,22,0.07)]">
+              <div className="flex items-start gap-4 pb-4 border-b border-[rgba(99, 102, 241,0.07)]">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
-                                bg-[rgba(212,160,23,0.10)] ring-1 ring-[rgba(212,160,23,0.18)]">
-                  <Clock className="h-4 w-4 text-[#b76a1f]" />
+                                bg-[rgba(99, 102, 241,0.10)] ring-1 ring-[rgba(99, 102, 241,0.18)]">
+                  <Clock className="h-4 w-4 text-[#6366F1]" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[rgba(83,44,22,0.40)]">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[rgba(99, 102, 241,0.40)]">
                     Items Count
                   </p>
-                  <p className="mt-1 text-sm font-medium text-[#24140f]">{itemCount || "N/A"} items</p>
+                  <p className="mt-1 text-sm font-medium text-[#0F172A]">{itemCount || "N/A"} items</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
-                                bg-[rgba(212,160,23,0.10)] ring-1 ring-[rgba(212,160,23,0.18)]">
-                  <Truck className="h-4 w-4 text-[#b76a1f]" />
+                                bg-[rgba(99, 102, 241,0.10)] ring-1 ring-[rgba(99, 102, 241,0.18)]">
+                  <Truck className="h-4 w-4 text-[#6366F1]" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[rgba(83,44,22,0.40)]">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[rgba(99, 102, 241,0.40)]">
                     Next Step
                   </p>
-                  <p className="mt-1 text-sm font-medium text-[#24140f]">View Payment & Delivery Details</p>
+                  <p className="mt-1 text-sm font-medium text-[#0F172A]">View Payment & Delivery Details</p>
                 </div>
               </div>
             </div>
@@ -90,16 +90,16 @@ function OrderSuccessPage({ paymentInfo }) {
             <div className="mt-8 flex flex-col gap-3">
               <button 
                 onClick={() => navigate("/payment-success", { state: { order } })}
-                className="flex items-center justify-center gap-2 rounded-xl bg-[#7a2828]
-                           py-3.5 text-sm font-medium text-white shadow-md shadow-[rgba(122,40,40,0.20)]
-                           transition-all hover:-translate-y-0.5 hover:bg-[#6b2020]">
+                className="flex items-center justify-center gap-2 rounded-xl bg-[#6366F1]
+                           py-3.5 text-sm font-medium text-white shadow-md shadow-[rgba(99, 102, 241,0.20)]
+                           transition-all hover:-translate-y-0.5 hover:bg-[#4F46E5]">
                 <Truck className="h-4 w-4" /> View Payment & Delivery
               </button>
               <button 
                 onClick={() => navigate("/")}
                 className="flex items-center justify-center gap-2 rounded-xl border
-                           border-[rgba(83,44,22,0.15)] bg-white py-3.5 text-sm font-medium
-                           text-[#3b2417] shadow-sm transition-all hover:bg-[#fffaf3]">
+                           border-[rgba(99, 102, 241,0.15)] bg-white py-3.5 text-sm font-medium
+                           text-[#0F172A] shadow-sm transition-all hover:bg-slate-50">
                 Continue Shopping
               </button>
             </div>
@@ -108,15 +108,15 @@ function OrderSuccessPage({ paymentInfo }) {
           {/* Support Section */}
           <div className="flex flex-col gap-4">
             {/* Quick Support Notice */}
-            <div className="rounded-2xl border border-[rgba(212,160,23,0.25)]
-                            bg-[rgba(212,160,23,0.07)] p-5">
-              <h3 className="mb-3 text-sm font-medium text-[#24140f]">Need Help?</h3>
-              <p className="mb-4 text-[13px] leading-relaxed text-[#6e5443]">
+            <div className="rounded-2xl border border-[rgba(99, 102, 241,0.25)]
+                            bg-[rgba(99, 102, 241,0.07)] p-5">
+              <h3 className="mb-3 text-sm font-medium text-[#0F172A]">Need Help?</h3>
+              <p className="mb-4 text-[13px] leading-relaxed text-[#475569]">
                 Have questions about your order? Our team is here to help!
               </p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <a href="tel:+919999999999"
-                   className="flex items-center justify-center gap-2 rounded-lg bg-[#1e0f0a]
+                   className="flex items-center justify-center gap-2 rounded-lg bg-[var(--charcoal)]
                               py-2.5 text-sm font-medium text-white shadow-sm transition-all
                               hover:-translate-y-0.5 hover:shadow-md">
                   <Phone className="h-4 w-4" /> Call Now
@@ -137,24 +137,24 @@ function OrderSuccessPage({ paymentInfo }) {
 
         {/* ── Map Section ── */}
         <div className="mb-12">
-          <h2 className="mb-6 text-xl font-medium tracking-tight text-[#24140f]">
+          <h2 className="mb-6 text-xl font-medium tracking-tight text-[#0F172A]">
             Visit Our Store
           </h2>
-          <p className="mb-6 text-[13px] text-[#6e5443]">
+          <p className="mb-6 text-[13px] text-[#475569]">
             Pick up your order in person or visit us for more variety. Open Mon–Sun, 9:00 AM – 10:00 PM
           </p>
           <StoreMap size="medium" showTitle={false} />
         </div>
 
         {/* ── Next Steps ── */}
-        <div className="rounded-2xl border border-[rgba(83,44,22,0.10)] bg-white p-8 shadow-sm">
-          <h2 className="mb-6 text-lg font-medium tracking-tight text-[#24140f]">What Happens Next?</h2>
+        <div className="rounded-2xl border border-[rgba(99, 102, 241,0.10)] bg-white p-8 shadow-sm">
+          <h2 className="mb-6 text-lg font-medium tracking-tight text-[#0F172A]">What Happens Next?</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {[
               {
                 step: "1",
                 title: "Preparation",
-                desc: "Your sweets are being prepared fresh with our premium ingredients."
+                desc: "Your products are being prepared fresh with our premium ingredients."
               },
               {
                 step: "2",
@@ -169,11 +169,11 @@ function OrderSuccessPage({ paymentInfo }) {
             ].map(({ step, title, desc }) => (
               <div key={step} className="relative">
                 <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full
-                                bg-[#7a2828] text-sm font-bold text-white">
+                                bg-[#6366F1] text-sm font-bold text-white">
                   {step}
                 </div>
-                <h3 className="mb-1 text-sm font-medium text-[#24140f]">{title}</h3>
-                <p className="text-[13px] text-[#6e5443]">{desc}</p>
+                <h3 className="mb-1 text-sm font-medium text-[#0F172A]">{title}</h3>
+                <p className="text-[13px] text-[#475569]">{desc}</p>
               </div>
             ))}
           </div>
@@ -185,3 +185,6 @@ function OrderSuccessPage({ paymentInfo }) {
 }
 
 export default OrderSuccessPage;
+
+
+

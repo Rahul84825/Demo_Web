@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const ORDER_STATUSES = [
   "PLACED",
+  "ACCEPTED",
   "PREPARING",
   "READY",
   "PICKED_UP",

@@ -37,7 +37,7 @@ const OrderTimer = ({ order }) => {
 
   if (!target) {
     return (
-      <div className="text-xs text-[#7a5c3a]">ETA: To be confirmed</div>
+      <div className="text-xs text-slate-500">ETA: To be confirmed</div>
     );
   }
 
@@ -52,3 +52,4 @@ const OrderTimer = ({ order }) => {
 };
 
 export default OrderTimer;
+

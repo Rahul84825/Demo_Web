@@ -7,7 +7,7 @@ import Order from "../models/Order.js";
  * Replaced with a mock implementation that simply marks it as assigned.
  */
 export const assignDeliveryPartner = async (orderId) => {
-  logger.info(\`🚚 [MARK READY] STEP 4 - ASSIGN DELIVERY CALLED for Order: \${orderId} (Provider: Mock)\`);
+  logger.info(`🚚 [MARK READY] STEP 4 - ASSIGN DELIVERY CALLED for Order: ${orderId} (Provider: Mock)`);
   
   try {
     const order = await Order.findById(orderId);
@@ -18,8 +18,8 @@ export const assignDeliveryPartner = async (orderId) => {
     order.delivery = {
       ...(order.delivery || {}),
       provider: "mock",
-      providerOrderId: \`MOCK-\${Date.now()}\`,
-      trackingId: \`MOCK-\${Date.now()}\`,
+      providerOrderId: `MOCK-${Date.now()}`,
+      trackingId: `MOCK-${Date.now()}`,
       trackingUrl: "",
       status: "DELIVERY_ASSIGNED",
       assignedAt: new Date()
@@ -40,7 +40,7 @@ export const assignDeliveryPartner = async (orderId) => {
 
     return order;
   } catch (error) {
-    logger.error(\`❌ [MARK READY] FAILED at assignDeliveryPartner:\`, error.message);
+    logger.error(`❌ [MARK READY] FAILED at assignDeliveryPartner:`, error.message);
     throw error;
   }
 };

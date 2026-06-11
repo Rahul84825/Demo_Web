@@ -20,8 +20,8 @@ export const calculateCartTotals = (cartItems = []) => {
     return sum + (itemPrice * itemQty);
   }, 0);
 
-  // Delivery fee: FREE if subtotal > ₹999, else ₹60
-  const deliveryFee = subtotal > DELIVERY_FREE_THRESHOLD ? 0 : DELIVERY_FEE;
+  // Delivery fee: Flat ₹60 for demo template
+  const deliveryFee = subtotal > 0 ? 60 : 0;
 
   // GST: 5% on subtotal + delivery
   const gst = Math.round((subtotal + deliveryFee) * GST_RATE * 100) / 100;

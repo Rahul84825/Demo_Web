@@ -7,14 +7,12 @@ export const STORE_LOCATION = {
   lng: 73.9143,
   radiusLimitKm: 15,
   operationalLimitKm: 14.5, // Safety buffer to reduce GPS edge-case losses
-  pincode: "411014"
+  pincode: "000000"
 };
 
 /**
- * Internal delivery pricing based on distance
+ * Internal delivery pricing (Simplified to flat rate for demo)
  */
 export const DELIVERY_PRICING_CONFIG = [
-  { maxKm: 5, fee: 0 },
-  { maxKm: 10, fee: 60 },
-  { maxKm: 15, fee: 80 }
+  { maxKm: 999, fee: 60 }
 ];
