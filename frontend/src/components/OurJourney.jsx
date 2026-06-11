@@ -20,7 +20,7 @@ const DEFAULT_MILESTONES = [
 ];
 
 const DEFAULT_IMAGE = {
-  src: product,
+  src: null,
   alt: "Store legacy products display",
 };
 
