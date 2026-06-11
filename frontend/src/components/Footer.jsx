@@ -6,7 +6,6 @@ import {
   ChevronRight,
   Package
 } from "lucide-react";
-import brandLogo from "../assets/logo.png"
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const QUICK_LINKS = [
