@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import SectionContainer from "./home/SectionContainer";
-import product from "../assets/DemoMart.jpeg";
 
 const DEFAULT_MILESTONES = [
   {
@@ -135,16 +134,7 @@ const OurJourney = ({
               <div className="group relative overflow-hidden rounded-[32px] sm:rounded-[48px] border-4 border-white bg-[#EEF2FF] shadow-[0_40px_80px_-20px_rgba(99,102,241,0.2)] transition-all duration-700 hover:shadow-2xl">
                 {/* Image */}
                 <div className="aspect-[4/5] sm:aspect-square overflow-hidden">
-                  {image?.src && !imgError ? (
-                    <img
-                      src={image.src}
-                      alt={image.alt || "Our journey"}
-                      onError={() => setImgError(true)}
-                      className="h-full w-full object-cover transition-all duration-1000 ease-out group-hover:scale-110 group-hover:rotate-2"
-                    />
-                  ) : (
-                    <div className="h-full w-full bg-gradient-to-br from-[#EEF2FF] via-[#EEF2FF]/80 to-[#EEF2FF]/50" />
-                  )}
+                  
                 </div>
 
                 {/* Shimmer Overlay */}
